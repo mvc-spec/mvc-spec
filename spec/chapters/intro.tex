@@ -1,0 +1,111 @@
+\chapter{Introduction}
+
+This specification defines a set of Java APIs for the development of Model-View-Controller (MVC) applications.
+Readers are assumed to be familiar with the MVC design pattern.
+
+This is the early draft release of version 1.0. The issue tracking system for this release can be found at:
+
+\begin{quote}
+http://java.net/jira/browse/MVC\_SPEC
+\end{quote}
+
+The corresponding Javadocs can be found online at:
+
+\begin{quote}
+http://mvc-spec.java.net/
+\end{quote}
+
+The reference implementation can be obtained from:
+
+\begin{quote}
+http://ozark.java.net/
+\end{quote}
+
+The expert group seeks feedback from the community on any aspect of this specification, please send comments to:
+
+\begin{quote}
+users@mvc-spec.java.net
+\end{quote}
+
+\section{Goals}
+
+The following are the goals of the API:
+
+\begin{description}
+
+\item[Goal 1] TBD
+
+\end{description}
+
+\section{Non-Goals}
+\label{non_goals}
+
+The following are non-goals of the API:
+
+\begin{description}
+
+\item[Non-Goal 1] TBD
+
+\end{description}
+
+\section{Conventions}
+
+The keywords `MUST', `MUST NOT', `REQUIRED', `SHALL', `SHALL NOT', `SHOULD', `SHOULD NOT', `RECOMMENDED', `MAY',
+and `OPTIONAL' in this document are to be interpreted as described in RFC 2119\cite{rfc2119}. 
+
+Java code and sample data fragments are formatted as shown in figure \ref{ex1}:
+
+\begin{figure}[hbtp]
+\caption{Example Java Code}
+\label{ex1}
+\begin{listing}{1}
+package com.example.hello;
+
+public class Hello {
+    public static void main(String args[]) {
+        System.out.println("Hello World");
+    }
+}\end{listing}
+\end{figure}
+
+URIs of the general form `http://example.org/...' and `http://example.com/...' represent application or
+ context-dependent URIs.
+
+All parts of this specification are normative, with the exception of examples, notes and sections explicitly
+ marked as `Non-Normative'. Non-normative notes are formatted as shown below.
+
+\begin{nnnote*}
+This is a note.
+\end{nnnote*}
+
+\section{Terminology}
+\label{terminology}
+
+\begin{description}
+\item[Term] TBD.
+\end{description}
+
+\section{Expert Group Members} 
+\label{expert_group}
+
+This specification is being developed as part of JSR 371 under the Java Community Process. It is the result
+of the collaborative work of the members of the JSR 339 Expert Group. The following are the present expert
+group members:
+
+\begin{list}{$-$}{\parsep 0em \labelwidth 0em}
+\item Mathieu Ancelin (Individual Member)
+\item Ivar Grimstad (Individual Member)
+\item Neil Griffin (Liferay, Inc)
+\item Joshua Wilson (RedHat)
+\item Rodrigo Turini (Caelum)
+\item Stefan Tilkov (innoQ Deutschland GmbH)
+\item Guilherme de Azevedo Silveira (Individual Member)
+\item Frank Caputo (Individual Member)
+\item Christian Kaltepoth (Individual Member)
+\item Woong-ki Lee (TmaxSoft, Inc.)
+\end{list}
+
+\section{Acknowledgements}
+\label{acks}
+
+TBD
