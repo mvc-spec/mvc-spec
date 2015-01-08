@@ -37,25 +37,22 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.mvc;
+package javax.mvc.rs;
 
-import javax.mvc.rs.Extension;
-import javax.ws.rs.NameBinding;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.RetentionPolicy.*;
-import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.ElementType.ANNOTATION_TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Annotation Controller.
+ * Annotation Extension.
+ *
+ * TODO: Should move to JAX-RS.
  *
  * @author Santiago Pericas-Geertsen
  */
-@NameBinding        // TODO
-@Extension
-@Target( { METHOD, TYPE } )
+@Target( { ANNOTATION_TYPE } )
 @Retention( RUNTIME )
-public @interface Controller {
+public @interface Extension {
 }
-
