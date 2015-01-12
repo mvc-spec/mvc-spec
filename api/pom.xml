@@ -1,36 +1,36 @@
 <?xml version="1.0" encoding="UTF-8"?>
+
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
     <modelVersion>4.0.0</modelVersion>
-
+    <parent>
+        <groupId>net.java</groupId>
+        <artifactId>jvnet-parent</artifactId>
+        <version>5</version>
+    </parent>
     <groupId>javax.mvc</groupId>
     <artifactId>javax.mvc-api</artifactId>
     <version>1.0-SNAPSHOT</version>
     <packaging>jar</packaging>
     <name>MVC 1.0 API</name>
-
     <url>http://mvc-spec.java.net</url>
-
     <organization>
         <name>Oracle Corporation</name>
         <url>http://www.oracle.com/</url>
     </organization>
-
     <issueManagement>
         <system>jira</system>
         <url>http://java.net/jira/browse/MVC_SPEC</url>
     </issueManagement>
-
     <mailingLists>
         <mailingList>
             <name>JSR371 Expert Group List</name>
             <archive>jsr371-experts@mvc-spec.java.net</archive>
         </mailingList>
         <mailingList>
-            <name>MVC Users List</name>
+            <name>MVC Specification Users List</name>
             <archive>users@mvc-spec.java.net</archive>
         </mailingList>
     </mailingLists>
-
     <build>
         <plugins>
             <plugin>
