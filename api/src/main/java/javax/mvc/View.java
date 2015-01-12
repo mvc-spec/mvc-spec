@@ -39,28 +39,28 @@
  */
 package javax.mvc;
 
-import javax.mvc.rs.Extension;
-import javax.ws.rs.NameBinding;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
 
-import static java.lang.annotation.RetentionPolicy.*;
-import static java.lang.annotation.ElementType.*;
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Identifies a method as a controller method. If applied at the class level,
- * it marks all method in a class as controllers.
+ * Declares a view (template) to be associated with a controller method. If
+ * specified at the class level, it applies to all controller methods in
+ * that class.
  *
  * @author Santiago Pericas-Geertsen
  */
-@NameBinding        // TODO
-@Extension
 @Target( { METHOD, TYPE } )
 @Retention( RUNTIME )
 @Documented
 @Inherited
-public @interface Controller {
+public @interface View {
+
+    String value() default "";
 }
 
