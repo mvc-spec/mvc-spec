@@ -49,4 +49,6 @@ public interface Models {
     Object get(String name);
 
     void set(String name, Object model);
+
+    Iterable<String> names();
 }
