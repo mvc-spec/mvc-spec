@@ -39,23 +39,16 @@
  */
 package javax.mvc.engine;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
-
 /**
- * Annotation Supports.
+ * Interface Priorities.
  *
  * @author Santiago Pericas-Geertsen
  */
-@Target( { TYPE } )
-@Retention( RUNTIME )
-@Documented
-@Inherited
-public @interface Supports {
-    String[] value();
+public interface Priorities {
+
+    public static final int DEFAULT = 1000;
+
+    public static final int FRAMEWORK = 2000;
+
+    public static final int APPLICATION = 3000;
 }
