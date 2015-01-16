@@ -37,29 +37,41 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.mvc;
+package javax.mvc.event;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import javax.mvc.engine.ViewEngine;
 
 /**
- * Declares a view (template) to be associated with a controller method. If
- * specified at the class level, it applies to all controller methods in
- * that class.
+ * Class ViewEngineSelected.
  *
  * @author Santiago Pericas-Geertsen
  */
-@Target( { METHOD, TYPE } )
-@Retention( RUNTIME )
-@Documented
-@Inherited
-public @interface View {
-    String value();
-}
+public class ViewEngineSelected {
 
+    private String view;
+
+    private Class<? extends ViewEngine> engine;
+
+    public String getView() {
+        return view;
+    }
+
+    public void setView(String view) {
+        this.view = view;
+    }
+
+    public Class<? extends ViewEngine> getEngine() {
+        return engine;
+    }
+
+    public void setEngine(Class<? extends ViewEngine> engine) {
+        this.engine = engine;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("[MVC Event] ViewEngineSelected:");
+        sb.append(view).append(":").append(engine.getName());
+        return sb.toString();
+    }
+}

@@ -37,29 +37,42 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.mvc;
+package javax.mvc.event;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import javax.ws.rs.container.ResourceInfo;
+import javax.ws.rs.core.UriInfo;
 
 /**
- * Declares a view (template) to be associated with a controller method. If
- * specified at the class level, it applies to all controller methods in
- * that class.
+ * Class ControllerMatched.
  *
  * @author Santiago Pericas-Geertsen
  */
-@Target( { METHOD, TYPE } )
-@Retention( RUNTIME )
-@Documented
-@Inherited
-public @interface View {
-    String value();
-}
+public class ControllerMatched {
 
+    private UriInfo uriInfo;
+
+    private ResourceInfo resourceInfo;
+
+    public UriInfo getUriInfo() {
+        return uriInfo;
+    }
+
+    public void setUriInfo(UriInfo uriInfo) {
+        this.uriInfo = uriInfo;
+    }
+
+    public ResourceInfo getResourceInfo() {
+        return resourceInfo;
+    }
+
+    public void setResourceInfo(ResourceInfo resourceInfo) {
+        this.resourceInfo = resourceInfo;
+    }
+
+    @Override
+    public String toString() {
+        final StringBuilder sb = new StringBuilder("[MVC Event] ControllerMatched:");
+        sb.append(uriInfo.getRequestUri()).append(":").append(resourceInfo.getResourceMethod());
+        return sb.toString();
+    }
+}
