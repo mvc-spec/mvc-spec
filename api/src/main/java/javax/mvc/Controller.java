@@ -39,7 +39,6 @@
  */
 package javax.mvc;
 
-import javax.mvc.rs.Extension;
 import javax.ws.rs.NameBinding;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Inherited;
@@ -55,8 +54,7 @@ import static java.lang.annotation.ElementType.*;
  *
  * @author Santiago Pericas-Geertsen
  */
-@NameBinding        // TODO
-@Extension
+@NameBinding
 @Target( { METHOD, TYPE } )
 @Retention( RUNTIME )
 @Documented
