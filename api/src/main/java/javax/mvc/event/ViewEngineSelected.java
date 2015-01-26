@@ -39,6 +39,7 @@
  */
 package javax.mvc.event;
 
+import javax.enterprise.context.Dependent;
 import javax.mvc.engine.ViewEngine;
 
 /**
@@ -46,6 +47,7 @@ import javax.mvc.engine.ViewEngine;
  *
  * @author Santiago Pericas-Geertsen
  */
+@Dependent
 public class ViewEngineSelected {
 
     private String view;

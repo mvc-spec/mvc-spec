@@ -39,6 +39,7 @@
  */
 package javax.mvc.event;
 
+import javax.enterprise.context.Dependent;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.UriInfo;
 
@@ -47,6 +48,7 @@ import javax.ws.rs.core.UriInfo;
  *
  * @author Santiago Pericas-Geertsen
  */
+@Dependent
 public class ControllerMatched {
 
     private UriInfo uriInfo;
