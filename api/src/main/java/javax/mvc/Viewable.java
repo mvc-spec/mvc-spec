@@ -39,6 +39,8 @@
  */
 package javax.mvc;
 
+import javax.mvc.engine.ViewEngine;
+
 /**
  * Class Viewable.
  *
@@ -48,8 +50,25 @@ public class Viewable {
 
     private String view;
 
+    private Models models;
+
+    private Class<? extends ViewEngine> viewEngine;
+
     public Viewable(String view) {
+        this(view, null, null);
+    }
+
+    public Viewable(String view, Class<? extends ViewEngine> viewEngine) {
+        this(view, null, viewEngine);
+    }
+
+    public Viewable(String view, Models models) {
+        this(view, models, null);
+    }
+
+    public Viewable(String view, Models models, Class<? extends ViewEngine> viewEngine) {
         this.view = view;
+        this.viewEngine = viewEngine;
     }
 
     public String getView() {
@@ -60,8 +79,19 @@ public class Viewable {
         this.view = view;
     }
 
-    @Override
-    public String toString() {
-        return view;
+    public Models getModels() {
+        return models;
+    }
+
+    public void setModels(Models models) {
+        this.models = models;
+    }
+
+    public Class<? extends ViewEngine> getViewEngine() {
+        return viewEngine;
+    }
+
+    public void setViewEngine(Class<? extends ViewEngine> viewEngine) {
+        this.viewEngine = viewEngine;
     }
 }

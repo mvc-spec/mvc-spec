@@ -44,11 +44,9 @@ package javax.mvc;
  *
  * @author Santiago Pericas-Geertsen
  */
-public interface Models {
+public interface Models extends Iterable<String> {
 
     Object get(String name);
 
     void set(String name, Object model);
-
-    Iterable<String> names();
 }

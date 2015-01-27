@@ -39,23 +39,22 @@
  */
 package javax.mvc.engine;
 
-import java.lang.annotation.Documented;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import javax.mvc.Models;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 /**
- * Annotation Supports.
+ * Interface ViewEngineContext.
  *
  * @author Santiago Pericas-Geertsen
  */
-@Target( { TYPE } )
-@Retention( RUNTIME )
-@Documented
-@Inherited
-public @interface Supports {
-    String[] value();
+public interface ViewEngineContext {
+
+    public String getView();
+
+    public Models getModels();
+
+    public HttpServletRequest getRequest();
+
+    public HttpServletResponse getResponse();
 }

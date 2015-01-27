@@ -39,10 +39,7 @@
  */
 package javax.mvc.engine;
 
-import javax.mvc.Models;
 import javax.servlet.ServletException;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 /**
@@ -52,6 +49,7 @@ import java.io.IOException;
  */
 public interface ViewEngine {
 
-    void processView(String view, Models models, HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException;
+    boolean supports(String view);
+
+    void processView(ViewEngineContext context) throws ServletException, IOException;
 }
