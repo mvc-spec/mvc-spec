@@ -39,14 +39,12 @@
  */
 package javax.mvc;
 
+import java.util.Map;
+
 /**
  * Interface Models.
  *
  * @author Santiago Pericas-Geertsen
  */
-public interface Models extends Iterable<String> {
-
-    Object get(String name);
-
-    void set(String name, Object model);
+public interface Models extends Map<String, Object>, Iterable<String> {
 }
