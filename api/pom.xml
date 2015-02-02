@@ -40,6 +40,12 @@
                 <configuration>
                     <source>1.8</source>
                     <target>1.8</target>
+                    <useIncrementalCompilation>false</useIncrementalCompilation>
+                    <showWarnings>true</showWarnings>
+                    <compilerArgs>
+                        <arg>-Xlint:serial</arg>
+                        <arg>-Werror</arg>
+                    </compilerArgs>
                 </configuration>
             </plugin>
             <plugin>
