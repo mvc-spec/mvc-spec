@@ -46,6 +46,8 @@ package javax.mvc.engine;
  */
 public class ViewEngineException extends Exception {
 
+    private static final long serialVersionUID = -429507729780110056L;
+
     public ViewEngineException(String message) {
         super(message);
     }
