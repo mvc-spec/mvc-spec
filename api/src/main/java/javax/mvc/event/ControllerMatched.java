@@ -39,7 +39,6 @@
  */
 package javax.mvc.event;
 
-import javax.enterprise.context.Dependent;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.UriInfo;
 
@@ -48,33 +47,9 @@ import javax.ws.rs.core.UriInfo;
  *
  * @author Santiago Pericas-Geertsen
  */
-@Dependent
-public class ControllerMatched {
+public interface ControllerMatched {
 
-    private UriInfo uriInfo;
+    UriInfo getUriInfo();
 
-    private ResourceInfo resourceInfo;
-
-    public UriInfo getUriInfo() {
-        return uriInfo;
-    }
-
-    public void setUriInfo(UriInfo uriInfo) {
-        this.uriInfo = uriInfo;
-    }
-
-    public ResourceInfo getResourceInfo() {
-        return resourceInfo;
-    }
-
-    public void setResourceInfo(ResourceInfo resourceInfo) {
-        this.resourceInfo = resourceInfo;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("[MVC Event] ControllerMatched:");
-        sb.append(uriInfo.getRequestUri()).append(":").append(resourceInfo.getResourceMethod());
-        return sb.toString();
-    }
+    ResourceInfo getResourceInfo();
 }

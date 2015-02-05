@@ -39,41 +39,17 @@
  */
 package javax.mvc.event;
 
-import javax.enterprise.context.Dependent;
 import javax.mvc.engine.ViewEngine;
 
 /**
- * Class ViewEngineSelected.
+ * Interface ViewEngineSelected.
  *
  * @author Santiago Pericas-Geertsen
  */
-@Dependent
-public class ViewEngineSelected {
+public interface ViewEngineSelected {
 
-    private String view;
+    public String getView();
 
-    private Class<? extends ViewEngine> engine;
+    public Class<? extends ViewEngine> getEngine();
 
-    public String getView() {
-        return view;
-    }
-
-    public void setView(String view) {
-        this.view = view;
-    }
-
-    public Class<? extends ViewEngine> getEngine() {
-        return engine;
-    }
-
-    public void setEngine(Class<? extends ViewEngine> engine) {
-        this.engine = engine;
-    }
-
-    @Override
-    public String toString() {
-        final StringBuilder sb = new StringBuilder("[MVC Event] ViewEngineSelected:");
-        sb.append(view).append(":").append(engine.getName());
-        return sb.toString();
-    }
 }
