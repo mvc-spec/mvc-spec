@@ -39,9 +39,6 @@
  */
 package javax.mvc.engine;
 
-import javax.servlet.ServletException;
-import java.io.IOException;
-
 /**
  * Interface ViewEngine.
  *
@@ -51,5 +48,5 @@ public interface ViewEngine {
 
     boolean supports(String view);
 
-    void processView(ViewEngineContext context) throws ServletException, IOException;
+    void processView(ViewEngineContext context) throws ViewEngineException;
 }

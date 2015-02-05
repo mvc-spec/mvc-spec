@@ -37,18 +37,24 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.mvc.event;
-
-import javax.mvc.engine.ViewEngine;
+package javax.mvc.engine;
 
 /**
- * Interface ViewEngineSelected.
+ * Class ViewEngineException.
  *
  * @author Santiago Pericas-Geertsen
  */
-public interface ViewEngineSelected {
+public class ViewEngineException extends Exception {
 
-    public String getView();
+    public ViewEngineException(String message) {
+        super(message);
+    }
 
-    public Class<? extends ViewEngine> getEngine();
+    public ViewEngineException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public ViewEngineException(Throwable cause) {
+        super(cause);
+    }
 }
