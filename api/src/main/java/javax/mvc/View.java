@@ -49,14 +49,26 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Declares a view (template) to be associated with a controller method. If
- * specified at the class level, it applies to all controller methods in
- * that class.
+ * <p>Declares a view for a controller method that returns void. It is ignored for
+ * any controller method that does not return void. If declared at the type level,
+ * it applies to all controller methods in the type and can be overridden by another
+ * instance of this annotation at the method level.
+ *
+ * <p>Example:
+ * <pre><code>
+ *     &#64;Controller
+ *     &#64;View("hello.jsp")
+ *     public void sayHello() {
+ *         ...
+ *     }
+ * </code></pre>
  *
  * @author Santiago Pericas-Geertsen
+ * @see javax.mvc.Controller
+ * @since 1.0
  */
-@Target( { METHOD, TYPE } )
-@Retention( RUNTIME )
+@Target({METHOD, TYPE})
+@Retention(RUNTIME)
 @Documented
 @Inherited
 public @interface View {

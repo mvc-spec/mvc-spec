@@ -42,13 +42,36 @@ package javax.mvc.event;
 import javax.mvc.engine.ViewEngine;
 
 /**
- * Interface ViewEngineSelected.
+ * <p>CDI Event that can be observed to get information about the view engine
+ * selected to process a view. Implementations are required to fire this
+ * event during processing.</p>
+ *
+ * <p>Example of an observer:
+ * <pre><code>
+ *     public class EventObserver {
+ *         public void onViewEngineSelected(&#64;Observes ViewEngineSelected event) {
+ *             ...
+ *         }
+ *     }
+ * </code></pre>
  *
  * @author Santiago Pericas-Geertsen
+ * @see javax.enterprise.event.Observes
+ * @since 1.0
  */
 public interface ViewEngineSelected {
 
+    /**
+     * Returns the view being processed.
+     *
+     * @return the view.
+     */
     public String getView();
 
+    /**
+     * Returns the {@link javax.mvc.engine.ViewEngine} selected by the implementation.
+     *
+     * @return the view engine selected.
+     */
     public Class<? extends ViewEngine> getEngine();
 }

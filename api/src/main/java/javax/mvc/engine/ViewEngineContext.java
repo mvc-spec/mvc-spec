@@ -44,17 +44,44 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Interface ViewEngineContext.
+ * <p>Contextual data used by a {@link javax.mvc.engine.ViewEngine} to process a view.
+ * This includes the view name, the models instance and the request and response
+ * objects from the Servlet container.</p>
  *
  * @author Santiago Pericas-Geertsen
+ * @see javax.mvc.engine.ViewEngine
+ * @see javax.servlet.http.HttpServletRequest
+ * @see javax.servlet.http.HttpServletResponse
+ * @since 1.0
  */
 public interface ViewEngineContext {
 
+    /**
+     * Returns the view.
+     *
+     * @return the view.
+     */
     public String getView();
 
+    /**
+     * Returns the models instance needed to process the view.
+     *
+     * @return the models instance.
+     */
     public Models getModels();
 
+    /**
+     * Returns HTTP request object from the Servlet container.
+     *
+     * @return HTTP request object.
+     */
     public HttpServletRequest getRequest();
 
+    /**
+     * Returns HTTP response object from the servlet container. The underlying
+     * output stream should be used to write the result of processing a view.
+     *
+     * @return HTTP response object.
+     */
     public HttpServletResponse getResponse();
 }

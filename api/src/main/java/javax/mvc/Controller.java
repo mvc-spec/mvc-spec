@@ -49,10 +49,26 @@ import static java.lang.annotation.RetentionPolicy.*;
 import static java.lang.annotation.ElementType.*;
 
 /**
- * Identifies a method as a controller method. If applied at the class level,
- * it marks all method in a class as controllers.
+ * <p>Declares a method as a <i>controller</i>. If declared at the type level,
+ * it applies to all methods in the type. A controller method returns a view as a
+ * {@link java.lang.String}, as part of a {@link javax.mvc.Viewable} or as a
+ * {@link javax.ws.rs.core.Response} whose entity is a {@link javax.mvc.Viewable}.
+ * If a controller method returns void, then the view must be specified using
+ * the {@link javax.mvc.View} annotation.
+ *
+ * <p>Example:
+ * <pre><code>
+ *     &#64;Controller
+ *     public String sayHello() {
+ *         return "hello.jsp";
+ *     }
+ * </code></pre>
  *
  * @author Santiago Pericas-Geertsen
+ * @see javax.mvc.View
+ * @see javax.mvc.Viewable
+ * @see javax.ws.rs.core.Response
+ * @since 1.0
  */
 @NameBinding
 @Target( { METHOD, TYPE } )

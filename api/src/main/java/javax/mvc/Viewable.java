@@ -42,9 +42,24 @@ package javax.mvc;
 import javax.mvc.engine.ViewEngine;
 
 /**
- * Class Viewable.
+ * <p>An abstraction that includes information about a view as well as an instance
+ * of {@link javax.mvc.Models} and a {@link javax.mvc.engine.ViewEngine} class, in
+ * which only the view information is mandatory. Instances of this class can be
+ * returned by controller methods.
+ *
+ * <p>If no {@link javax.mvc.Models} is specified, the view engine is required to
+ * inject it; if no {@link javax.mvc.engine.ViewEngine} is specified, then
+ * the default selection mechanism to associate views and view engines is used.
+ * Thus, a controller method returning an instance of this class can override
+ * the {@link javax.mvc.Models} in request scope as well as the default lookup
+ * mechanism for view engines.
+ *
  *
  * @author Santiago Pericas-Geertsen
+ * @see javax.mvc.Models
+ * @see javax.mvc.Controller
+ * @see javax.mvc.engine.ViewEngine
+ * @since 1.0
  */
 public class Viewable {
 
@@ -54,18 +69,42 @@ public class Viewable {
 
     private Class<? extends ViewEngine> viewEngine;
 
+    /**
+     * Constructs an instance specifying only a view.
+     *
+     * @param view the view.
+     */
     public Viewable(String view) {
         this(view, null, null);
     }
 
+    /**
+     * Constructs an instance using a view and a view engine.
+     *
+     * @param view the view.
+     * @param viewEngine the view engine class.
+     */
     public Viewable(String view, Class<? extends ViewEngine> viewEngine) {
         this(view, null, viewEngine);
     }
 
+    /**
+     * Constructs an instance using a view and a models.
+     *
+     * @param view the view.
+     * @param models the models instance.
+     */
     public Viewable(String view, Models models) {
         this(view, models, null);
     }
 
+    /**
+     * Constructs an instance using a view, a models and a view engine.
+     *
+     * @param view the view.
+     * @param models the models instance.
+     * @param viewEngine the view engine class.
+     */
     public Viewable(String view, Models models, Class<? extends ViewEngine> viewEngine) {
         this.view = view;
         this.viewEngine = viewEngine;

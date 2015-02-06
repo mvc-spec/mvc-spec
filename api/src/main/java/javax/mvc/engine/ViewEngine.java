@@ -40,13 +40,50 @@
 package javax.mvc.engine;
 
 /**
- * Interface ViewEngine.
+ * <p>View engines are responsible for processing views and are discovered
+ * using CDI. Implementations must inject all instances of this interface,
+ * and process a view as follows:
+ * <ol>
+ *     <li>Gather the set of candidate view engines by calling {@link #supports(String)}
+ *     and discarding engines that return <code>false</code>.</li>
+ *     <li>Sort the resulting set of candidates using priorities. View engines
+ *     can be decorated with {@link javax.annotation.Priority} to indicate
+ *     their priority; otherwise the priority is assumed to be {@link Priorities#DEFAULT}.</li>
+ *     <li>If more than one candidate is available, choose one in an
+ *     implementation-defined manner.</li>
+ *     <li>Fire a {@link javax.mvc.event.ViewEngineSelected} event to inform observers
+ *     of the selection.</li>
+ * </ol>
+ * <p>Once a view engine is selected, the method {@link #processView(ViewEngineContext)} is
+ * called to process the view.
+ * <p>The default view engines for JSPs and Facelets use file extensions to determine
+ * support. Namely, the default JSP view engine supports views with extensions <code>jsp</code>
+ * and <code>jspx</code>, and the one for Facelets supports views with extension
+ * <code>xhtml</code>.</p>
  *
  * @author Santiago Pericas-Geertsen
+ * @see javax.annotation.Priority
+ * @see javax.mvc.event.ViewEngineSelected
+ * @since 1.0
  */
 public interface ViewEngine {
 
+    /**
+     * Returns <code>true</code> if this engine can process the view or <code>false</code>
+     * otherwise.
+     *
+     * @param view the view.
+     * @return outcome of supports test.
+     */
     boolean supports(String view);
 
+    /**
+     * Process a view given a {@link javax.mvc.engine.ViewEngineContext}. Processing
+     * a view involves <i>merging</i> the model and template data and writing
+     * the result to an output stream.
+     *
+     * @param context the context needed for processing.
+     * @throws ViewEngineException if an error occurs during processing.
+     */
     void processView(ViewEngineContext context) throws ViewEngineException;
 }

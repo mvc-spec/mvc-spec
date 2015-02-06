@@ -40,15 +40,36 @@
 package javax.mvc.engine;
 
 /**
- * Interface Priorities.
+ * <p>Defines priority classes that can used together with the {@link javax.annotation.Priority}
+ * annotation to decorate {@link javax.mvc.engine.ViewEngine} implementations. When
+ * multiple view engines are available to process a view, the one with the highest
+ * priority is chosen. If two or more view engines can process the same view and they
+ * all have the same priority, one is chosen in an implementation-defined manner.
+ *
+ * <p>Applications can define observers for the event {@link javax.mvc.event.ViewEngineSelected}
+ * to get additional information about the outcome of the selection mechanism.
  *
  * @author Santiago Pericas-Geertsen
+ * @see javax.annotation.Priority
+ * @see javax.mvc.engine.ViewEngine
+ * @see javax.mvc.event.ViewEngineSelected
+ * @since 1.0
  */
 public interface Priorities {
 
+    /**
+     * Default priority for all built-in view engines.
+     */
     public static final int DEFAULT = 1000;
 
+    /**
+     * Recommended priority for all view engines provided by frameworks built
+     * on top of MVC implementations.
+     */
     public static final int FRAMEWORK = 2000;
 
+    /**
+     * Recommended priority for all application-provided view engines.
+     */
     public static final int APPLICATION = 3000;
 }

@@ -40,9 +40,14 @@
 package javax.mvc.engine;
 
 /**
- * Class ViewEngineException.
+ * <p>Exception thrown by {@link javax.mvc.engine.ViewEngine#processView(ViewEngineContext)}
+ * when unable to process a view. Additional information is available from underlying
+ * <code>message</code> and <code>cause</code>.</p>
  *
  * @author Santiago Pericas-Geertsen
+ * @see Exception#getMessage()
+ * @see Exception#getCause()
+ * @since 1.0
  */
 public class ViewEngineException extends Exception {
 
