@@ -49,7 +49,7 @@ import static java.lang.annotation.RetentionPolicy.*;
 import static java.lang.annotation.ElementType.*;
 
 /**
- * <p>Declares a method as a <i>controller</i>. If declared at the type level,
+ * <p>Declares a method as a controller. If declared at the type level,
  * it applies to all methods in the type. A controller method returns a view as a
  * {@link java.lang.String}, as part of a {@link javax.mvc.Viewable} or as a
  * {@link javax.ws.rs.core.Response} whose entity is a {@link javax.mvc.Viewable}.

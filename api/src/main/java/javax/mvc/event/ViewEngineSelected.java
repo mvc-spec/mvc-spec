@@ -42,7 +42,7 @@ package javax.mvc.event;
 import javax.mvc.engine.ViewEngine;
 
 /**
- * <p>CDI Event that can be observed to get information about the view engine
+ * <p>Observable CDI Event to get information about the view engine that was
  * selected to process a view. Implementations are required to fire this
  * event during processing.</p>
  *

@@ -37,42 +37,10 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.mvc.event;
-
-import javax.ws.rs.container.ResourceInfo;
-import javax.ws.rs.core.UriInfo;
 
 /**
- * <p>Observable CDI Event to get information about the controller method
- * that matched a request. Implementations are required to fire this
- * event during processing.</p>
+ * The view engine SPI.
  *
- * <p>Example of an observer:
- * <pre><code>
- *     public class EventObserver {
- *         public void onControllerMatched(&#64;Observes ControllerMatched event) {
- *             ...
- *         }
- *     }
- * </code></pre>
- *
- * @author Santiago Pericas-Geertsen
- * @see javax.enterprise.event.Observes
- * @since 1.0
+ * @version 1.0
  */
-public interface ControllerMatched {
-
-    /**
-     * See {@link javax.ws.rs.core.UriInfo}.
-     *
-     * @return URI info.
-     */
-    UriInfo getUriInfo();
-
-    /**
-     * See {@link javax.ws.rs.container.ResourceInfo}.
-     *
-     * @return resources info.
-     */
-    ResourceInfo getResourceInfo();
-}
+package javax.mvc.engine;
