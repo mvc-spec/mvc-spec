@@ -42,6 +42,8 @@ package javax.mvc.engine;
 import javax.mvc.Models;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.ws.rs.container.ResourceInfo;
+import javax.ws.rs.core.UriInfo;
 
 /**
  * <p>Contextual data used by a {@link javax.mvc.engine.ViewEngine} to process a view.
@@ -84,4 +86,22 @@ public interface ViewEngineContext {
      * @return HTTP response object.
      */
     public HttpServletResponse getResponse();
+
+    /**
+     * Returns the {@link javax.ws.rs.core.UriInfo} instance containing information
+     * about the current request URI.
+     *
+     * @return the URI info for the current request.
+     * @see javax.ws.rs.core.UriInfo
+     */
+    public UriInfo getUriInfo();
+
+    /**
+     * Returns the {@link javax.ws.rs.container.ResourceInfo} instance containing
+     * information about the controller method matched in the current request.
+     *
+     * @return the resource info for the current request.
+     * @see javax.ws.rs.container.ResourceInfo
+     */
+    public ResourceInfo getResourceInfo();
 }
