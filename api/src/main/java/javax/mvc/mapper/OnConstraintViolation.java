@@ -39,7 +39,6 @@
  */
 package javax.mvc.mapper;
 
-import javax.ws.rs.NameBinding;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
@@ -50,15 +49,41 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Interface OnConstraintViolation.
+ * <p>An annotation that associates a {@link javax.mvc.mapper.ConstraintViolationMapper}
+ * to a controller method or its class. If specified at the type level, it applies to
+ * all controller methods that are not decorated with the same annotation.
+ *
+ * <p>MVC implementations are required to provide a default implementation of a
+ * {@link javax.mvc.mapper.ConstraintViolationMapper} if not specified by the
+ * application. This default mapper MUST bind the exception to a model named
+ * {@code ex} and return a response whose entity is a {@link javax.mvc.Viewable}
+ * that wraps the {@code view} in this annotation.
  *
  * @author Santiago Pericas-Geertsen
+ * @see javax.mvc.mapper.ConstraintViolationMapper
+ * @since 1.0
  */
-@NameBinding
-@Target( { METHOD, TYPE } )
-@Retention( RUNTIME )
+@Target({METHOD, TYPE})
+@Retention(RUNTIME)
 @Documented
 @Inherited
 public @interface OnConstraintViolation {
-    Class<? extends ConstraintViolationMapper> value();
+
+    /**
+     * View to render after the handler for the exception is executed. Default view
+     * is {@code "error.jsp"}.
+     *
+     * @return the view name.
+     */
+    String view() default "error.jsp";
+
+    /**
+     * Class that maps a {@link javax.validation.ConstraintViolationException} to a
+     * {@link javax.ws.rs.core.Response}. See documentation at the type level for
+     * this annotation for more information on the default behavior if no mapper
+     * is specified.
+     *
+     * @return Mapper or the (default) class.
+     */
+    Class<? extends ConstraintViolationMapper> mapper() default ConstraintViolationMapper.class;
 }

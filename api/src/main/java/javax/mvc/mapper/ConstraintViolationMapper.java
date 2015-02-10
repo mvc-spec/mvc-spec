@@ -40,12 +40,29 @@
 package javax.mvc.mapper;
 
 import javax.validation.ConstraintViolationException;
+import javax.ws.rs.core.Response;
 import javax.ws.rs.ext.ExceptionMapper;
 
 /**
- * Interface ConstraintViolationMapper.
+ * An exception mapper for {@link javax.validation.ConstraintViolationException} that
+ * can be specified in the {@link javax.mvc.mapper.OnConstraintViolation} annotation.
+ * It differs from a regular {@link javax.ws.rs.ext.ExceptionMapper} in that it gets
+ * passed the {@code view}.
  *
  * @author Santiago Pericas-Geertsen
+ * @see javax.mvc.mapper.OnConstraintViolation
+ * @since 1.0
  */
-public interface ConstraintViolationMapper extends ExceptionMapper<ConstraintViolationException> {
+public interface ConstraintViolationMapper {
+
+    /**
+     * Maps a {@link javax.validation.ConstraintViolationException} to a JAX-RS
+     * {@link javax.ws.rs.core.Response}, possibly using the {@code view} in the
+     * process.
+     *
+     * @param e Exception thrown by the runtime system.
+     * @param view View name or the default {@code "error.jsp"} if not specified.
+     * @return a response.
+     */
+    Response toResponse(ConstraintViolationException e, String view);
 }
