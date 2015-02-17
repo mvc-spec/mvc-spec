@@ -1,0 +1,50 @@
+\chapter{Applications}
+\label{applications}
+
+This chapter introduces the notion of an \mvc\ application and how it relates to
+a \jaxrs\ application.
+
+\section{\mvc\ Applications}
+\label{mvc_applications}
+
+An \mvc\ application consists of one or more \jaxrs\ resources that are annotated with 
+\Controller\ and, just like \jaxrs\ applications, zero or more providers. If no
+resources are annotated with \Controller, then the resulting application is a \jaxrs\
+application instead. In general, everything that applies to a \jaxrs\ application
+also applies to an \mvc\ application. In what follows, we drop the adjective and 
+refer to them simply as applications.
+
+The controllers and providers that make up an application are configured via an 
+application-supplied subclass of \code{Application} from \jaxrs. An implementation 
+MAY provide alternate mechanisms for locating controllers, but as in \jaxrs, 
+the use of an \code{Application} subclass is the only way to guarantee portability.
+
+All the rules described in the Servlet section of the \jaxrs\ Specification
+\cite{jaxrs} apply to \mvc\ as well. This section recommends the use of
+the Servlet 3 framework pluggability mechanism and describes its semantics
+for the cases in which an \code{Application} subclass is present or not. 
+
+The path in the application's URL space in which \mvc\ controllers live must
+be specified either using the \ApplicationPath\ annotation on the application
+subclass or in the web.xml as part of the \code{url-pattern} element. \mvc\
+applications MUST use a non-empty path or pattern: i.e., {\em "/"} or {\em "/*"} are 
+invalid in \mvc\ applications. 
+
+The reason for this is that \mvc\ implementations
+often forward requests to the Servlet container, and the use of these
+values may result in the unwanted processing of the forwarded request
+by the \jaxrs\ servlet once again. Most \jaxrs\ applications avoid using
+these values, and many use \code{"/resources"} or \code{"/resources/*"} by 
+convention, which this specification also recommends.
+
+\section{Providers in \mvc}
+\label{providers_in_mvc}
+
+\mvc\ implementations are free use their own providers in order to modify the standard 
+\jaxrs\ pipeline for the purpose of implementing the \mvc\ semantics. Whenever mixing 
+implementation and application providers, care should be taken to ensure the correct 
+execution order using priorities.
+
+{\note Should we define the priorities for portability?}
+
+
