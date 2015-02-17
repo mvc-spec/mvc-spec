@@ -1,4 +1,231 @@
-\chapter{Controllers and Models}
+\chapter{Models, Views and Controllers}
+\label{mvc}
+
+This chapter focuses on the three components that comprise the \mvc\ architectural pattern: models, views
+and controllers. 
+
+\section{Controllers}
 \label{controllers}
 
-TBD
+An {\em MVC controller} is a \jaxrs\ resource method decorated by an \Controller\ annotation. If 
+this annotation is applied to a class, then all methods in it are regarded as controllers. 
+Using the \Controller\ annotation on a subset of methods defines a hybrid class in which 
+certain methods are controllers and others are traditional \jaxrs\ resource methods.
+
+A simple hello-world controller can be defined as follows:
+
+\begin{listing}{1}
+@Path("hello")
+public class HelloController {
+
+    @GET
+    @Controller
+    public String hello() {
+        return "hello.jsp";
+    }
+}
+\end{listing}
+
+In this example, \code{hello} is a controller method that returns a path to a Java Server Page (JSP).
+The semantics of controller method differ slightly from \jaxrs\ resource methods; in particular, a
+return type of \code{String} is interpreted as a view path rather than text content. Moreover,
+the default media type for a response is assumed to be \code{text/html}, but otherwise can
+be declared using \Produces\ just like in \jaxrs.
+
+The return type of a controller method is restricted to be one of four possible types:
+\begin{description}
+\item[void] A controller method that returns void is REQUIRED to be decorated by \View. 
+\item[String] The string returned is interpreted as a path to a view. 
+\item[Viewable] A \Viewable\ is a class that encapsulates information about views and their processing.
+\item[Response] A \jaxrs\ \Response\ whose entity's type is one of the three above.
+\end{description}
+
+The following class defines equivalent controller methods:
+
+\begin{listing}{1}
+@Controller
+@Path("hello")
+public class HelloController {
+
+    @GET
+    @View("hello.jsp")
+    public void helloVoid() {
+    }
+    
+    @GET
+    public String helloString() {
+        return "hello.jsp";
+    }
+    
+    @GET
+    public Viewable helloViewable() {
+        return new Viewable("hello.jsp");
+    }
+    
+    @GET
+    public Response helloResponse() {
+        return Response.status(Response.Status.OK)
+                       .entity("hello.jsp").build();
+    }    
+}
+\end{listing}
+
+Note that, even though controller methods return types are restricted as 
+explained above, \mvc\ does not impose any restrictions on the parameter
+types available for controller methods: i.e., all parameter types injectable
+in \jaxrs\ resources are also available in \mvc\ controllers. Likewise, injection
+of fields and properties is unrestricted and fully compatible with \jaxrs\ (modulo
+the restrictions explained in Section \ref{controller_instances}).
+
+\subsection{Controller Instances}
+\label{controller_instances}
+
+Unlike in \jaxrs\ where resource classes can be native (i.e., created and managed by \jaxrs), CDI beans, 
+managed beans or EJBs, \mvc\ classes are REQUIRED to be CDI-managed beans only. It follows that a hybrid 
+class that contains a mix of \jaxrs\ resource methods and \mvc\ controllers must also be CDI 
+managed. 
+
+Like in \jaxrs, the default resource class instance lifecycle is per-request. 
+That is, an instance of a controller class MUST be instantiated and initialized on every request. 
+Implementations MAY support other lifecycles via CDI; the same caveats that apply to \jaxrs\ classes 
+in other lifecycles applied to \mvc\ classes. In particular, proxies may be necessary when, for example,
+a per-request instance is as a member of a per-application instance. See \cite{jaxrs} for more 
+information on lifecycles and their caveats.
+
+\subsection{Viewable}
+\label{viewable}
+
+The \Viewable\ class encapsulates information about a view as well as, optionally, information 
+about how it  should be processed. More precisely, a \Viewable\ instance may include references 
+to \Models\ and \ViewEngine\ objects. For more information see Sections \ref{models} and \ref{view_engines}. 
+\Viewable\ defines traditional constructors for all these objects and it is, therefore, not a 
+CDI-managed class.
+
+The reader is referred to the Javadoc of the \Viewable\ class for more information on its semantics.
+
+\subsection{Response}
+\label{response}
+
+Returning a \Response\ object gives applications full access to all the parts in a response, 
+including the headers. For example, an instance of  \Response\ can modify the HTTP status
+code upon encountering an error condition; \jaxrs\ provides a fluent API to build responses
+as shown next.
+
+\begin{listing}{1}
+@GET
+@Controller
+public Response getById(@PathParam("id") String id) {
+    if (id.length() == 0) {
+   	    return Response.status(Response.Status.BAD_REQUEST)
+   	                   .entity("error.jsp").build();
+    } 
+    ...
+}
+\end{listing}
+
+Direct access to \Response\ enables applications to override content types, set character
+encodings, set cache control policies, etc. For more information, the reader is referred to the
+Javadoc.
+
+\section{Models}
+\label{models}
+
+\mvc\ controllers are responsible for combining data models and views (templates) to 
+produce web application pages. This specification supports two kinds of models: the
+first is based on the \Models\ interface which defines a map between names and
+objects, and the second is based on CDI \Named\ beans. Support for the \Models\ 
+interface is mandatory for all view engines; support for CDI \Named\ beans is
+OPTIONAL but highly RECOMMENDED. For more information on view engines see
+Chapter \ref{view_engines}.
+
+Let us now revisit our hello-world example, this time also showing how to update
+a model. Since we intent to show the two ways in which models can be used, we define the
+model as a CDI \Named\ bean in request scope even though this is only necessary
+for the CDI case:
+
+\begin{listing}{1}
+@Named("greeting")
+@RequestScoped
+public class Greeting {
+
+	private String message;
+	
+	public String getMessage() { return message; }
+	public void setMessage(String message) { this.message = message; }
+	...
+}
+\end{listing}
+
+Given that the view engine for JSPs supports \Named\ beans, all the controller
+needs to do is fill out the model and return the view. Access to the model
+is straightforward using CDI injection:
+
+\begin{listing}{1}
+@Path("hello")
+public class HelloController {
+
+	@Inject
+	private Greeting greeting;
+
+    @GET
+    @Controller
+    public String hello() {
+        greeting.setMessage("Hello there!");
+        return "hello.jsp";
+    }
+}
+\end{listing}
+
+If the view engine that processes the view returned by the controller is not CDI 
+enabled, then controllers can use the \Models\ map instead:
+
+\begin{listing}{1}
+@Path("hello")
+public class HelloController {
+
+	@Inject
+	private Models models;
+
+    @GET
+    @Controller
+    public String hello() {
+        models.set("greeting", new Greeting("Hello there!");
+        return "hello.jsp";
+    }
+}
+\end{listing}
+
+As stated above, the use of typed CDI \Named\ beans is recommended over the \Models\ map,
+but support for the latter may be necessary to integrate view engines that are not
+CDI aware.
+
+\section{Views}
+\label{views}
+
+A {\em view}, sometimes also referred to as a template, defines the structure of the output
+page and can refer to one or more models. It is the responsibility of a {\em view engine}
+to process (render) a view by extracting the information in the models and producing the
+output page. 
+
+Here is the JSP page for the hello-world example:
+
+\begin{listing}{1}
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>Hello</title>
+</head>
+<body>
+<h1>${greeting.message}</h1>
+</body>
+</html>
+\end{listing}
+
+In a JSP, model properties are accessible via EL \cite{el}. In the example above,
+the property \code{message} is read from the \code{greeting} model whose name
+was specified either in the \Named\ annotation or as the first argument to 
+the setter in \Models, depending on which controller from Section \ref{models}
+triggered this view's processing.
+
+%% CONTROLLERS
+%% Computation of Content-Type - Sectin 3.8 in JAX-RS

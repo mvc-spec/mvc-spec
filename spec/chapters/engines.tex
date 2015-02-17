@@ -1,4 +1,62 @@
 \chapter{View Engines}
-\label{engines}
+\label{view_engines}
 
-TBD
+A {\em view engine} is responsible for processing views. In this context, processing entails
+(i) locating and loading a view (ii) preparing any required models and (iii) rendering and 
+writing the result into a response object. 
+
+Implementations MUST provide built-in support for JSPs and Facelets view engines. Additional
+engines may be supported via an extension mechanism based on CDI. Namely, any CDI bean
+that implements the \code{javax.mvc.engine.ViewEngine} interface MUST be considered as
+a possible target for processing by calling its \code{support} method, discarding the
+engine if this method returns \code{false}.
+
+This is the interface that must be implemented by all \mvc\ view engines:
+
+\begin{listing}{1}
+public interface ViewEngine {
+
+    boolean supports(String view);
+
+    void processView(ViewEngineContext context) throws ViewEngineException;
+}
+\end{listing}
+
+As explained in Section \ref{viewable}, a \Viewable\ is an encapsulation for information
+that relates to a view. In particular, a \Viewable\ may optionally include a reference to a
+view engine. Implementations should perform the following steps while trying to find
+a suitable view engine for a \Viewable.
+
+\begin{enumerate}
+\item If calling \code{getViewEngine} on the \Viewable\ returns a non-null value, return
+that view engine.
+\item Otherwise, lookup all instances of \code{javax.mvc.engine.ViewEngine} available via CDI.~\footnote{The \code{@Any} annotation in CDI can be used for this purpose.}
+\item Call \code{supports} on every view engine found in the previous step, discarding
+those that return \code{false}.
+\item If the resulting set is empty, return \code{null}.
+\item Otherwise, sort the resulting set in descending order of priority using the integer value 
+from the \Priority\ annotation decorating the view engine class or the default value \code{Priorities.DEFAULT} if the annotation is not present.
+\item Return the first element in the resulting sorted set, that is, the view engine with
+the highest priority that supports the given \Viewable.
+\end{enumerate}
+
+If a view engine that can process a \Viewable\ is not found, as a fall-back attempt to 
+process the view by other means, implementations are 
+REQUIRED to forward the request-response pair back to the Servlet container using a 
+\code{RequestDispatcher}.
+
+The \code{processView} method has all the information that is required for processing,
+including the view, a reference to \Models, as well as the HTTP request and response
+available from the underlying the Servlet container. Implementations SHOULD catch
+exceptions thrown during the execution of \code{processView} and re-throw them as 
+\code{ViewEngineException}'s. 
+
+Prior to the view render phase, all entries available in \Models\ MUST be bound in
+such a way that they become available to the processing view. The exact mechanism
+for this depends on the actual view engine implementation. In the case of the built-in
+view engines for JSPs and Facelets, entries in \Models\ must be bound by calling
+\code{HttpServletRequest.setAttribute(String, Object)}; calling this method ensures
+access to the named models from EL expressions.
+
+
+%% Where are views located??
