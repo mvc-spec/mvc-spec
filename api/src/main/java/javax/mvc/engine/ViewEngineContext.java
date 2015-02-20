@@ -43,6 +43,7 @@ import javax.mvc.Models;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.container.ResourceInfo;
+import javax.ws.rs.core.Configuration;
 import javax.ws.rs.core.UriInfo;
 
 /**
@@ -104,4 +105,14 @@ public interface ViewEngineContext {
      * @see javax.ws.rs.container.ResourceInfo
      */
     public ResourceInfo getResourceInfo();
+
+    /**
+     * Returns the application's configuration. The configuration provides access
+     * to properties such as {@link javax.mvc.engine.ViewEngine#VIEW_FOLDER}, which
+     * view engines must use to locate views.
+     *
+     * @return application's configuration.
+     * @see javax.ws.rs.core.Configuration
+     */
+    public Configuration getConfiguration();
 }

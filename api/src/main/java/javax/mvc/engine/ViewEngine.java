@@ -69,6 +69,19 @@ package javax.mvc.engine;
 public interface ViewEngine {
 
     /**
+     * Name of property that can be set in an application's {@link javax.ws.rs.core.Configuration}
+     * to override the root location for views in an archive.
+     *
+     * @see javax.ws.rs.core.Application#getProperties()
+     */
+    public static final String VIEW_FOLDER = "javax.mvc.engine.ViewEngine.viewFolder";
+
+    /**
+     * Default value for property {@link #VIEW_FOLDER}.
+     */
+    public static final String DEFAULT_VIEW_FOLDER = "/WEB-INF/views/";
+
+    /**
      * Returns <code>true</code> if this engine can process the view or <code>false</code>
      * otherwise.
      *
