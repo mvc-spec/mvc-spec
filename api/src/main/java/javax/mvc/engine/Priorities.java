@@ -61,16 +61,16 @@ public interface Priorities {
     /**
      * Default priority for all built-in view engines.
      */
-    final int DEFAULT = 1000;
+    int DEFAULT = 1000;
 
     /**
      * Recommended priority for all view engines provided by frameworks built
      * on top of MVC implementations.
      */
-    final int FRAMEWORK = 2000;
+    int FRAMEWORK = 2000;
 
     /**
      * Recommended priority for all application-provided view engines.
      */
-    final int APPLICATION = 3000;
+    int APPLICATION = 3000;
 }

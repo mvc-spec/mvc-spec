@@ -75,12 +75,12 @@ public interface ViewEngine {
      *
      * @see javax.ws.rs.core.Application#getProperties()
      */
-    final String VIEW_FOLDER = "javax.mvc.engine.ViewEngine.viewFolder";
+    String VIEW_FOLDER = "javax.mvc.engine.ViewEngine.viewFolder";
 
     /**
      * Default value for property {@link #VIEW_FOLDER}.
      */
-    final String DEFAULT_VIEW_FOLDER = "/WEB-INF/views/";
+    String DEFAULT_VIEW_FOLDER = "/WEB-INF/views/";
 
     /**
      * Returns <code>true</code> if this engine can process the view or <code>false</code>
