@@ -55,6 +55,7 @@ package javax.mvc.engine;
  * @see javax.mvc.event.ViewEngineSelected
  * @since 1.0
  */
+@SuppressWarnings("unused")
 public interface Priorities {
 
     /**
