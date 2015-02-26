@@ -64,21 +64,21 @@ public interface ViewEngineContext {
      *
      * @return the view.
      */
-    public String getView();
+    String getView();
 
     /**
      * Returns the models instance needed to process the view.
      *
      * @return the models instance.
      */
-    public Models getModels();
+    Models getModels();
 
     /**
      * Returns HTTP request object from the Servlet container.
      *
      * @return HTTP request object.
      */
-    public HttpServletRequest getRequest();
+    HttpServletRequest getRequest();
 
     /**
      * Returns HTTP response object from the servlet container. The underlying
@@ -86,7 +86,7 @@ public interface ViewEngineContext {
      *
      * @return HTTP response object.
      */
-    public HttpServletResponse getResponse();
+    HttpServletResponse getResponse();
 
     /**
      * Returns the {@link javax.ws.rs.core.UriInfo} instance containing information
@@ -95,7 +95,7 @@ public interface ViewEngineContext {
      * @return the URI info for the current request.
      * @see javax.ws.rs.core.UriInfo
      */
-    public UriInfo getUriInfo();
+    UriInfo getUriInfo();
 
     /**
      * Returns the {@link javax.ws.rs.container.ResourceInfo} instance containing
@@ -104,7 +104,7 @@ public interface ViewEngineContext {
      * @return the resource info for the current request.
      * @see javax.ws.rs.container.ResourceInfo
      */
-    public ResourceInfo getResourceInfo();
+    ResourceInfo getResourceInfo();
 
     /**
      * Returns the application's configuration. The configuration provides access
@@ -114,5 +114,5 @@ public interface ViewEngineContext {
      * @return application's configuration.
      * @see javax.ws.rs.core.Configuration
      */
-    public Configuration getConfiguration();
+    Configuration getConfiguration();
 }

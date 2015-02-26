@@ -41,7 +41,6 @@ package javax.mvc.mapper;
 
 import javax.validation.ConstraintViolationException;
 import javax.ws.rs.core.Response;
-import javax.ws.rs.ext.ExceptionMapper;
 
 /**
  * An exception mapper for {@link javax.validation.ConstraintViolationException} that
@@ -60,7 +59,7 @@ public interface ConstraintViolationMapper {
      * {@link javax.ws.rs.core.Response}, possibly using the {@code view} in the
      * process.
      *
-     * @param e Exception thrown by the runtime system.
+     * @param e    Exception thrown by the runtime system.
      * @param view View name or the default {@code "error.jsp"} if not specified.
      * @return a response.
      */

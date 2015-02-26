@@ -107,6 +107,7 @@ public class Viewable {
      */
     public Viewable(String view, Models models, Class<? extends ViewEngine> viewEngine) {
         this.view = view;
+        this.models = models;
         this.viewEngine = viewEngine;
     }
 

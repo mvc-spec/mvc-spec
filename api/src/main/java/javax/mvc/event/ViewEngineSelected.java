@@ -66,12 +66,12 @@ public interface ViewEngineSelected {
      *
      * @return the view.
      */
-    public String getView();
+    String getView();
 
     /**
      * Returns the {@link javax.mvc.engine.ViewEngine} selected by the implementation.
      *
      * @return the view engine selected.
      */
-    public Class<? extends ViewEngine> getEngine();
+    Class<? extends ViewEngine> getEngine();
 }
