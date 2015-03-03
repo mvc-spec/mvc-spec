@@ -1,4 +1,175 @@
-\chapter{Validation}
+\chapter{Exception Handling}
+\label{exception_handling}
+
+This chapter discusses exception handling in the \mvc\ API. Exception handling is based
+on the underlying mechanism provided by \jaxrs, but with additional support for 
+validation exceptions that are common in HTML form posts.
+
+\section{Exception Mappers}
+\label{exception_mappers}
+
+The general exception handling mechanism in MVC controllers is identical to that defined
+for resource methods in the \jaxrs\ specification. In a nutshell, applications can 
+implement exception mapping providers for the purpose of mapping exceptions to 
+responses. If an exception mapper is not found for a particular exception type, 
+default rules apply that describe how to process the exception depending on whether
+it is a checked or an unchecked exception, and using additional rules for
+the special case of a \WebAppExc\ that includes a response. The reader is referred
+to the \jaxrs\ specification for more information.
+
+Let us consider the case of a \ValExc\ that is thrown as a result of a bean validation
+failure:
+
+\begin{listing}{1}
+@Controller
+@Path("form")
+@Produces("text/html")
+public class FormController {
+
+    @POST
+    public Response formPost(@Valid @BeanParam FormDataBean form) {
+        return Response.status(OK).entity("data.jsp").build();    
+    }
+}
+\end{listing}
+
+The method \code{formPost} injects a bean parameter of type \code{FormDataBean}
+which, for the sake of the example, we assume includes validation constraints
+such as \code{@Min(18)}, \code{@Size(min=1)}, etc. The presence of \code{@Valid} triggers
+validation of the bean on every HTML form post; if validation fails, a 
+\ConstVioExc\ (a subclass of \ValExc) is thrown. 
+
+An application can handle the exception by including an exception mapper as follows:
+
+\begin{listing}{1}
+class FormViolationMapper implements 
+                          ExceptionMapper<ConstraintViolationException> {
+
+    @Inject
+    private ErrorDataBean error;
+
+    @Override
+    public Response toResponse(ConstraintViolationException e) {
+        final Set<ConstraintViolation<?>> set = e.getConstraintViolations();
+        if (!set.isEmpty()) {
+            final ConstraintViolation<?> cv = set.iterator().next();
+            // fill out ErrorDataBean ...
+
+        }
+        return Response.status(Response.Status.BAD_REQUEST)
+                       .entity("error.jsp").build();
+    }
+}
+\end{listing}
+
+This exception mapper fills out an \code{ErrorDataBean} and returns the \code{error.jsp} view, 
+wrapped in a response as required by the method signature, with the intent to provide a human-friendly 
+description of the exception.
+
+Even though using exception mappers is a convenient way to handle exceptions in general, 
+there are cases in which finer control is necessary. The mapper defined above will be
+invoked for all instances of \ConstVioExc\ thrown in an application. Given that 
+applications may include several form-post controllers, handling all exceptions using
+a single method makes it difficult to provide controller-specific customizations.
+Moreover, exception mappers do not get access to the (likely partially valid) bound
+data, or \code{FormDataBean} in the example above.
+
+\section{Validation}
 \label{validation}
 
-TBD
+MVC provides an alternative exception handling mechanism that is specific for the 
+use case described in Section~\ref{exception_handling}. Rather than funnelling 
+exception handling into a single location while providing no access to the bound
+data, controller methods may opt to act as exception handlers as well. In other words, 
+controller methods can get called even if parameter validation fails as long as
+they declare themselves capable of handling errors.
+
+A controller class that defines a field or a property of type 
+\code{javax.mvc.validation.ValidationResult} will have its controller methods
+called even if a validation error is encountered while validating parameters. 
+Let us revisit the example from Section~\ref{exception_handling},
+this time using the controller method as an exception handler.
+
+\begin{listing}{1}
+@Controller
+@Path("form")
+@Produces("text/html")
+public class FormController {
+
+    @Inject
+    private ValidationResult vr;
+    
+    @Inject
+    private ErrorDataBean error;
+
+    @POST
+    @ValidateOnExecution(type = ExecutableType.NONE)
+    public Response formPost(@Valid @BeanParam FormDataBean form) {
+        if (vr.isFailed()) {
+            final Set<ConstraintViolation<?>> set = vr.getAllViolations();
+            // fill out ErrorDataBean ...
+            return Response.status(BAD_REQUEST).entity("error.jsp").build();
+        }
+        return Response.status(OK).entity("data.jsp").build();    
+    }
+}
+\end{listing}
+
+The presence of the injection target for the field 
+\code{vr} indicates to an implementation that controller methods in this
+class can handle validation errors. As a result, methods in this class
+that validate parameters should call \code{vr.isFailed()} to verify if
+validation errors were found.~\footnote{The \code{ValidateOnExecution} 
+annotation is necessary to ensure that CDI calls the method even after 
+a validation failure is encountered. Thus, to ensure the correct semantics, 
+validation  must be done by the JAX-RS implementation before the method 
+is called.}
+
+The class \code{javax.mvc.validation.ValidationResult}
+provides methods to get detailed access about any violations 
+found during validation. Instances of this class are always in request
+scope; the reader is referred to the javadoc for more information.
+
+As previously stated, properties of type \code{javax.mvc.validation.ValidationResult}
+are also supported. Here is a modified version of the example in which
+a property is used instead:
+
+\begin{listing}{1}
+@Controller
+@Path("form")
+@Produces("text/html")
+public class FormController {
+
+    private ValidationResult vr;
+    
+    @Inject
+    private ErrorDataBean error;
+    
+    public ValidationResult getVr() {
+        return vr;
+    }
+
+    @Inject
+    public void setVr(ValidationResult vr) {
+        this.vr = vr;
+    }
+
+    @POST
+    @ValidateOnExecution(type = ExecutableType.NONE)
+    public Response formPost(@Valid @BeanParam FormDataBean form) {
+        if (vr.isFailed()) {
+            final Set<ConstraintViolation<?>> set = vr.getAllViolations();
+            // fill out ErrorDataBean ...
+            return Response.status(BAD_REQUEST).entity("error.jsp").build();
+        }
+        return Response.status(OK).entity("data.jsp").build();    
+    }
+}
+\end{listing}
+
+Note that the \code{@Inject} has been moved from the field to the setter,
+thus ensuring the bean is properly initialized by CDI when it is
+created. Implementations MUST give precedence to a property over a field
+if both are present in the same class.
+ 
+

@@ -27,7 +27,7 @@ public class HelloController {
 \end{listing}
 
 In this example, \code{hello} is a controller method that returns a path to a Java Server Page (JSP).
-The semantics of controller method differ slightly from \jaxrs\ resource methods; in particular, a
+The semantics of controller methods differ slightly from \jaxrs\ resource methods; in particular, a
 return type of \code{String} is interpreted as a view path rather than text content. Moreover,
 the default media type for a response is assumed to be \code{text/html}, but otherwise can
 be declared using \Produces\ just like in \jaxrs.
@@ -124,8 +124,8 @@ public Response getById(@PathParam("id") String id) {
 \end{listing}
 
 Direct access to \Response\ enables applications to override content types, set character
-encodings, set cache control policies, etc. For more information, the reader is referred to the
-Javadoc.
+encodings, set cache control policies, trigger an HTTP redirect, etc. For more information, 
+the reader is referred to the Javadoc for the \Response\ class.
 
 \section{Models}
 \label{models}
