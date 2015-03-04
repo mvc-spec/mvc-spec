@@ -1,4 +1,70 @@
 \chapter{Events}
 \label{events}
 
-TBD
+This chapter introduces a mechanism by which MVC applications can be informed 
+of important events that occur while processing a request. This mechanism 
+is based on CDI events that can be fired by implementations and observed by 
+applications.
+
+\section{Observers}
+\label{observers}
+
+The package \code{javax.mvc.event} defines a number of event types that MUST be 
+fired by implementations during the processing of a request. Implementations MAY
+extend this set and also provide additional information on any of the events defined
+by this specification. The reader is referred to the implementation's documentation
+for more information on event support.
+
+Observing events can be useful for applications to learn about the lifecycle of a 
+request, provide application-level logging, monitor performance, etc. Chapter 
+\ref{view_engines} describes the algorithm used by implementations to select a
+specific view engine for processing. This information is made available to any
+application (or framework) that observes the \code{ViewEngineSelected} event. For
+example,
+
+\begin{listing}{1}
+@ApplicationScoped
+public class EventObserver {
+
+    public void onViewEngineSelected(@Observes ViewEngineSelected event) {
+        ...
+    }
+}
+\end{listing}
+
+Observer methods in CDI are defined using the \code{@Observes} annotation on 
+a parameter position.
+The class \code{EventObserver} is a CDI bean in application scope whose method
+\code{onViewEngineSelected} is called every time a \code{ViewEngineSelected} event
+is fired by the implementation. 
+
+To complete the example, let us assume that the information about the selected
+view engine needs to be conveyed to the client. To ensure that this information
+is available to a view returned to the client, the \code{EventObserver} class
+can inject and update the same request scope bean accessed by the view:
+
+\begin{listing}{1}
+@ApplicationScoped
+public class EventObserver {
+
+    @Inject
+    private EventBean eventBean;
+
+    public void onViewEngineSelected(@Observes ViewEngineSelected event) {
+        eventBean.setView(event.getView());
+        eventBean.setEngine(event.getEngine());
+    }
+}
+\end{listing}
+
+For more information about the interaction between views and models, the reader
+is referred to Section~\ref{models}. 
+
+Events fired by implementations are synchronous,
+so it is recommended that applications carry out only simple tasks in 
+their observer methods, avoiding long-running computations as well as blocking calls.
+
+\begin{ednote}
+Synchronous vs.~asynchronous event processing should be reviewed 
+based on any new capabilities available in CDI 2.0.
+\end{ednote}

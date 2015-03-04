@@ -163,4 +163,7 @@ thus ensuring the bean is properly initialized by CDI when it is
 created. Implementations MUST give precedence to a property (calling its getter and
 setter) over a field if both are present in the same class.
  
-
+\begin{ednote}
+Support for injection of \ValRes\ as a method parameter may be re-considered based on 
+any new capabilities available in CDI 2.0.
+\end{ednote}
