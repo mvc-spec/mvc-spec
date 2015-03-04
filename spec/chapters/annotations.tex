@@ -1,9 +1,18 @@
 \chapter{Summary of Annotations}
 \label{annotation_table}
-%\begin{center}
+
+\begin{center}
 \begin{longtable}{|l|p{1.2in}|p{3.5in}|}
 \hline
 \bfseries Annotation & \bfseries Target & \bfseries Description \tabularnewline
 \hline\hline\endhead
+\code{Controller} & \raggedright Type or method & \raggedright Defines a resource method 
+as an MVC controller. If specified at the type level, it defines all methods in a
+class as controllers. \tabularnewline
+\hline
+\code{View} & \raggedright Type or method & \raggedright Declares a view for a controller 
+method  that returns void. If specified at the type level, it applies to all controller 
+methods that return void in a class. \tabularnewline
+\hline
 \end{longtable}
-%\end{center}
+\end{center}
