@@ -1,8 +1,8 @@
 \chapter{Applications}
 \label{applications}
 
-This chapter introduces the notion of an \mvc\ application and how it relates to
-a \jaxrs\ application.
+This chapter introduces the notion of an \mvc\ application and explains how it 
+relates to a \jaxrs\ application.
 
 \section{\mvc\ Applications}
 \label{mvc_applications}
@@ -11,8 +11,7 @@ An \mvc\ application consists of one or more \jaxrs\ resources that are annotate
 \Controller\ and, just like \jaxrs\ applications, zero or more providers. If no
 resources are annotated with \Controller, then the resulting application is a \jaxrs\
 application instead. In general, everything that applies to a \jaxrs\ application
-also applies to an \mvc\ application. In what follows, we drop the adjective and 
-refer to them simply as applications.
+also applies to an \mvc\ application. 
 
 The controllers and providers that make up an application are configured via an 
 application-supplied subclass of \code{Application} from \jaxrs. An implementation 
@@ -22,7 +21,7 @@ the use of an \code{Application} subclass is the only way to guarantee portabili
 All the rules described in the Servlet section of the \jaxrs\ Specification
 \cite{jaxrs} apply to \mvc\ as well. This section recommends the use of
 the Servlet 3 framework pluggability mechanism and describes its semantics
-for the cases in which an \code{Application} subclass is present or not. 
+for the cases in which an \code{Application} subclass is present and absent. 
 
 The path in the application's URL space in which \mvc\ controllers live must
 be specified either using the \ApplicationPath\ annotation on the application
@@ -35,7 +34,8 @@ often forward requests to the Servlet container, and the use of these
 values may result in the unwanted processing of the forwarded request
 by the \jaxrs\ servlet once again. Most \jaxrs\ applications avoid using
 these values, and many use \code{"/resources"} or \code{"/resources/*"} by 
-convention, which this specification also recommends.
+convention. For consistency, it is recommended for MVC applications to use
+these patterns as well.
 
 \section{Providers in \mvc}
 \label{providers_in_mvc}

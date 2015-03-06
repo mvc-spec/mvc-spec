@@ -10,7 +10,7 @@ validation exceptions that are common in HTML form posts.
 
 The general exception handling mechanism in MVC controllers is identical to that defined
 for resource methods in the \jaxrs\ specification. In a nutshell, applications can 
-implement exception mapping providers for the purpose of mapping exceptions to 
+implement exception mapping providers for the purpose of converting exceptions to 
 responses. If an exception mapper is not found for a particular exception type, 
 default rules apply that describe how to process the exception depending on whether
 it is checked or unchecked, and using additional rules for
@@ -52,9 +52,7 @@ class FormViolationMapper implements
     public Response toResponse(ConstraintViolationException e) {
         final Set<ConstraintViolation<?>> set = e.getConstraintViolations();
         if (!set.isEmpty()) {
-            final ConstraintViolation<?> cv = set.iterator().next();
             // fill out ErrorDataBean ...
-
         }
         return Response.status(Response.Status.BAD_REQUEST)
                        .entity("error.jsp").build();
@@ -62,7 +60,8 @@ class FormViolationMapper implements
 }
 \end{listing}
 
-This exception mapper updates \code{ErrorDataBean} and returns the \code{error.jsp} view 
+This exception mapper updates an instance of \code{ErrorDataBean} and returns 
+the \code{error.jsp} view 
 (wrapped in a response as required by the method signature) with the intent to provide a 
 human-friendly description of the exception.
 
@@ -71,7 +70,7 @@ there are cases in which finer control is necessary. The mapper defined above wi
 invoked for all instances of \ConstVioExc\ thrown in an application. Given that 
 applications may include several form-post controllers, handling all exceptions using
 a single method makes it difficult to provide controller-specific customizations.
-Moreover, exception mappers do not get access to the (likely partially valid) bound
+Moreover, exception mappers do not get access to the (partially valid) bound
 data, or \code{FormDataBean} in the example above.
 
 \section{Validation Exceptions}
@@ -84,16 +83,17 @@ data, controller methods may opt to act as exception handlers as well. In other 
 controller methods can get called even if parameter validation fails as long as
 they declare themselves capable of handling errors.
 
-A controller class, either directly or indirectly via inheritance, that defines 
+A controller class that, either directly or indirectly via inheritance, defines 
 a field or a property of type 
 \code{javax.mvc.validation.ValidationResult} will have its controller methods
 called even if a validation error is encountered while validating parameters. 
 Implementations MUST introspect the controller bean for a field or a property of
 this type to determine the correct semantics; fields and property setters
-MUST be annotated with \code{@Inject} to guarantee proper bean initialization.
+of this type MUST be annotated with \code{@Inject} to guarantee proper bean
+initialization.
 
 Let us revisit the example from Section~\ref{exception_mappers},
-this time using the controller method as an exception handler.
+this time using the controller method as an exception handler:
 
 \begin{listing}{1}
 @Controller
@@ -111,7 +111,6 @@ public class FormController {
     @ValidateOnExecution(type = ExecutableType.NONE)
     public Response formPost(@Valid @BeanParam FormDataBean form) {
         if (vr.isFailed()) {
-            final Set<ConstraintViolation<?>> set = vr.getAllViolations();
             // fill out ErrorDataBean ...
             return Response.status(BAD_REQUEST).entity("error.jsp").build();
         }
@@ -125,16 +124,17 @@ The presence of the injection target for the field
 class can handle validation errors. As a result, methods in this class
 that validate parameters should call \code{vr.isFailed()} to verify if
 validation errors were found.~\footnote{The \code{ValidateOnExecution} 
-annotation is necessary to ensure that CDI calls the method even after 
-a validation failure is encountered. Thus, to ensure the correct semantics, 
-validation  must be done by the JAX-RS implementation before the method 
+annotation is necessary to ensure that CDI does not abort the
+invocation upon detecting a violation. Thus, to ensure the correct semantics, 
+validation must be performed by the JAX-RS implementation before the method 
 is called.}
 
-The class \ValRes\ provides methods to get detailed information about any violations 
+The class \code{ValidationResult} provides methods to get detailed information 
+about any violations 
 found during validation. Instances of this class are always in request
 scope; the reader is referred to the javadoc for more information.
 
-As previously stated, properties of type \ValRes\
+As previously stated, properties of type  \code{ValidationResult}
 are also supported. Here is a modified version of the example in which
 a property is used instead:
 

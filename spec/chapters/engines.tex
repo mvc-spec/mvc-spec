@@ -10,8 +10,8 @@ view languages.
 \label{view_engines_introduction}
 
 A {\em view engine} is responsible for processing views. In this context, processing entails
-(i) locating and loading a view (ii) preparing any required models and (iii) rendering and 
-writing the result into a response object. 
+(i) locating and loading a view (ii) preparing any required models and (iii) rendering the 
+view and writing the result back to the client. 
 
 Implementations MUST provide built-in support for JSPs and Facelets view engines. Additional
 engines may be supported via an extension mechanism based on CDI. Namely, any CDI bean
@@ -34,8 +34,11 @@ public interface ViewEngine {
 \label{selection_algorithm}
 
 As explained in Section \ref{viewable}, a \Viewable\ is an encapsulation for information
-that relates to a view. In particular, a \Viewable\ may optionally include a reference to a
-view engine. Implementations should perform the following steps while trying to find
+that relates to a view. Every possible return type from a controller method is either
+a \Viewable\ or can be turned into one by calling a constructor. Thus,
+the following algorithm assumes only \Viewable\ as input.
+
+Implementations should perform the following steps while trying to find
 a suitable view engine for a \Viewable.
 
 \begin{enumerate}
@@ -56,18 +59,23 @@ process the view by other means, implementations are
 REQUIRED to forward the request-response pair back to the Servlet container using a 
 \code{RequestDispatcher}.
 
-The \code{processView} method has all the information that is required for processing,
+The \code{processView} method has all the information necessary for processing
+in the \code{ViewEngineContext},
 including the view, a reference to \Models, as well as the HTTP request and response
  from the underlying the Servlet container. Implementations MUST catch
 exceptions thrown during the execution of \code{processView} and re-throw them as 
 \code{ViewEngineException}'s. 
 
 Prior to the view render phase, all entries available in \Models\ MUST be bound in
-such a way that they become available to the processing view. The exact mechanism
+such a way that they become available to the view being processed. The exact mechanism
 for this depends on the actual view engine implementation. In the case of the built-in
 view engines for JSPs and Facelets, entries in \Models\ must be bound by calling
 \code{HttpServletRequest.setAttribute(String, Object)}; calling this method ensures
 access to the named models from EL expressions.
 
+A view returned by a controller method represents a relative path within an
+application archive. Implementations MUST resolve view paths relative to 
+\code{ViewEngine.DEFAULT\_VIEW\_FOLDER}, which is set to \code{/WEB-INF/views/}.
+Locating views under \code{WEB-INF} ensures that they are not  
+directly accessible to clients as static resources.
 
-%% Where are views located??
