@@ -91,13 +91,13 @@
 \newcommand{\ReadFrom}{{\footnotesize {\sf ReadFrom}}}
 \newcommand{\WriteTo}{{\footnotesize {\sf WriteTo}}}
 
-\newcommand{\lllb}{$[\![\![$}
-\newcommand{\rrrb}{$]\!]\!]$}
-\newcommand{\assertref}[1]{\textbf{\lllb\ref{#1}\rrrb}}
+\newcommand{\llb}{$[\![$}
+\newcommand{\rrb}{$]\!]$}
+\newcommand{\assertref}[1]{\textbf{\llb\ref{#1}\rrb}}
 
 \makeatletter
 \newcommand{\assert}[1]{%
-\def\@itemlabel{\textbf{\lllb#1\rrrb}}
+\def\@itemlabel{\textbf{\llb{#1}\rrb}}
 \item
 \def\@currentlabel{#1}\label{#1}}
 \makeatother
