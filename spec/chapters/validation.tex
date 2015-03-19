@@ -90,7 +90,7 @@ called even if a validation error is encountered while validating parameters.
 Implementations MUST introspect the controller bean for a field or a property of
 this type to determine the correct semantics; fields and property setters
 of this type MUST be annotated with \code{@Inject} to guarantee proper bean
-initialization.
+initialization \assertref{validation-result}.
 
 Let us revisit the example from Section~\ref{exception_mappers},
 this time using the controller method as an exception handler:

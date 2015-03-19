@@ -13,11 +13,12 @@ A {\em view engine} is responsible for processing views. In this context, proces
 (i) locating and loading a view (ii) preparing any required models and (iii) rendering the 
 view and writing the result back to the client. 
 
-Implementations MUST provide built-in support for JSPs and Facelets view engines. Additional
+Implementations MUST provide built-in support for JSPs and Facelets view engines
+\assertref{builtin-engines}. Additional
 engines may be supported via an extension mechanism based on CDI. Namely, any CDI bean
 that implements the \code{javax.mvc.engine.ViewEngine} interface MUST be considered as
 a possible target for processing by calling its \code{support} method, discarding the
-engine if this method returns \code{false}.
+engine if this method returns \code{false} \assertref{extension-engines}.
 
 This is the interface that must be implemented by all \mvc\ view engines:
 
@@ -39,17 +40,19 @@ a \Viewable\ or can be turned into one by calling a constructor. Thus,
 the following algorithm assumes only \Viewable\ as input.
 
 Implementations should perform the following steps while trying to find
-a suitable view engine for a \Viewable.
+a suitable view engine for a \Viewable \assertref{selection-algorithm}.
 
 \begin{enumerate}
 \item If calling \code{getViewEngine} on the \Viewable\ returns a non-null value, return
 that view engine.
-\item Otherwise, lookup all instances of \code{javax.mvc.engine.ViewEngine} available via CDI.~\footnote{The \code{@Any} annotation in CDI can be used for this purpose.}
+\item Otherwise, lookup all instances of \code{javax.mvc.engine.ViewEngine} available via 
+CDI.~\footnote{The \code{@Any} annotation in CDI can be used for this purpose.}
 \item Call \code{supports} on every view engine found in the previous step, discarding
 those that return \code{false}.
 \item If the resulting set is empty, return \code{null}.
 \item Otherwise, sort the resulting set in descending order of priority using the integer value 
-from the \Priority\ annotation decorating the view engine class or the default value \code{Priorities.DEFAULT} if the annotation is not present.
+from the \Priority\ annotation decorating the view engine class or the default value
+ \code{Priorities.DEFAULT} if the annotation is not present.
 \item Return the first element in the resulting sorted set, that is, the view engine with
 the highest priority that supports the given \Viewable.
 \end{enumerate}
@@ -57,14 +60,14 @@ the highest priority that supports the given \Viewable.
 If a view engine that can process a \Viewable\ is not found, as a fall-back attempt to 
 process the view by other means, implementations are 
 REQUIRED to forward the request-response pair back to the Servlet container using a 
-\code{RequestDispatcher}.
+\code{RequestDispatcher} \assertref{request-forward}.
 
 The \code{processView} method has all the information necessary for processing
 in the \code{ViewEngineContext},
 including the view, a reference to \Models, as well as the HTTP request and response
  from the underlying the Servlet container. Implementations MUST catch
 exceptions thrown during the execution of \code{processView} and re-throw them as 
-\code{ViewEngineException}'s. 
+\code{ViewEngineException}'s \assertref{exception-wrap}.
 
 Prior to the view render phase, all entries available in \Models\ MUST be bound in
 such a way that they become available to the view being processed. The exact mechanism
@@ -73,9 +76,11 @@ view engines for JSPs and Facelets, entries in \Models\ must be bound by calling
 \code{HttpServletRequest.setAttribute(String, Object)}; calling this method ensures
 access to the named models from EL expressions.
 
-A view returned by a controller method represents a relative path within an
-application archive. Implementations MUST resolve view paths relative to 
-\code{ViewEngine.DEFAULT\_VIEW\_FOLDER}, which is set to \code{/WEB-INF/views/}.
-Locating views under \code{WEB-INF} ensures that they are not  
-directly accessible to clients as static resources.
+A view returned by a controller method represents a path within an
+application archive. If the path is relative, does not start with \code{/}, implementations 
+MUST resolve view paths relative to \code{ViewEngine.DEFAULT\_VIEW\_FOLDER}, 
+which is set to \code{/WEB-INF/views/}. If the path is absolute, no further processing
+is required \assertref{view-resolution}. It is recommended to use relative paths and a 
+location under \code{WEB-INF} to prevent direct access to views as static resources.
+
 

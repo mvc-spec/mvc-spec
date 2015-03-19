@@ -18,3 +18,10 @@ spec.synctex.gz
 styles/jsrfrontstyle.aux
 styles/jsrmainstyle.aux
 styles/macros.aux
+chapters/assertions.aux
+chapters/assertions.log
+spec.bbl
+spec.blg
+spec.ent
+spec.thm
+spec.toc

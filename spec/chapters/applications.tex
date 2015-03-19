@@ -11,7 +11,8 @@ An \mvc\ application consists of one or more \jaxrs\ resources that are annotate
 \Controller\ and, just like \jaxrs\ applications, zero or more providers. If no
 resources are annotated with \Controller, then the resulting application is a \jaxrs\
 application instead. In general, everything that applies to a \jaxrs\ application
-also applies to an \mvc\ application. 
+also applies to an \mvc\ application. Some \mvc\ applications may be {\em hybrid}
+and include a mix of \mvc\ controllers and \jaxrs\ resource methods.
 
 The controllers and providers that make up an application are configured via an 
 application-supplied subclass of \code{Application} from \jaxrs. An implementation 
@@ -27,7 +28,7 @@ The path in the application's URL space in which \mvc\ controllers live must
 be specified either using the \ApplicationPath\ annotation on the application
 subclass or in the web.xml as part of the \code{url-pattern} element. \mvc\
 applications MUST use a non-empty path or pattern: i.e., {\em "/"} or {\em "/*"} are 
-invalid in \mvc\ applications. 
+invalid in \mvc\ applications \assertref{application-path}. 
 
 The reason for this is that \mvc\ implementations
 often forward requests to the Servlet container, and the use of these

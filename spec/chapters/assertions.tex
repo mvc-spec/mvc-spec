@@ -1,0 +1,27 @@
+\chapter{Summary of Assertions}
+\label{assertions}
+
+\begin{description}
+\assert{controller} Controller methods are JAX-RS resource methods annotated with \code{@Controller}.
+\assert{all-controllers} All resource methods in a class annotated with \code{@Controller} must
+be controllers.
+\assert{controller-types} A controller's return type is limited as described in Section 
+\ref{controllers}.
+\assert{void-controllers} Controller methods that return void must be annotated with \code{@View}.
+\assert{cdi-beans} MVC beans are managed by CDI.
+\assert{per-request} Default scope for MVC beans is request scope.
+\assert{validation-result} If validation fails, controller methods must still be called if a 
+\code{ValidationResult} field or property is defined. 
+\assert{event-firing} All events in \code{javax.mvc.event} must be fired. See Javadoc for more
+information on each event in that package.
+\assert{application-path} The application's path must be non-empty.
+\assert{builtin-engines} Implementations must provide support for JSPs and Facelets.
+\assert{extension-engines} CDI beans that implement \code{javax.mvc.engine.ViewEngine} provide
+an extension mechanism for view engines.
+\assert{selection-algorithm} Implementations must use algorithm in Section \ref{selection_algorithm} 
+to select view engines.
+\assert{request-forward} Forward request for which no view engine is found.
+\assert{exception-wrap} Exceptions thrown during view processing must be wrapped.
+\assert{view-resolution} Relative paths to views must be resolved as explained in 
+Section \ref{selection_algorithm}.
+\end{description}

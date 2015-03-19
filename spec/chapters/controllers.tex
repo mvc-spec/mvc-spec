@@ -8,8 +8,9 @@ pattern: models, views and controllers.
 \label{controllers}
 
 An {\em MVC controller} is a \jaxrs\ \cite{jaxrs} resource method decorated by 
-an \Controller\ annotation. If 
-this annotation is applied to a class, then all methods in it are regarded as controllers. 
+an \Controller\ annotation \assertref{controller}. 
+If this annotation is applied to a class, then all methods in it are regarded as controllers
+\assertref{all-controllers}. 
 Using the \Controller\ annotation on a subset of methods defines a hybrid class in which 
 certain methods are controllers and others are traditional \jaxrs\ resource methods.
 
@@ -33,9 +34,11 @@ return type of \code{String} is interpreted as a view path rather than text cont
 the default media type for a response is assumed to be \code{text/html}, but otherwise can
 be declared using \Produces\ just like in \jaxrs.
 
-The return type of a controller method is restricted to be one of four possible types:
+The return type of a controller method is restricted to be one of four possible types
+\assertref{controller-types}:
 \begin{description}
-\item[void] A controller method that returns void is REQUIRED to be decorated by \View. 
+\item[void] A controller method that returns void is REQUIRED to be decorated by \View
+\assertref{void-controllers}. 
 \item[String] The string returned is interpreted as a path to a view. 
 \item[Viewable] A \Viewable\ is a class that encapsulates information about a view and
 how it is processed.
@@ -84,10 +87,11 @@ the restrictions explained in Section \ref{controller_instances}.
 
 Unlike in \jaxrs\ where resource classes can be native (created and managed by \jaxrs), 
 CDI beans, managed beans or EJBs, \mvc\ classes are REQUIRED to be CDI-managed beans 
-only. It follows that a hybrid class that contains a mix of \jaxrs\ resource methods 
-and \mvc\ controllers must also be CDI managed. 
+only \assertref{cdi-beans}. It follows that a hybrid class that contains a mix 
+of \jaxrs\ resource methods and \mvc\ controllers must also be CDI managed. 
 
-Like in \jaxrs, the default resource class instance lifecycle is {\em per-request}.
+Like in \jaxrs, the default resource class instance lifecycle is {\em per-request}
+\assertref{per-request}.
 That is, an instance of a controller class MUST be instantiated and initialized 
 on every request. Implementations MAY support other lifecycles via CDI; the same caveats 
 that apply to \jaxrs\ classes in other lifecycles applied to \mvc\ classes. In particular, 
@@ -234,5 +238,3 @@ was either specified in a \Named\ annotation or used as a key in the \Models\ ma
 depending on which controller from Section \ref{models} triggered this view's 
 processing.
 
-%% CONTROLLERS
-%% Computation of Content-Type - Sectin 3.8 in JAX-RS
