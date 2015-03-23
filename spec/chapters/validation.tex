@@ -23,7 +23,6 @@ failure:
 \begin{listing}{1}
 @Controller
 @Path("form")
-@Produces("text/html")
 public class FormController {
 
     @POST
@@ -98,7 +97,6 @@ this time using the controller method as an exception handler:
 \begin{listing}{1}
 @Controller
 @Path("form")
-@Produces("text/html")
 public class FormController {
 
     @Inject
@@ -124,7 +122,7 @@ The presence of the injection target for the field
 class can handle validation errors. As a result, methods in this class
 that validate parameters should call \code{vr.isFailed()} to verify if
 validation errors were found.~\footnote{The \code{ValidateOnExecution} 
-annotation is necessary to ensure that CDI does not abort the
+annotation is necessary to ensure that CDI and BV do not abort the
 invocation upon detecting a violation. Thus, to ensure the correct semantics, 
 validation must be performed by the JAX-RS implementation before the method 
 is called.}
@@ -141,7 +139,6 @@ a property is used instead:
 \begin{listing}{1}
 @Controller
 @Path("form")
-@Produces("text/html")
 public class FormController {
 
     private ValidationResult vr;

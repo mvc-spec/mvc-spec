@@ -28,7 +28,7 @@ public class HelloController {
 }
 \end{listing}
 
-In this example, \code{hello} is a controller method that returns a path to a Java Server Page (JSP).
+In this example, \code{hello} is a controller method that returns a path to a JavaServer Page (JSP).
 The semantics of controller methods differ slightly from \jaxrs\ resource methods; in particular, a
 return type of \code{String} is interpreted as a view path rather than text content. Moreover,
 the default media type for a response is assumed to be \code{text/html}, but otherwise can
@@ -37,7 +37,7 @@ be declared using \Produces\ just like in \jaxrs.
 The return type of a controller method is restricted to be one of four possible types
 \assertref{controller-types}:
 \begin{description}
-\item[void] A controller method that returns void is REQUIRED to be decorated by \View
+\item[void] A controller method that returns void is REQUIRED to be decorated by \View\
 \assertref{void-controllers}. 
 \item[String] The string returned is interpreted as a path to a view. 
 \item[Viewable] A \Viewable\ is a class that encapsulates information about a view and
@@ -144,7 +144,8 @@ first is based on CDI \Named\ beans, and the second on the \Models\ interface
 which defines a map between names and objects. Support for the \Models\ 
 interface is mandatory for all view engines; support for CDI \Named\ beans is
 OPTIONAL but highly RECOMMENDED. Application developers are encouraged to use CDI-based
-models whenever supported.  
+models whenever supported, and thus take advantage of the existing CDI and EL integration
+on the platform. 
 
 Let us now revisit our hello-world example, this time also showing how to update
 a model. Since we intent to show the two ways in which models can be used, we define the
@@ -197,7 +198,7 @@ public class HelloController {
     @GET
     @Controller
     public String hello() {
-        models.set("greeting", new Greeting("Hello there!");
+        models.put("greeting", new Greeting("Hello there!");
         return "hello.jsp";
     }
 }

@@ -77,8 +77,8 @@ view engines for JSPs and Facelets, entries in \Models\ must be bound by calling
 access to the named models from EL expressions.
 
 A view returned by a controller method represents a path within an
-application archive. If the path is relative, does not start with \code{/}, implementations 
-MUST resolve view paths relative to \code{ViewEngine.DEFAULT\_VIEW\_FOLDER}, 
+application archive. If the path is relative, does not start with \code{"/"}, implementations 
+MUST resolve view paths relative to value of \code{ViewEngine. DEFAULT\_VIEW\_FOLDER}, 
 which is set to \code{/WEB-INF/views/}. If the path is absolute, no further processing
 is required \assertref{view-resolution}. It is recommended to use relative paths and a 
 location under \code{WEB-INF} to prevent direct access to views as static resources.
