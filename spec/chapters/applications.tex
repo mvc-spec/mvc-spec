@@ -27,8 +27,8 @@ for the cases in which an \code{Application} subclass is present and absent.
 The path in the application's URL space in which \mvc\ controllers live must
 be specified either using the \ApplicationPath\ annotation on the application
 subclass or in the web.xml as part of the \code{url-pattern} element. \mvc\
-applications MUST use a non-empty path or pattern: i.e., {\em "/"} or {\em "/*"} are 
-invalid in \mvc\ applications \assertref{application-path}. 
+applications SHOULD use a non-empty path or pattern: i.e., {\em "/"} or {\em "/*"} 
+should be avoided whenever possible. 
 
 The reason for this is that \mvc\ implementations
 often forward requests to the Servlet container, and the use of these

@@ -9,7 +9,7 @@ pattern: models, views and controllers.
 
 An {\em MVC controller} is a \jaxrs\ \cite{jaxrs} resource method decorated by 
 an \Controller\ annotation \assertref{controller}. 
-If this annotation is applied to a class, then all methods in it are regarded as controllers
+If this annotation is applied to a class, then all resource methods in it are regarded as controllers
 \assertref{all-controllers}. 
 Using the \Controller\ annotation on a subset of methods defines a hybrid class in which 
 certain methods are controllers and others are traditional \jaxrs\ resource methods.
@@ -74,6 +74,9 @@ public class HelloController {
     }    
 }
 \end{listing}
+
+The \View\ annotation only applies to a method that returns void and
+it is ignored in all the other cases.
 
 Note that, even though controller methods return types are restricted as 
 explained above, \mvc\ does not impose any restrictions on parameter

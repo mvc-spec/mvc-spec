@@ -41,8 +41,8 @@ validation of the bean on every HTML form post; if validation fails, a
 An application can handle the exception by including an exception mapper as follows:
 
 \begin{listing}{1}
-class FormViolationMapper implements 
-                          ExceptionMapper<ConstraintViolationException> {
+public class FormViolationMapper 
+             implements ExceptionMapper<ConstraintViolationException> {
 
     @Inject
     private ErrorDataBean error;
