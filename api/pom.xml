@@ -88,7 +88,7 @@
                         <configuration>
                             <artifacts>
                                 <artifact>
-                                    <file>${project.build.directory}/../../spec/spec.pdf</file>
+                                    <file>${basedir}/src/main/spec/spec.pdf</file>
                                     <type>pdf</type>
                                     <classifier>spec</classifier>
                                 </artifact>
