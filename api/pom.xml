@@ -204,6 +204,6 @@
     </reporting>
     <scm>
         <connection>scm:git:git://java.net/mvc-spec~git</connection>
-        <developerConnection>scm:git:git://java.net/mvc-spec~git</developerConnection>
+        <developerConnection>scm:git:ssh://git.java.net/mvc-spec~git</developerConnection>
     </scm>
 </project>
