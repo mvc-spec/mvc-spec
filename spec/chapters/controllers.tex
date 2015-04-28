@@ -75,8 +75,10 @@ public class HelloController {
 }
 \end{listing}
 
-The \View\ annotation only applies to a method that returns void and
-it is ignored in all the other cases.
+Controller methods that return a non-void type may also be decorated with \View\ as a 
+way to specify a {\em default} view for the controller. The default view MUST be 
+used only when the controller method returns a \code{null} value 
+\assertref{null-controllers}.
 
 Note that, even though controller methods return types are restricted as 
 explained above, \mvc\ does not impose any restrictions on parameter

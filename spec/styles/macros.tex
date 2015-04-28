@@ -93,11 +93,11 @@
 
 \newcommand{\llb}{$[\![$}
 \newcommand{\rrb}{$]\!]$}
-\newcommand{\assertref}[1]{\textbf{\llb\ref{#1}\rrb}}
+\newcommand{\assertref}[1]{\textbf{\llb\ref{mvc:#1}\rrb}}
 
 \makeatletter
 \newcommand{\assert}[1]{%
-\def\@itemlabel{\textbf{\llb{#1}\rrb}}
+\def\@itemlabel{\textbf{\llb{mvc:#1}\rrb}}
 \item
-\def\@currentlabel{#1}\label{#1}}
+\def\@currentlabel{mvc:#1}\label{mvc:#1}}
 \makeatother
