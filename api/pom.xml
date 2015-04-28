@@ -51,7 +51,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-javadoc-plugin</artifactId>
-                <version>2.10.1</version>
+                <version>2.10.2</version>
                 <executions>
                     <execution>
                         <id>attach-javadocs</id>
@@ -60,6 +60,10 @@
                         </goals>
                     </execution>
                 </executions>
+                <configuration>
+                    <doctitle>MVC ${project.version} API</doctitle>
+                    <windowtitle>MVC ${project.version} API</windowtitle>
+                </configuration>
             </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
