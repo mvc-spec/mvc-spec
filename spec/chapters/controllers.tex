@@ -34,15 +34,17 @@ return type of \code{String} is interpreted as a view path rather than text cont
 the default media type for a response is assumed to be \code{text/html}, but otherwise can
 be declared using \Produces\ just like in \jaxrs.
 
-The return type of a controller method is restricted to be one of four possible types
-\assertref{controller-types}:
+A controller's method return type determines how its result is processed:
+
 \begin{description}
 \item[void] A controller method that returns void is REQUIRED to be decorated by \View\
 \assertref{void-controllers}. 
-\item[String] The string returned is interpreted as a path to a view. 
-\item[Viewable] A \Viewable\ is a class that encapsulates information about a view and
-how it is processed.
-\item[Response] A \jaxrs\ \Response\ whose entity's type is one of the three above.
+\item[String] A string returned is interpreted as a view path. 
+\item[Viewable] A \Viewable\ is a class that encapsulates a view path as well as
+additional information related to its processing.
+\item[{\em (Java Type)}] The method \code{toString} is called on other Java types and the
+result interpreted as a view path. 
+\item[Response] A \jaxrs\ \Response\ whose entity's type is one of the above.
 \end{description}
 
 The following class defines equivalent controller methods:
@@ -52,26 +54,31 @@ The following class defines equivalent controller methods:
 @Path("hello")
 public class HelloController {
 
-    @GET
+    @GET @Path("void")
     @View("hello.jsp")
     public void helloVoid() {
     }
     
-    @GET
+    @GET @Path("string")
     public String helloString() {
         return "hello.jsp";
     }
     
-    @GET
+    @GET @Path("viewable")
     public Viewable helloViewable() {
         return new Viewable("hello.jsp");
     }
     
-    @GET
+    @GET @Path("response")
     public Response helloResponse() {
         return Response.status(Response.Status.OK)
                        .entity("hello.jsp").build();
     }    
+
+    @GET @Path("myview")
+    public MyView helloMyView() {
+        return new MyView("hello.jsp");    // toString() -> "hello.jsp"
+    }       
 }
 \end{listing}
 
