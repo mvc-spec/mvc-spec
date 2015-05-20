@@ -46,7 +46,7 @@ package javax.mvc.security;
  * accessible from EL using the name {@code encoders}.
  *
  * @author Santiago Pericas-Geertsen
- * @see https://www.owasp.org/index.php/OWASP_Java_Encoder_Project
+ * @see <a href="https://www.owasp.org/index.php/OWASP_Java_Encoder_Project">OWASP Encoder Project</a>
  * @since 1.0
  */
 public interface Encoders {
@@ -54,7 +54,7 @@ public interface Encoders {
     /**
      * <p>Encoding for JavaScript code in attributes or script blocks. It MUST support
      * encoding of (at least) the following characters:</p>
-     * <p/>
+     *
      * <table summary="Encoding Table">
      * <thead>
      * <tr><th>Input Character</th><th>Encoding</th></tr>
@@ -82,7 +82,7 @@ public interface Encoders {
     /**
      * <p>Encoding for HTML code in attributes or content. It MUST support encoding of
      * (at least) the following characters:</p>
-     * <p/>
+     *
      * <table summary="Encoding Table">
      * <thead>
      * <tr><th>Input Character</th><th>Encoding</th></tr>
