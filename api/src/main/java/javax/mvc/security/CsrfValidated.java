@@ -50,7 +50,7 @@ import static java.lang.annotation.ElementType.*;
 
 /**
  * <p>Controller annotation that can be used to validate a CSRF token value received
- * in a request. Tokens are accesible via instances of the interface
+ * in a request. Tokens are accessible via instances of the interface
  * {@link javax.mvc.security.Csrf}.</p>
  *
  * <p>Even though this annotation is targeted to {@code TYPE}, it can only be used

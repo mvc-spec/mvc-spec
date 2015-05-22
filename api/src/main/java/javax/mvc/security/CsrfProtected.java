@@ -50,7 +50,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * Controller annotation that can be used to enable CSRF token generation.
- * Tokens are accesible via instances of {@link javax.mvc.security.Csrf}.
+ * Tokens are accessible via instances of {@link javax.mvc.security.Csrf}.
  * Alternatively, generation can be enabled for all controllers using the
  * application-level property {@link javax.mvc.security.Csrf#ENABLE_CSRF}.
  *
