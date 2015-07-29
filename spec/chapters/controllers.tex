@@ -8,7 +8,7 @@ pattern: models, views and controllers.
 \label{controllers}
 
 An {\em MVC controller} is a \jaxrs\ \cite{jaxrs} resource method decorated by 
-an \Controller\ annotation \assertref{controller}. 
+\Controller\ \assertref{controller}. 
 If this annotation is applied to a class, then all resource methods in it are regarded as controllers
 \assertref{all-controllers}. 
 Using the \Controller\ annotation on a subset of methods defines a hybrid class in which 
@@ -146,6 +146,36 @@ public Response getById(@PathParam("id") String id) {
 Direct access to \Response\ enables applications to override content types, set character
 encodings, set cache control policies, trigger an HTTP redirect, etc. For more information, 
 the reader is referred to the Javadoc for the \Response\ class.
+
+\subsection{Redirect}
+\label{redirect}
+ 
+As stated in the previous section, controllers can redirect clients by returning a \Response\
+instance using the \jaxrs\ API. For example,
+
+\begin{listing}{1}
+@GET
+@Controller
+public Response redirect() {
+    return Response.seeOther(URI.create("see/here")).build();
+}
+\end{listing}
+
+Given that redirects are fairly common in MVC frameworks, implementations MUST support
+view paths prefixed by {\tt redirect:} as a more concise way to trigger a client redirect \assertref{redirect}. 
+The controller shown above can be re-written as follows:
+
+\begin{listing}{1}
+@GET
+@Controller
+public String redirect() {
+	return "redirect:see/here";
+}
+\end{listing}
+
+In either case, the HTTP status code returned is 302. Note that redirects require client 
+cooperation (they must be supported by clients) and result in a completely new 
+request-response exchange in order to complete the redirection.
 
 \section{Models}
 \label{models}
