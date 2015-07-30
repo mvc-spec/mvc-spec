@@ -57,7 +57,7 @@ import javax.mvc.engine.ViewEngine;
  *
  * @author Santiago Pericas-Geertsen
  * @see javax.mvc.Models
- * @see javax.mvc.Controller
+ * @see javax.mvc.annotation.Controller
  * @see javax.mvc.engine.ViewEngine
  * @since 1.0
  */

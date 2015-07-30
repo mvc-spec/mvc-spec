@@ -46,13 +46,13 @@ package javax.mvc.engine;
  * priority is chosen. If two or more view engines can process the same view and they
  * all have the same priority, one is chosen in an implementation-defined manner.
  *
- * <p>Applications can define observers for the event {@link javax.mvc.event.ViewEngineSelected}
+ * <p>Applications can define observers for the event {@link javax.mvc.event.ViewEngineSelectedEvent}
  * to get additional information about the outcome of the selection mechanism.
  *
  * @author Santiago Pericas-Geertsen
  * @see javax.annotation.Priority
  * @see javax.mvc.engine.ViewEngine
- * @see javax.mvc.event.ViewEngineSelected
+ * @see javax.mvc.event.ViewEngineSelectedEvent
  * @since 1.0
  */
 @SuppressWarnings("unused")

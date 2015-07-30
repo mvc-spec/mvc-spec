@@ -37,38 +37,31 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.mvc.security;
+package javax.mvc.annotation;
+
+import javax.ws.rs.NameBinding;
+import java.lang.annotation.Documented;
+import java.lang.annotation.Inherited;
+import java.lang.annotation.Retention;
+import java.lang.annotation.Target;
+
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Cross Site Request Forgery (CSRF) interface with access to the CSRF header name
- * and the CSRF token value. Instances of this interface MUST be accessible via EL using the name {@code csrf}. It is RECOMMENDED for instances of this
- * class to be in session scope.
+ * Controller annotation that can be used to enable CSRF token generation.
+ * Tokens are accessible via instances of {@link javax.mvc.security.Csrf}.
+ * Alternatively, generation can be enabled for all controllers using the
+ * application-level property {@link javax.mvc.security.Csrf#ENABLE_CSRF}.
  *
  * @author Santiago Pericas-Geertsen
- * @see javax.mvc.annotation.CsrfProtected
  * @see javax.mvc.annotation.CsrfValidated
  * @since 1.0
  */
-public interface Csrf {
-
-    /**
-     * Property that can be used to globally enable CSRF in an application.
-     *
-     * @see javax.ws.rs.core.Application#getProperties
-     */
-    static final String ENABLE_CSRF = "javax.mvc.security.EnableCsrf";
-
-    /**
-     * Returns the name of the CSRF header. This header is typically a constant.
-     *
-     * @return name of CSRF header.
-     */
-    String getName();
-
-    /**
-     * Returns the value of the CSRF token.
-     *
-     * @return value of CSRF token.
-     */
-    String getToken();
+@NameBinding
+@Target(METHOD)
+@Retention(RUNTIME)
+@Documented
+@Inherited
+public @interface CsrfProtected {
 }

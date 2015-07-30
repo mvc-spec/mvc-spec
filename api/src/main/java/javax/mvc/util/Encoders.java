@@ -37,7 +37,7 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.mvc.security;
+package javax.mvc.util;
 
 /**
  * Interface that provides encoders to <em>escape</em> code in JavaScript, HTML,

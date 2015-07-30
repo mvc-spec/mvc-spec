@@ -51,7 +51,7 @@ package javax.mvc.engine;
  *     their priority; otherwise the priority is assumed to be {@link Priorities#DEFAULT}.</li>
  *     <li>If more than one candidate is available, choose one in an
  *     implementation-defined manner.</li>
- *     <li>Fire a {@link javax.mvc.event.ViewEngineSelected} event to inform observers
+ *     <li>Fire a {@link javax.mvc.event.ViewEngineSelectedEvent} event to inform observers
  *     of the selection.</li>
  * </ol>
  * <p>Once a view engine is selected, the method {@link #processView(ViewEngineContext)} is
@@ -63,7 +63,7 @@ package javax.mvc.engine;
  *
  * @author Santiago Pericas-Geertsen
  * @see javax.annotation.Priority
- * @see javax.mvc.event.ViewEngineSelected
+ * @see javax.mvc.event.ViewEngineSelectedEvent
  * @since 1.0
  */
 @SuppressWarnings("unused")

@@ -39,39 +39,40 @@
  */
 package javax.mvc.event;
 
-import javax.mvc.engine.ViewEngine;
+import javax.ws.rs.container.ResourceInfo;
+import javax.ws.rs.core.UriInfo;
 
 /**
- * <p>Observable CDI Event to get information about the view engine that was
- * selected to process a view. Implementations are required to fire this
+ * <p>Observable CDI Event to get information about the controller method
+ * that matched a request. Implementations are required to fire this
  * event during processing.</p>
  *
  * <p>Example of an observer:
  * <pre><code>
  *     public class EventObserver {
- *         public void onViewEngineSelected(&#64;Observes ViewEngineSelected event) {
- *             ...
- *         }
- *     }
- * </code></pre>
+ *         public void onControllerMatched(&#64;Observes ControllerMatchedEvent event) {
+             ...
+         }
+     }
+ </code></pre>
  *
  * @author Santiago Pericas-Geertsen
  * @see javax.enterprise.event.Observes
  * @since 1.0
  */
-public interface ViewEngineSelected {
+public interface ControllerMatchedEvent {
 
     /**
-     * Returns the view being processed.
+     * See {@link javax.ws.rs.core.UriInfo}.
      *
-     * @return the view.
+     * @return URI info.
      */
-    String getView();
+    UriInfo getUriInfo();
 
     /**
-     * Returns the {@link javax.mvc.engine.ViewEngine} selected by the implementation.
+     * See {@link javax.ws.rs.container.ResourceInfo}.
      *
-     * @return the view engine selected.
+     * @return resources info.
      */
-    Class<? extends ViewEngine> getEngine();
+    ResourceInfo getResourceInfo();
 }

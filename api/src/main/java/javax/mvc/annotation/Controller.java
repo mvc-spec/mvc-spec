@@ -37,7 +37,7 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.mvc;
+package javax.mvc.annotation;
 
 import javax.ws.rs.NameBinding;
 import java.lang.annotation.Documented;
@@ -54,7 +54,7 @@ import static java.lang.annotation.ElementType.*;
  * {@link java.lang.String}, as part of a {@link javax.mvc.Viewable} or as a
  * {@link javax.ws.rs.core.Response} whose entity is a {@link javax.mvc.Viewable}.
  * If a controller method returns void, then the view must be specified using
- * the {@link javax.mvc.View} annotation.
+ * the {@link javax.mvc.annotation.View} annotation.
  *
  * <p>Example:
  * <pre><code>
@@ -65,8 +65,8 @@ import static java.lang.annotation.ElementType.*;
  * </code></pre>
  *
  * @author Santiago Pericas-Geertsen
- * @see javax.mvc.View
  * @see javax.mvc.Viewable
+ * @see javax.mvc.annotation.View
  * @see javax.ws.rs.core.Response
  * @since 1.0
  */

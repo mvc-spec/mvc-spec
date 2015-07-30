@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2014-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -37,38 +37,41 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.mvc.security;
+package javax.mvc.event;
+
+import javax.mvc.engine.ViewEngine;
 
 /**
- * Cross Site Request Forgery (CSRF) interface with access to the CSRF header name
- * and the CSRF token value. Instances of this interface MUST be accessible via EL using the name {@code csrf}. It is RECOMMENDED for instances of this
- * class to be in session scope.
+ * <p>Observable CDI Event to get information about the view engine that was
+ * selected to process a view. Implementations are required to fire this
+ * event during processing.</p>
+ *
+ * <p>Example of an observer:
+ * <pre><code>
+ *     public class EventObserver {
+ *         public void onViewEngineSelected(&#64;Observes ViewEngineSelectedEvent event) {
+             ...
+         }
+     }
+ </code></pre>
  *
  * @author Santiago Pericas-Geertsen
- * @see javax.mvc.annotation.CsrfProtected
- * @see javax.mvc.annotation.CsrfValidated
+ * @see javax.enterprise.event.Observes
  * @since 1.0
  */
-public interface Csrf {
+public interface ViewEngineSelectedEvent {
 
     /**
-     * Property that can be used to globally enable CSRF in an application.
+     * Returns the view being processed.
      *
-     * @see javax.ws.rs.core.Application#getProperties
+     * @return the view.
      */
-    static final String ENABLE_CSRF = "javax.mvc.security.EnableCsrf";
+    String getView();
 
     /**
-     * Returns the name of the CSRF header. This header is typically a constant.
+     * Returns the {@link javax.mvc.engine.ViewEngine} selected by the implementation.
      *
-     * @return name of CSRF header.
+     * @return the view engine selected.
      */
-    String getName();
-
-    /**
-     * Returns the value of the CSRF token.
-     *
-     * @return value of CSRF token.
-     */
-    String getToken();
+    Class<? extends ViewEngine> getEngine();
 }

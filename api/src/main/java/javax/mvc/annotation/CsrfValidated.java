@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2014-2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -37,41 +37,32 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.mvc;
+package javax.mvc.annotation;
 
+import javax.ws.rs.NameBinding;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
-
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.ElementType.TYPE;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
+import static java.lang.annotation.RetentionPolicy.*;
+import static java.lang.annotation.ElementType.*;
 
 /**
- * <p>Declares a view for a controller method that returns void. It is ignored for
- * any controller method that does not return void. If declared at the type level,
- * it applies to all controller methods in the type and can be overridden by another
- * instance of this annotation at the method level.
+ * <p>Controller annotation that can be used to validate a CSRF token value received
+ * in a request. Tokens are accessible via instances of the interface
+ * {@link javax.mvc.security.Csrf}.</p>
  *
- * <p>Example:
- * <pre><code>
- *     &#64;Controller
- *     &#64;View("hello.jsp")
- *     public void sayHello() {
- *         ...
- *     }
- * </code></pre>
+ * <p>Even though this annotation is targeted to {@code TYPE}, it can only be used
+ * to decorate individual controller methods.</p>
  *
  * @author Santiago Pericas-Geertsen
- * @see javax.mvc.Controller
+ * @see javax.mvc.annotation.CsrfProtected
  * @since 1.0
  */
+@NameBinding
 @Target({METHOD, TYPE})
 @Retention(RUNTIME)
 @Documented
 @Inherited
-public @interface View {
-    String value();
+public @interface CsrfValidated {
 }
-

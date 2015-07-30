@@ -1,7 +1,7 @@
 /*
  * DO NOT ALTER OR REMOVE COPYRIGHT NOTICES OR THIS HEADER.
  *
- * Copyright (c) 2014-2015 Oracle and/or its affiliates. All rights reserved.
+ * Copyright (c) 2015 Oracle and/or its affiliates. All rights reserved.
  *
  * The contents of this file are subject to the terms of either the GNU
  * General Public License Version 2 only ("GPL") or the Common Development
@@ -37,31 +37,10 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.mvc.security;
-
-import javax.ws.rs.NameBinding;
-import java.lang.annotation.Documented;
-import java.lang.annotation.Inherited;
-import java.lang.annotation.Retention;
-import java.lang.annotation.Target;
-
-import static java.lang.annotation.ElementType.METHOD;
-import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * Controller annotation that can be used to enable CSRF token generation.
- * Tokens are accessible via instances of {@link javax.mvc.security.Csrf}.
- * Alternatively, generation can be enabled for all controllers using the
- * application-level property {@link javax.mvc.security.Csrf#ENABLE_CSRF}.
+ * The annotations used by the MVC runtime.
  *
- * @author Santiago Pericas-Geertsen
- * @see javax.mvc.security.CsrfValidated
- * @since 1.0
+ * @version 1.0
  */
-@NameBinding
-@Target(METHOD)
-@Retention(RUNTIME)
-@Documented
-@Inherited
-public @interface CsrfProtected {
-}
+package javax.mvc.annotation;
