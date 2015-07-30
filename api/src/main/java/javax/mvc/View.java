@@ -49,10 +49,10 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * <p>Declares a view for a controller method that returns void. It is ignored for
- * any controller method that does not return void. If declared at the type level,
- * it applies to all controller methods in the type and can be overridden by another
- * instance of this annotation at the method level.
+ * <p>Associates a default view with a controller. If a controller returns void
+ * or {@code null}, the default view is used. If declared at the type level, it applies
+ * to all controller methods in the type and can be overridden by another instance of
+ * this annotation at the method level.
  *
  * <p>Example:
  * <pre><code>
