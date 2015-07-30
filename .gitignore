@@ -1,3 +1,4 @@
 .idea
 api/.idea
 api/target
+.DS_Store
