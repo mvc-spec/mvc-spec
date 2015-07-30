@@ -20,14 +20,14 @@ Observing events can be useful for applications to learn about the lifecycle of 
 request, provide application-level logging, monitor performance, etc. Chapter 
 \ref{view_engines} describes the algorithm used by implementations to select a
 specific view engine for processing. This information is made available to any
-application (or framework) that observes the \code{ViewEngineSelected} event. For
+application (or framework) that observes the \code{ViewEngineSelectedEvent}. For
 example,
 
 \begin{listing}{1}
 @ApplicationScoped
 public class EventObserver {
 
-    public void onViewEngineSelected(@Observes ViewEngineSelected event) {
+    public void onViewEngineSelected(@Observes ViewEngineSelectedEvent e) {
         ...
     }
 }
@@ -36,7 +36,7 @@ public class EventObserver {
 Observer methods in CDI are defined using the \code{@Observes} annotation on 
 a parameter position.
 The class \code{EventObserver} is a CDI bean in application scope whose method
-\code{onViewEngineSelected} is called every time a \code{ViewEngineSelected} event
+\code{onViewEngineSelected} is called every time a \code{ViewEngineSelectedEvent}
 is fired by the implementation. 
 
 To complete the example, let us assume that the information about the selected
@@ -51,9 +51,9 @@ public class EventObserver {
     @Inject
     private EventBean eventBean;
 
-    public void onViewEngineSelected(@Observes ViewEngineSelected event) {
-        eventBean.setView(event.getView());
-        eventBean.setEngine(event.getEngine());
+    public void onViewEngineSelected(@Observes ViewEngineSelectedEvent e) {
+        eventBean.setView(e.getView());
+        eventBean.setEngine(e.getEngine());
     }
 }
 \end{listing}
