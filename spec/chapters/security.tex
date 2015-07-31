@@ -1,0 +1,41 @@
+\chapter{Security}
+
+\section{Introduction}
+
+{\em (TBD)}
+
+\section{Cross-site Request Forgery}
+
+Cross-site Request Forgery (CSRF) is a type of attack in which a user, who has a trust
+relationship with a certain site, is mislead to execute some commands that exploit the
+existence of such a trust relationship. The canonical example for this attack is that of
+a user unintentionally carrying out a bank transfer while visiting another site. 
+
+The attack is based on the inclusion of a link or script in a page that accesses a site 
+to which the user is known or assumed to have been authenticated (trusted). Trust
+relationship are often stored in the form of cookies that may be active while the user
+is visiting other sites. For example, such a malicious site could include the following
+HTML snippet:
+
+\begin{verbatim}
+<img src="http://yourbank.com/transfer?from=yours&to=mine&sum=1000000">
+\end{verbatim}
+
+that will mislead a browser to execute a bank transfer in an attempt to load an image.
+
+In practice, most sites require the use of form posts to submit requests such as bank
+transfers. The common way to prevent CSRF attacks is by embedding additional, 
+difficult-to-guess data fields in requests that contain sensible commands. This 
+additional data, or token, is obtained from the trusted site but unlike cookies it is
+never stored in the browser.
+
+MVC implementations include support CSRF protection via the use of tokens.
+These tokens need to be generated and also validated to ensure applications
+are protected from CSRF attacks.
+
+{\em (TBD)}
+
+\section{Cross-site Scripting}
+
+{\em (TBD)}
+
