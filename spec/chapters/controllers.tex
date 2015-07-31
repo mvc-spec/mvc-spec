@@ -173,9 +173,10 @@ public String redirect() {
 }
 \end{listing}
 
-In either case, the HTTP status code returned is 302. Note that redirects require client 
-cooperation (they must be supported by clients) and result in a completely new 
-request-response exchange in order to complete the redirection.
+In either case, the HTTP status code returned is 302 and relative paths are resolved as
+described in the Javadoc for method \code{seeOther} in \code{Response}.
+Note that redirects require client cooperation and result in a completely new 
+request-response cycle in order to access the intended controller.
 
 \section{Models}
 \label{models}
