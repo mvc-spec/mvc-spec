@@ -63,9 +63,18 @@ public interface Csrf {
      * Options for property {@link Csrf#CSRF_PROTECTION}.
      */
     enum CsrfOptions {
-        OFF,            // No protection
-        EXPLICIT,       // Must use @CsrfValidated explicitly
-        IMPLICIT        // Auto-validation on every form POST
+        /**
+         * CSRF protection not enabled.
+         */
+        OFF,
+        /**
+         * Enabling CSRF requires use of {@link javax.mvc.annotation.CsrfValid} explicitly.
+         */
+        EXPLICIT,
+        /**
+         * CSRF enabled automatically.
+         */
+        IMPLICIT
     };
 
     /**
