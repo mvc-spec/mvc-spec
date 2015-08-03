@@ -41,22 +41,32 @@ package javax.mvc.security;
 
 /**
  * Cross Site Request Forgery (CSRF) interface with access to the CSRF header name
- * and the CSRF token value. Instances of this interface MUST be accessible via EL using the name {@code csrf}. It is RECOMMENDED for instances of this
- * class to be in session scope.
+ * and the CSRF token value. Instances of this interface MUST be accessible via EL
+ * using the name {@code csrf}. It is RECOMMENDED for instances of this class to be
+ * in session scope.
  *
  * @author Santiago Pericas-Geertsen
- * @see javax.mvc.annotation.CsrfProtected
- * @see javax.mvc.annotation.CsrfValidated
+ * @see javax.mvc.annotation.CsrfValid
  * @since 1.0
  */
 public interface Csrf {
 
     /**
-     * Property that can be used to globally enable CSRF in an application.
+     * Property that can be used to globally enable CSRF protection for an application.
+     * Values of this property must be of type {@link Csrf.CsrfOptions}.
      *
      * @see javax.ws.rs.core.Application#getProperties
      */
-    static final String ENABLE_CSRF = "javax.mvc.security.EnableCsrf";
+    static final String CSRF_PROTECTION = "javax.mvc.security.CsrfProtection";
+
+    /**
+     * Options for property {@link Csrf#CSRF_PROTECTION}.
+     */
+    enum CsrfOptions {
+        OFF,            // No protection
+        EXPLICIT,       // Must use @CsrfValidated explicitly
+        IMPLICIT        // Auto-validation on every form POST
+    };
 
     /**
      * Returns the name of the CSRF header. This header is typically a constant.

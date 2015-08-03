@@ -44,19 +44,26 @@ import java.lang.annotation.Documented;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
 import java.lang.annotation.Target;
-import static java.lang.annotation.RetentionPolicy.*;
-import static java.lang.annotation.ElementType.*;
+
+import static java.lang.annotation.ElementType.METHOD;
+import static java.lang.annotation.ElementType.TYPE;
+import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
  * <p>Controller annotation that can be used to validate a CSRF token value received
- * in a request. Tokens are accessible via instances of the interface
- * {@link javax.mvc.security.Csrf}.</p>
+ * in a request whenever property {@link javax.mvc.security.Csrf#CSRF_PROTECTION}
+ * is set to {@link javax.mvc.security.Csrf.CsrfOptions#EXPLICIT}. If property
+ * property {@link javax.mvc.security.Csrf#CSRF_PROTECTION} is set to
+ * {@link javax.mvc.security.Csrf.CsrfOptions#IMPLICIT}, then the use of this
+ * annotation is unnecessary. MVC implementations are only REQUIRED to enforce CSRF
+ * for POST controllers that consume payloads of type
+ * {@link javax.ws.rs.core.MediaType#APPLICATION_FORM_URLENCODED_TYPE}.
  *
  * <p>Even though this annotation is targeted to {@code TYPE}, it can only be used
  * to decorate individual controller methods.</p>
  *
  * @author Santiago Pericas-Geertsen
- * @see javax.mvc.annotation.CsrfProtected
+ * @see javax.mvc.security.Csrf
  * @since 1.0
  */
 @NameBinding
@@ -64,5 +71,5 @@ import static java.lang.annotation.ElementType.*;
 @Retention(RUNTIME)
 @Documented
 @Inherited
-public @interface CsrfValidated {
+public @interface CsrfValid {
 }
