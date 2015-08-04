@@ -27,4 +27,9 @@ method that returns a \code{null} value.
 return type of {\tt String}.
 \assert{annotation-inheritance} Annotation inheritance is derived from \jaxrs\  and extended to 
 \mvc\ annotations. 
+\assert{csrf-options} CSRF support for configuration options defined by {\tt Csrf.CsrfOptions}.
+\assert{csrf-support} CSRF validation required only for controllers annotated by {\tt @POST} 
+and consuming the media type {\tt x-www-form-urlencoded}.
+\assert{encoders} Support for injectable {\tt Encoders} that are also available in EL via the
+name {\tt encoders}.
 \end{description}
