@@ -39,8 +39,7 @@
  */
 
 /**
- * Security related interfaces and annotations. Protection against CSRF and
- * XSS attacks.
+ * Types related to Web security.
  *
  * @version 1.0
  */

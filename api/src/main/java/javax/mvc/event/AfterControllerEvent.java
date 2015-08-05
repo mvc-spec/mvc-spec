@@ -43,24 +43,21 @@ import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.UriInfo;
 
 /**
- * <p>Observable CDI Event to get information about the controller method
- * that matched a request. Implementations are required to fire this
- * event during processing.</p>
+ * <p>Event fired after a controller returns successfully. If the controller throws
+ * an exception, this event may not be fired.</p>
  *
- * <p>Example of an observer:
- * <pre><code>
- *     public class EventObserver {
- *         public void onControllerMatched(&#64;Observes ControllerMatchedEvent event) {
-             ...
-         }
-     }
- </code></pre>
+ * <p>For example:
+ * <pre><code>    public class EventObserver {
+ *         public void afterControllerEvent(&#64;Observes AfterControllerEvent e) {
+ *            ...
+ *        }
+ *    }</code></pre>
  *
  * @author Santiago Pericas-Geertsen
  * @see javax.enterprise.event.Observes
  * @since 1.0
  */
-public interface ControllerMatchedEvent {
+public interface AfterControllerEvent {
 
     /**
      * See {@link javax.ws.rs.core.UriInfo}.

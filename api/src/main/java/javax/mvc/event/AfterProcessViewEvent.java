@@ -37,40 +37,40 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.mvc.engine;
+package javax.mvc.event;
+
+import javax.mvc.engine.ViewEngine;
 
 /**
- * <p>Defines priority classes that can used together with the {@link javax.annotation.Priority}
- * annotation to decorate {@link javax.mvc.engine.ViewEngine} implementations. When
- * multiple view engines are available to process a view, the one with the highest
- * priority is chosen. If two or more view engines can process the same view and they
- * all have the same priority, one is chosen in an implementation-defined manner.</p>
+ * <p>Event fired after the view engine method
+ * {@link javax.mvc.engine.ViewEngine#processView(javax.mvc.engine.ViewEngineContext)}
+ * returns successfully. If the an exception is thrown while processing a view,
+ * this event may not be fired.</p>
  *
- * <p>Applications can define observers for {@link javax.mvc.event.BeforeProcessViewEvent}
- * and {@link javax.mvc.event.AfterProcessViewEvent} to get additional information about
- * view processing.</p>
+ * <p>For example:
+ * <pre><code>    public class EventObserver {
+ *         public void afterProcessView(&#64;Observes AfterProcessViewEvent e) {
+ *            ...
+ *        }
+ *    }</code></pre>
  *
  * @author Santiago Pericas-Geertsen
- * @see javax.annotation.Priority
- * @see javax.mvc.engine.ViewEngine
+ * @see javax.enterprise.event.Observes
  * @since 1.0
  */
-@SuppressWarnings("unused")
-public interface Priorities {
+public interface AfterProcessViewEvent{
 
     /**
-     * Default priority for all built-in view engines.
+     * Returns the view being processed.
+     *
+     * @return the view.
      */
-    int DEFAULT = 1000;
+    String getView();
 
     /**
-     * Recommended priority for all view engines provided by frameworks built
-     * on top of MVC implementations.
+     * Returns the {@link javax.mvc.engine.ViewEngine} selected by the implementation.
+     *
+     * @return the view engine selected.
      */
-    int FRAMEWORK = 2000;
-
-    /**
-     * Recommended priority for all application-provided view engines.
-     */
-    int APPLICATION = 3000;
+    Class<? extends ViewEngine> getEngine();
 }

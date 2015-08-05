@@ -51,11 +51,10 @@ package javax.mvc.engine;
  *     their priority; otherwise the priority is assumed to be {@link Priorities#DEFAULT}.</li>
  *     <li>If more than one candidate is available, choose one in an
  *     implementation-defined manner.</li>
- *     <li>Fire a {@link javax.mvc.event.ViewEngineSelectedEvent} event to inform observers
- *     of the selection.</li>
+ *     <li>Fire a {@link javax.mvc.event.BeforeProcessViewEvent} event.</li>
+ *     <li>Call method {@link #processView(ViewEngineContext)} to process view.</li>
+ *     <li>Fire a {@link javax.mvc.event.AfterProcessViewEvent} event.</li>
  * </ol>
- * <p>Once a view engine is selected, the method {@link #processView(ViewEngineContext)} is
- * called to process the view.
  * <p>The default view engines for JSPs and Facelets use file extensions to determine
  * support. Namely, the default JSP view engine supports views with extensions <code>jsp</code>
  * and <code>jspx</code>, and the one for Facelets supports views with extension
@@ -63,7 +62,7 @@ package javax.mvc.engine;
  *
  * @author Santiago Pericas-Geertsen
  * @see javax.annotation.Priority
- * @see javax.mvc.event.ViewEngineSelectedEvent
+ * @see javax.mvc.event.BeforeProcessViewEvent
  * @since 1.0
  */
 @SuppressWarnings("unused")
