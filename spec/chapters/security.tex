@@ -2,18 +2,22 @@
 
 \section{Introduction}
 
-{\em (TBD)}
+Guarding against malicious attacks is a great concern for web application developers. In
+particular, MVC applications that accept input from a browser are often targetted by 
+attackers. Two of the most common forms of attacks are cross-site request forgery (CSRF)
+and cross-site scripting (XSS). This chapter explores techniques to prevent these type
+of attacks with the aid of the MVC API.
 
 \section{Cross-site Request Forgery}
 
 Cross-site Request Forgery (CSRF) is a type of attack in which a user, who has a trust
-relationship with a certain site, is mislead to execute some commands that exploit the
+relationship with a certain site, is mislead into executing some commands that exploit the
 existence of such a trust relationship. The canonical example for this attack is that of
 a user unintentionally carrying out a bank transfer while visiting another site. 
 
 The attack is based on the inclusion of a link or script in a page that accesses a site 
 to which the user is known or assumed to have been authenticated (trusted). Trust
-relationship are often stored in the form of cookies that may be active while the user
+relationships are often stored in the form of cookies that may be active while the user
 is visiting other sites. For example, such a malicious site could include the following
 HTML snippet:
 
@@ -21,21 +25,99 @@ HTML snippet:
 <img src="http://yourbank.com/transfer?from=yours&to=mine&sum=1000000">
 \end{verbatim}
 
-that will mislead a browser to execute a bank transfer in an attempt to load an image.
+which will result in the browser executing a bank transfer in an attempt to load an image.
+
 
 In practice, most sites require the use of form posts to submit requests such as bank
 transfers. The common way to prevent CSRF attacks is by embedding additional, 
 difficult-to-guess data fields in requests that contain sensible commands. This 
-additional data, or token, is obtained from the trusted site but unlike cookies it is
-never stored in the browser.
+additional data, known as a token, is obtained from the trusted site but 
+unlike cookies it is never stored in the browser.
 
-MVC implementations include support CSRF protection via the use of tokens.
-These tokens need to be generated and also validated to ensure applications
-are protected from CSRF attacks.
+MVC implementations provide CSRF protection using the {\tt Csrf} interface
+and the {\tt @CsrfValid} annotation. The {\tt Csrf} interface is available to applications
+for injection and is also accessible via the EL name {\tt csrf}. Applications may use
+this interface to inject a hidden field in a form that can be validated upon submission.
+Consider the following JSP,
 
-{\em (TBD)}
+\begin{listing}{1}
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<html>
+<head>
+    <title>CSRF Protected Form</title>
+</head>
+<body>
+    <form action="csrf" method="post" accept-charset="utf-8">
+        <input type="submit" value="Click here"/>
+        <input type="hidden" name="${csrf.name}" value="${csrf.token}"/>
+    </form>
+</html>
+\end{listing}
+
+The hidden field will be submitted with the form, giving the MVC implementation
+the opportunity to verify the token and ensure the validity of the post request. 
+
+Another way to convey this information to and form the client is via an HTTP
+header. MVC implementations are REQUIRED to support CSRF tokens both
+as form fields (with the help of the application developer as shown above) and
+as HTTP headers.
+
+The application-level property {\tt javax.mvc.security.CsrfProtection} enables
+ CSRF protection when set to one of the possible values defined by
+{\tt javax.mvc.security.Csrf.CsrfOptions}. The default value of this property is
+{\tt CsrfOptions.OFF}. Setting it to any other value will automatically inject a
+CSRF token as an HTTP header; the actual name of this header is 
+implementation dependent.
+
+Automatic validation is enabled by setting this
+property to {\tt CsrfOptions.IMPLICIT}, in which case all post requests
+must include either an HTTP header or a hidden field with the correct token.
+Finally, if the property is set to {\tt CsrfOptions.EXPLICIT} then application
+developers must annotate controllers using {\tt @CsrfValid} to manually
+enable validation \assertref{csrf-options} as shown in the following example.
+
+\begin{listing}{1}
+@Path("csrf")
+@Controller
+public class CsrfController {
+
+    @GET
+    public String getForm() {
+        return "csrf.jsp";     // Injects CSRF token
+    }
+
+    @POST
+    @CsrfValid		           // Required for CsrfOptions.EXPLICIT
+    public void postForm(@FormParam("greeting") String greeting) {
+        // Process form
+    }
+}
+ \end{listing}
+
+MVC implementations are required to support CSRF validation of
+tokens for controllers annotated with {\tt @POST} and consuming the
+media type {\tt x-www-form-urlencoded} \assertref{csrf-support}; other media 
+types and scenarios may also be supported but are OPTIONAL.
 
 \section{Cross-site Scripting}
 
-{\em (TBD)}
+Cross-site scripting (XSS) is a type of attack in which snippets of scripting 
+code are injected and later executed when returned back from a server. The
+typical scenario is that of a website with a search field that does not validate
+its input, and returns an error message that includes the value that was
+submitted. If the value includes a snippet of the form {\tt <script>...</script>}
+then it will be executed by the browser when the page containing the 
+error page is rendered.
 
+There are lots of different variations of this the XSS attack, but most can be
+prevented by ensuring that the data submitted by clients is properly {\em sanitized}
+before it is manipulated, stored in a database, returned to the client, etc.
+Data escaping/encoding is the recommended way to deal with untrusted
+data and prevent XSS attacks. 
+
+MVC implementations MUST provide an injectable class of type
+{\tt javax.mvc.security.Encoders} that is also accessible from EL using
+the name {\tt encoders} \assertref{encoders}. The methods in this class can be used
+by applications to contextually encode data in an attempt to prevent 
+XSS attacks. The reader is referred to the Javadoc for {\tt javax.mvc.security.Encoders} 
+for further information.
