@@ -41,14 +41,20 @@ package javax.mvc.event;
 
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.UriInfo;
+import java.net.URI;
 
 /**
- * <p>Event fired after a controller returns successfully. If the controller throws
- * an exception, this event may not be fired.</p>
+ * <p>Event fired when a controller returns a redirect status code. Only the
+ * status codes 301 (moved permanently), 302 (found), 303 (see other) and
+ * 307 (temporary redirect) are REQUIRED to be reported. Note that the
+ * JAX-RS methods
+ * {@link javax.ws.rs.core.Response#seeOther(java.net.URI)}} and
+ * {@link javax.ws.rs.core.Response#temporaryRedirect(java.net.URI)}}
+ * correspond to the status codes 303 and 307, respectively.</p>
  *
  * <p>For example:
  * <pre><code>    public class EventObserver {
- *         public void afterControllerEvent(&#64;Observes AfterControllerEvent e) {
+ *         public void onControllerRedirect(&#64;Observes ControllerRedirectEvent e) {
  *            ...
  *        }
  *    }</code></pre>
@@ -57,7 +63,7 @@ import javax.ws.rs.core.UriInfo;
  * @see javax.enterprise.event.Observes
  * @since 1.0
  */
-public interface AfterControllerEvent extends MvcEvent {
+public interface ControllerRedirectEvent extends MvcEvent {
 
     /**
      * Access to the current request URI information.
@@ -74,4 +80,11 @@ public interface AfterControllerEvent extends MvcEvent {
      * @see javax.ws.rs.container.ResourceInfo
      */
     ResourceInfo getResourceInfo();
+
+    /**
+     * The target of the redirection.
+     *
+     * @return URI of redirection.
+     */
+    URI getLocation();
 }

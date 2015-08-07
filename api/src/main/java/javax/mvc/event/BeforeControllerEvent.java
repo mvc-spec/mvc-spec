@@ -56,19 +56,21 @@ import javax.ws.rs.core.UriInfo;
  * @see javax.enterprise.event.Observes
  * @since 1.0
  */
-public interface BeforeControllerEvent {
+public interface BeforeControllerEvent extends MvcEvent {
 
     /**
-     * See {@link javax.ws.rs.core.UriInfo}.
+     * Access to the current request URI information.
      *
      * @return URI info.
+     * @see javax.ws.rs.core.UriInfo
      */
     UriInfo getUriInfo();
 
     /**
-     * See {@link javax.ws.rs.container.ResourceInfo}.
+     * Access to the current request controller information.
      *
      * @return resources info.
+     * @see javax.ws.rs.container.ResourceInfo
      */
     ResourceInfo getResourceInfo();
 }

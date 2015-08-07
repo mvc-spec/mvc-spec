@@ -58,7 +58,7 @@ import javax.mvc.engine.ViewEngine;
  * @see javax.enterprise.event.Observes
  * @since 1.0
  */
-public interface AfterProcessViewEvent{
+public interface AfterProcessViewEvent extends MvcEvent {
 
     /**
      * Returns the view being processed.

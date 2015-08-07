@@ -39,39 +39,28 @@
  */
 package javax.mvc.event;
 
-import javax.ws.rs.container.ResourceInfo;
-import javax.ws.rs.core.UriInfo;
-
 /**
- * <p>Event fired after a controller returns successfully. If the controller throws
- * an exception, this event may not be fired.</p>
- *
- * <p>For example:
- * <pre><code>    public class EventObserver {
- *         public void afterControllerEvent(&#64;Observes AfterControllerEvent e) {
- *            ...
- *        }
- *    }</code></pre>
+ * <p>Base interface for all MVC events. Every MVC event type must extend this interface.</p>
  *
  * @author Santiago Pericas-Geertsen
- * @see javax.enterprise.event.Observes
  * @since 1.0
  */
-public interface AfterControllerEvent extends MvcEvent {
+public interface MvcEvent {
 
     /**
-     * Access to the current request URI information.
+     * Boolean property that can be set to enable MVC events to be fired by
+     * implementations. The default value for this property is {@link
+     * java.lang.Boolean#FALSE}.
      *
-     * @return URI info.
-     * @see javax.ws.rs.core.UriInfo
+     * @see javax.ws.rs.core.Application#getProperties()
      */
-    UriInfo getUriInfo();
+    String ENABLE_EVENTS = "javax.mvc.event.enableEvents";
 
     /**
-     * Access to the current request controller information.
+     * A unique identifier for this event. It does not need to be universally
+     * unique nor different across application restarts.
      *
-     * @return resources info.
-     * @see javax.ws.rs.container.ResourceInfo
+     * @return an event identifier.
      */
-    ResourceInfo getResourceInfo();
+    String getId();
 }
