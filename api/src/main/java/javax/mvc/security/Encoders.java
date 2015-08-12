@@ -37,13 +37,13 @@
  * only if the new code is made subject to such option by the copyright
  * holder.
  */
-package javax.mvc.util;
+package javax.mvc.security;
 
 /**
  * Interface that provides encoders to <em>escape</em> code in JavaScript, HTML,
  * etc. Encoding data that may be mis-interpreted in a client (e.g., a browser)
- * can prevent XSS attacks. Instances of this interface are injectable and also
- * accessible from EL using the name {@code encoders}.
+ * can prevent XSS attacks. Implementations of this interface are injectable
+ * and accessible from EL via the {@link javax.mvc.Mvc} class as {@code mvc.encoders}.
  *
  * @author Santiago Pericas-Geertsen
  * @see <a href="https://www.owasp.org/index.php/OWASP_Java_Encoder_Project">OWASP Encoder Project</a>
