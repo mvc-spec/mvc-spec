@@ -87,8 +87,8 @@ public interface Mvc  {
      * not end with one. Thus, the path returned by this method can be appended to that
      * returned by {@link #getContextPath()}.</p>
      *
-     * <p>If the application path is empty or was set to {@code /*}, then {@code /} is returned. If
-     * a JAX-RS application subclass is not found, {@code null} may be returned.</p>
+     * <p>If the application path is empty or was set to {@code /*}, then an empty string is
+     * returned. If a JAX-RS application subclass is not found, {@code null} may be returned.</p>
      *
      * <p>For example, given the URI {@code http://host:port/myapp/resources/hello},
      * this method returns {@code /resources}.</p>
