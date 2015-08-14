@@ -48,15 +48,6 @@ package javax.mvc.event;
 public interface MvcEvent {
 
     /**
-     * Boolean property that can be set to enable MVC events to be fired by
-     * implementations. The default value for this property is {@link
-     * java.lang.Boolean#FALSE}.
-     *
-     * @see javax.ws.rs.core.Application#getProperties()
-     */
-    String ENABLE_EVENTS = "javax.mvc.event.enableEvents";
-
-    /**
      * A unique identifier for this event. It does not need to be universally
      * unique nor different across application restarts.
      *
