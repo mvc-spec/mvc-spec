@@ -45,7 +45,8 @@ import javax.mvc.engine.ViewEngine;
  * <p>Event fired after the view engine method
  * {@link javax.mvc.engine.ViewEngine#processView(javax.mvc.engine.ViewEngineContext)}
  * returns successfully. If the an exception is thrown while processing a view,
- * this event may not be fired.</p>
+ * this event may not be fired. Must be fired after {@link
+ * javax.mvc.event.BeforeProcessViewEvent}.</p>
  *
  * <p>For example:
  * <pre><code>    public class EventObserver {
