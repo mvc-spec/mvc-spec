@@ -17,27 +17,57 @@ by this specification. The reader is referred to the implementation's documentat
 for more information on event support.
 
 Observing events can be useful for applications to learn about the lifecycle of a 
-request, provide application-level logging, monitor performance, etc. Chapter 
-\ref{view_engines} describes the algorithm used by implementations to select a
-specific view engine for processing. This information is made available to any
-application (or framework) that observes the \code{ViewEngineSelectedEvent}. For
-example,
+request, perform logging, monitor performance, etc. The events
+\code{BeforeControllerEvent} and \code{AfterControllerEvent} are fired around
+the invocation of a controller; applications can monitor these events using an 
+observer as shown next.
 
 \begin{listing}{1}
 @ApplicationScoped
 public class EventObserver {
 
-    public void onViewEngineSelected(@Observes ViewEngineSelectedEvent e) {
-        ...
+    public void onBeforeController(@Observes BeforeControllerEvent e) {
+        System.out.println("URI: " + e.getUriInfo().getRequestURI());
+    }
+    
+    public void onAfterController(@Observes AfterControllerEvent e) {
+        System.out.println("Controller: " + 
+            e.getResourceInfo().getResourceMethod());
     }
 }
 \end{listing}
 
 Observer methods in CDI are defined using the \code{@Observes} annotation on 
 a parameter position.
-The class \code{EventObserver} is a CDI bean in application scope whose method
-\code{onViewEngineSelected} is called every time a \code{ViewEngineSelectedEvent}
-is fired by the implementation. 
+The class \code{EventObserver} is a CDI bean in application scope whose methods
+\code{onBeforeController} and \code{onAfterController} are called 
+before and after a controller is called. 
+
+Every event generated must include a
+unique ID whose getter is defined by \code{MvcEvent}, the base type for all
+events. Moreover, each event includes additional information that is specific to
+the event; for example, the events shown in the example above allow applications
+to get information about the request URI and the resource (controller) selected.
+
+Chapter \ref{view_engines} describes the algorithm used by implementations to select a
+specific view engine for processing; after a view engine is selected, the method
+\code{processView} is called. The events \code{BeforeProcessViewEvent}
+and \code{AfterProcessViewEvent} are fired around this call and can be observed
+in a similar manner:
+
+\begin{listing}{1}
+@ApplicationScoped
+public class EventObserver {
+
+    public void onBeforeProcessView(@Observes BeforeProcessViewEvent e) {
+        ...
+    }
+    
+    public void onAfterProcessView(@Observes AfterProcessViewEvent e) {
+        ...
+    }
+}
+\end{listing}
 
 To complete the example, let us assume that the information about the selected
 view engine needs to be conveyed to the client. To ensure that this information
@@ -51,21 +81,28 @@ public class EventObserver {
     @Inject
     private EventBean eventBean;
 
-    public void onViewEngineSelected(@Observes ViewEngineSelectedEvent e) {
+    public void onBeforeProcessView(@Observes BeforeProcessViewEvent e) {
         eventBean.setView(e.getView());
         eventBean.setEngine(e.getEngine());
     }
+    
+    ...
 }
 \end{listing}
 
 For more information about the interaction between views and models, the reader
 is referred to Section~\ref{models}. 
 
-Events fired by implementations are synchronous,
+CDI events fired by implementations are {\em synchronous},
 so it is recommended that applications carry out only simple tasks in 
 their observer methods, avoiding long-running computations as well as blocking calls.
+For a complete list of events, the reader is referred to the Javadoc for the 
+\code{javax.mvc.event} package.
 
-\begin{ednote}
-Synchronous vs.~asynchronous event processing should be reviewed 
-based on any new capabilities available in CDI 2.0.
-\end{ednote}
+Event reporting requires the MVC implementations to create event objects before
+firing. In high-throughput systems without any observers the number of unnecessary
+objects created may not be insignificant. For this reason, it is RECOMMENDED
+for implementations to consider smart firing strategies when no observers
+are present.
+
+
