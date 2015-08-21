@@ -83,4 +83,23 @@ which is set to \code{/WEB-INF/views/}. If the path is absolute, no further proc
 is required \assertref{view-resolution}. It is recommended to use relative paths and a 
 location under \code{WEB-INF} to prevent direct access to views as static resources.
 
+\section{FacesServlet}
+\label{faces_servlet}
 
+Because Facelets support is not enabled by default, MVC applications that use Facelets are 
+required to package a \code{web.xml} deployment descriptor with the following entry
+mapping the extension \code{*.xhtml} as shown next:
+
+\begin{listing}{1}
+  <servlet>
+      <servlet-name>Faces Servlet</servlet-name>
+      <servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+      <load-on-startup>1</load-on-startup>
+  </servlet>
+  <servlet-mapping>
+      <servlet-name>Faces Servlet</servlet-name>
+      <url-pattern>*.xhtml</url-pattern>
+  </servlet-mapping>
+\end{listing}
+
+It is worth noting that if you opt to use Facelets as a view technology for your MVC application, regular JSF post-backs will not be processed by the MVC runtime.
