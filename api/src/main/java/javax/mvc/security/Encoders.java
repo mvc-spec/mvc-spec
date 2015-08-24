@@ -43,7 +43,7 @@ package javax.mvc.security;
  * Interface that provides encoders to <em>escape</em> code in JavaScript, HTML,
  * etc. Encoding data that may be mis-interpreted in a client (e.g., a browser)
  * can prevent XSS attacks. Implementations of this interface are injectable
- * and accessible from EL via the {@link javax.mvc.Mvc} class as {@code mvc.encoders}.
+ * and accessible from EL via the {@link javax.mvc.MvcContext} class as {@code mvc.encoders}.
  *
  * @author Santiago Pericas-Geertsen
  * @see <a href="https://www.owasp.org/index.php/OWASP_Java_Encoder_Project">OWASP Encoder Project</a>

@@ -58,7 +58,7 @@ import javax.ws.rs.core.Configuration;
  * @see javax.ws.rs.core.Configuration
  * @since 1.0
  */
-public interface Mvc  {
+public interface MvcContext {
 
     /**
      * Get the JAX-RS application configuration object. All application-defined properties
