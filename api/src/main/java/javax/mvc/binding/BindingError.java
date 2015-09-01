@@ -60,13 +60,6 @@ public interface BindingError {
     String getMessage();
 
     /**
-     * Returns the non-interpolated error message for this binding error.
-     *
-     * @return The template of the error message
-     */
-    String getMessageTemplate();
-
-    /**
      * The parameter name of the value that caused the binding error. This is usually
      * the name specified with the binding annotation (i.e. {@link javax.ws.rs.FormParam}).
      *

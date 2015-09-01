@@ -39,7 +39,7 @@
  */
 
 /**
- * Types related to the handling of data binding.
+ * Types related to the handling of data binding and validation.
  *
  * @version 1.0
  */
