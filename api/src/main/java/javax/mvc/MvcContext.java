@@ -98,6 +98,18 @@ public interface MvcContext {
     String getApplicationPath();
 
     /**
+     * <p>Get the application's base path which is defined as the concatenation of context
+     * and application paths. It follows that the value returned by this method always
+     * starts with a slash but never ends with one.</p>
+     *
+     * <p>If a JAX-RS application subclass is not found, causing {@link #getApplicationPath()}
+     * to return {@code null}, then the value returned is the same as {@link #getContextPath}.</p>
+     *
+     * @return the application's base path.
+     */
+    String getBasePath();
+
+    /**
      * Get the CSRF object.
      *
      * @return the CSRF object.
