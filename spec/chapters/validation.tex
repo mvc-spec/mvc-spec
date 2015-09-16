@@ -3,12 +3,12 @@
 
 This chapter discusses exception handling in the \mvc\ API. Exception handling is based
 on the underlying mechanism provided by \jaxrs, but with additional support for 
-validation exceptions that are common in HTML form posts.
+binding and validation exceptions that are common in \mvc\ frameworks.
 
 \section{Exception Mappers}
 \label{exception_mappers}
 
-The general exception handling mechanism in MVC controllers is identical to that defined
+The general exception handling mechanism in \mvc\  controllers is identical to that defined
 for resource methods in the \jaxrs\ specification. In a nutshell, applications can 
 implement exception mapping providers for the purpose of converting exceptions to 
 responses. If an exception mapper is not found for a particular exception type, 
@@ -84,7 +84,7 @@ they declare themselves capable of handling errors.
 
 A controller class that, either directly or indirectly via inheritance, defines 
 a field or a property of type 
-\code{javax.mvc.validation.ValidationResult} will have its controller methods
+\code{javax.mvc.binding.BindingResult} will have its controller methods
 called even if a validation error is encountered while validating parameters. 
 Implementations MUST introspect the controller bean for a field or a property of
 this type to determine the correct semantics; fields and property setters
@@ -100,7 +100,7 @@ this time using the controller method as an exception handler:
 public class FormController {
 
     @Inject
-    private ValidationResult vr;
+    private BindingResult br;
     
     @Inject
     private ErrorDataBean error;
@@ -108,7 +108,7 @@ public class FormController {
     @POST
     @ValidateOnExecution(type = ExecutableType.NONE)
     public Response formPost(@Valid @BeanParam FormDataBean form) {
-        if (vr.isFailed()) {
+        if (br.isFailed()) {
             // fill out ErrorDataBean ...
             return Response.status(BAD_REQUEST).entity("error.jsp").build();
         }
@@ -118,21 +118,21 @@ public class FormController {
 \end{listing}
 
 The presence of the injection target for the field 
-\code{vr} indicates to an implementation that controller methods in this
-class can handle validation errors. As a result, methods in this class
-that validate parameters should call \code{vr.isFailed()} to verify if
+\code{br} indicates to an implementation that controller methods in this
+class can handle errors. As a result, methods in this class
+that validate parameters should call \code{br.isFailed()} to verify if
 validation errors were found.~\footnote{The \code{ValidateOnExecution} 
 annotation is necessary to ensure that CDI and BV do not abort the
 invocation upon detecting a violation. Thus, to ensure the correct semantics, 
 validation must be performed by the JAX-RS implementation before the method 
 is called.}
 
-The class \code{ValidationResult} provides methods to get detailed information 
+The class \code{BindingResult} provides methods to get detailed information 
 about any violations 
 found during validation. Instances of this class are always in request
-scope; the reader is referred to the javadoc for more information.
+scope; the reader is referred to the Javadoc for more information.
 
-As previously stated, properties of type  \code{ValidationResult}
+As previously stated, properties of type  \code{BindingResult}
 are also supported. Here is a modified version of the example in which
 a property is used instead:
 
@@ -141,15 +141,15 @@ a property is used instead:
 @Path("form")
 public class FormController {
 
-    private ValidationResult vr;
+    private BindingResult br;
     
-    public ValidationResult getVr() {
+    public BindingResult getBr() {
         return vr;
     }
 
     @Inject
-    public void setVr(ValidationResult vr) {
-        this.vr = vr;
+    public void setBr(BindingResult br) {
+        this.br = br;
     }
     ...
 }
@@ -160,7 +160,25 @@ thus ensuring the bean is properly initialized by CDI when it is
 created. Implementations MUST give precedence to a property (calling its getter and
 setter) over a field if both are present in the same class.
  
-\begin{ednote}
-Support for injection of \ValRes\ as a method parameter may be re-considered based on 
-any new capabilities available in CDI 2.0.
-\end{ednote}
+\section{Binding Exceptions}
+\label{binding_exceptions}
+
+As suggested by its name, instances of \code{BindingResult} also track any 
+binding errors that occur while mapping request parameters to Java
+types. Binding errors are discovered even before validation takes place. An
+example of a binding error is that of a query parameter bound to an {\tt int} whose
+value cannot be converted to that type. 
+
+ \jaxrs\ uses the notion of a parameter converter
+to provide extension points for these conversions; if none are specified for
+the type at hand, a set of default parameter converters is available. Regardless
+of where the parameter converter is coming from, a failure to carry out a 
+conversion results in an \code{IllegalArgument\-Exception} thrown and, typically,
+a 500 error code returned the client. As explained before, applications can provide
+an exception mapper for \code{IllegalArgumentException} but this may be
+insufficient when error recovery using controller-specific logic is required. 
+
+Controllers can call the same \code{isFailed} method to check for binding errors
+---the method returns true if at least one error of either kind is found.
+Additional methods in the \code{BindingResult} type allow to get specific 
+information related to binding errors. See the Javadoc for more information.
