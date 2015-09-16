@@ -161,9 +161,8 @@ public Response redirect() {
 }
 \end{listing}
 
-Given that redirects are fairly common in MVC frameworks, implementations MUST support
-view paths prefixed by {\tt redirect:} as a more concise way to trigger a client redirect \assertref{redirect}. 
-The controller shown above can be re-written as follows:
+Given the popularity of the POST-redirect-GET pattern, MVC implementations are REQUIRED to
+support view paths prefixed by {\tt redirect:} as a more concise way to trigger a client redirect \assertref{redirect}. Using this prefix, the controller shown above can be re-written as follows:
 
 \begin{listing}{1}
 @GET
@@ -173,9 +172,12 @@ public String redirect() {
 }
 \end{listing}
 
-In either case, the HTTP status code returned is 302 and relative paths are resolved as
-described in the Javadoc for method \code{seeOther} in \code{Response}.
-Note that redirects require client cooperation and result in a completely new 
+In either case, the HTTP status code returned is 302 and relative paths are resolved 
+relative to the application path --for more information please refer to the Javadoc for
+the {\tt seeOther} method in \jaxrs.
+
+It is worth noting that redirects require client cooperation (all browsers support it, but
+certain CLI clients may not) and result in a completely new 
 request-response cycle in order to access the intended controller.
 
 \section{Models}

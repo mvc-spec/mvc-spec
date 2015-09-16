@@ -38,6 +38,26 @@ these values, and many use \code{"/resources"} or \code{"/resources/*"} by
 convention. For consistency, it is recommended for MVC applications to use
 these patterns as well.
 
+\section{MvcContext}
+\label{mvc_context}
+
+MVC applications can inject an instance of {\tt MvcContext} to access configuration,
+security and path-related information. Instances of {\tt MvcContext} are provided
+by implementations and are always in application scope \assertref{mvc-context}. 
+For convenience, the
+{\tt MvcContext} instance is also available using the name {\tt mvc} in EL.
+
+As an example, a view can refer to a CSS file by using the context path available in 
+the {\tt MvcContext} object as follows:
+
+\begin{listing}{1}
+<link rel="stylesheet" type="text/css" href="${mvc.contextPath}/my.css">
+\end{listing}
+
+
+For more information on security see Chapter~\ref{security}; for more information 
+about the {\tt MvcContext} in general, refer to the Javadoc for the type.
+
 \section{Providers in \mvc}
 \label{providers_in_mvc}
 
