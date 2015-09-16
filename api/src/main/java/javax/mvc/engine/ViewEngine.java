@@ -91,9 +91,13 @@ public interface ViewEngine {
     boolean supports(String view);
 
     /**
-     * Process a view given a {@link javax.mvc.engine.ViewEngineContext}. Processing
+     * <p>Process a view given a {@link javax.mvc.engine.ViewEngineContext}. Processing
      * a view involves <i>merging</i> the model and template data and writing
-     * the result to an output stream.
+     * the result to an output stream.</p>
+     *
+     * <p>Following the Java EE threading model, the underlying view engine implementation
+     * must support this method being called by different threads. Any resources allocated
+     * during view processing must be released before the method returns.</p>
      *
      * @param context the context needed for processing.
      * @throws ViewEngineException if an error occurs during processing.
