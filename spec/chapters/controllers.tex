@@ -147,7 +147,7 @@ Direct access to \Response\ enables applications to override content types, set 
 encodings, set cache control policies, trigger an HTTP redirect, etc. For more information, 
 the reader is referred to the Javadoc for the \Response\ class.
 
-\subsection{Redirect}
+\subsection{Redirect and RedirectScoped}
 \label{redirect}
  
 As stated in the previous section, controllers can redirect clients by returning a \Response\
@@ -174,11 +174,54 @@ public String redirect() {
 
 In either case, the HTTP status code returned is 302 and relative paths are resolved 
 relative to the application path --for more information please refer to the Javadoc for
-the {\tt seeOther} method in \jaxrs.
-
-It is worth noting that redirects require client cooperation (all browsers support it, but
+the {\tt seeOther} method in \jaxrs. It is worth noting that redirects require client 
+cooperation (all browsers support it, but
 certain CLI clients may not) and result in a completely new 
 request-response cycle in order to access the intended controller.
+
+MVC applications can leverage CDI by defining beans in scopes such as request
+and session. A bean in request scope is available only during the processing of a single 
+request, while a bean in session scope is available throughout an entire web session 
+which can potentially span tens or even hundreds of requests. 
+
+Sometimes it is necessary
+to share data between the request that returns a redirect instruction and the new request
+that is triggered by that. That is, a scope that spans at most two requests and thus fits
+between a request and a session scope. For this purpose, the MVC API defines a new
+CDI scope identified by the annotation {\tt @RedirectScoped}. CDI beans in this scope
+are automatically created and destroyed by correlating a redirect and the request that
+follows. The exact mechanism by which requests are correlated is implementation 
+dependent, but popular techniques include URL rewrites and cookies.
+
+Let us assume that {\tt MyBean} is annotated by {\tt @RedirectScoped} and given
+the name {\tt mybean}, and consider the following controller:
+
+\begin{listing}{1}
+@Controller
+@Path("submit")
+public class MyController {
+
+    @Inject
+    private MyBean myBean;
+    
+    @POST
+    public String post() {
+        myBean.setValue("Redirect about to happen");
+        return "redirect:/submit";
+    }
+
+    @GET
+    public String get() {
+        return "mybean.jsp";    // mybean.value accessed in JSP
+    }
+}
+\end{listing}
+
+The bean {\tt myBean} is injected in the controller and available not only during
+the first {\tt POST}, but also during the subsequent {\tt GET} request, enabling
+{\em communication} between the two interactions; the creation and destruction
+of the bean is under control of CDI, and thus completely transparent to the application
+ just like any other built-in scope.
 
 \section{Models}
 \label{models}
