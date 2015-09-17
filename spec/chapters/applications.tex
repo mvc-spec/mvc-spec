@@ -31,7 +31,8 @@ applications SHOULD use a non-empty path or pattern: i.e., {\em "/"} or {\em "/*
 should be avoided whenever possible. 
 
 The reason for this is that \mvc\ implementations
-often forward requests to the Servlet container, and the use of these
+often forward requests to the Servlet container, and the use of the 
+aforementioned
 values may result in the unwanted processing of the forwarded request
 by the \jaxrs\ servlet once again. Most \jaxrs\ applications avoid using
 these values, and many use \code{"/resources"} or \code{"/resources/*"} by 
@@ -82,6 +83,6 @@ i.e., if a subclass or implementation method has any \mvc\ or \jaxrs\ annotation
 annotations on the superclass or interface method are ignored.
 
 Annotations on a super-class take precedence over those on an implemented interface. The
-precedence over conflicting annotations defined in multiple implemented interfaces is implementation 
-specific. Note that, in accordance to the \jaxrs\ rules, inheritance of class or interface annotations 
+precedence over conflicting annotations defined in multiple implemented interfaces is implementation dependent.
+Note that, in accordance to the \jaxrs\ rules, inheritance of class or interface annotations 
 is not supported. 

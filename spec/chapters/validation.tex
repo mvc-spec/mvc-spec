@@ -1,9 +1,9 @@
 \chapter{Exception Handling}
 \label{exception_handling}
 
-This chapter discusses exception handling in the \mvc\ API. Exception handling is based
-on the underlying mechanism provided by \jaxrs, but with additional support for 
-binding and validation exceptions that are common in \mvc\ frameworks.
+This chapter discusses exception handling in the \mvc\ API. Exception handling in MVC 
+is based on the underlying mechanism provided by \jaxrs, but with additional support for 
+handling binding and validation exceptions that are common in \mvc\ frameworks.
 
 \section{Exception Mappers}
 \label{exception_mappers}
@@ -32,7 +32,7 @@ public class FormController {
 }
 \end{listing}
 
-The method \code{formPost} injects a bean parameter of type \code{FormDataBean}
+The method \code{formPost} defines a bean parameter of type \code{FormDataBean}
 which, for the sake of the example, we assume includes validation constraints
 such as \code{@Min(18)}, \code{@Size(min=1)}, etc. The presence of \code{@Valid} triggers
 validation of the bean on every HTML form post; if validation fails, a 
@@ -67,8 +67,8 @@ human-friendly description of the exception.
 Even though using exception mappers is a convenient way to handle exceptions in general, 
 there are cases in which finer control is necessary. The mapper defined above will be
 invoked for all instances of \ConstVioExc\ thrown in an application. Given that 
-applications may include several form-post controllers, handling all exceptions using
-a single method makes it difficult to provide controller-specific customizations.
+applications may include several form-post controllers, handling all exceptions in
+a single location makes it difficult to provide controller-specific customizations.
 Moreover, exception mappers do not get access to the (partially valid) bound
 data, or \code{FormDataBean} in the example above.
 
@@ -85,7 +85,7 @@ they declare themselves capable of handling errors.
 A controller class that, either directly or indirectly via inheritance, defines 
 a field or a property of type 
 \code{javax.mvc.binding.BindingResult} will have its controller methods
-called even if a validation error is encountered while validating parameters. 
+called even if an error is encountered while validating parameters. 
 Implementations MUST introspect the controller bean for a field or a property of
 this type to determine the correct semantics; fields and property setters
 of this type MUST be annotated with \code{@Inject} to guarantee proper bean

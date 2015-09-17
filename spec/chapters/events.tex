@@ -44,7 +44,7 @@ The class \code{EventObserver} is a CDI bean in application scope whose methods
 before and after a controller is called. 
 
 Every event generated must include a
-unique ID whose getter is defined by \code{MvcEvent}, the base type for all
+unique ID whose getter is defined in \code{MvcEvent}, the base type for all
 events. Moreover, each event includes additional information that is specific to
 the event; for example, the events shown in the example above allow applications
 to get information about the request URI and the resource (controller) selected.
@@ -72,7 +72,7 @@ public class EventObserver {
 To complete the example, let us assume that the information about the selected
 view engine needs to be conveyed to the client. To ensure that this information
 is available to a view returned to the client, the \code{EventObserver} class
-can inject and update the same request-scope bean accessed by the view:
+can inject and update the same request-scope bean accessed by such a view:
 
 \begin{listing}{1}
 @ApplicationScoped

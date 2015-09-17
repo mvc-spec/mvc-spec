@@ -91,7 +91,7 @@ public class CsrfController {
     @POST
     @CsrfValid		           // Required for CsrfOptions.EXPLICIT
     public void postForm(@FormParam("greeting") String greeting) {
-        // Process form
+        // Process greeting
     }
 }
  \end{listing}

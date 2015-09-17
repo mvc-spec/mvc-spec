@@ -84,7 +84,7 @@ public class HelloController {
 
 Controller methods that return a non-void type may also be decorated with \View\ as a 
 way to specify a {\em default} view for the controller. The default view MUST be 
-used only when the controller method returns a \code{null} value 
+used only when such a non-void controller method returns a \code{null} value 
 \assertref{null-controllers}.
 
 Note that, even though controller methods return types are restricted as 
@@ -106,9 +106,9 @@ Like in \jaxrs, the default resource class instance lifecycle is {\em per-reques
 \assertref{per-request}.
 That is, an instance of a controller class MUST be instantiated and initialized 
 on every request. Implementations MAY support other lifecycles via CDI; the same caveats 
-that apply to \jaxrs\ classes in other lifecycles applied to \mvc\ classes. In particular, 
-proxies may be necessary when, for example, a per-request instance is as a member of a 
-per-application instance. See \cite{jaxrs} for more information on lifecycles and 
+that apply to \jaxrs\ classes in other lifecycles applied to \mvc\ classes.~\footnote{In particular, 
+CDI may need to create proxies when, for example, a per-request instance is as a member of a 
+per-application instance.} See \cite{jaxrs} for more information on lifecycles and 
 their caveats.
 
 \subsection{Viewable}
@@ -147,7 +147,7 @@ Direct access to \Response\ enables applications to override content types, set 
 encodings, set cache control policies, trigger an HTTP redirect, etc. For more information, 
 the reader is referred to the Javadoc for the \Response\ class.
 
-\subsection{Redirect and RedirectScoped}
+\subsection{Redirect and @RedirectScoped}
 \label{redirect}
  
 As stated in the previous section, controllers can redirect clients by returning a \Response\
@@ -186,7 +186,7 @@ which can potentially span tens or even hundreds of requests.
 
 Sometimes it is necessary
 to share data between the request that returns a redirect instruction and the new request
-that is triggered by that. That is, a scope that spans at most two requests and thus fits
+that is triggered as a result. That is, a scope that spans at most two requests and thus fits
 between a request and a session scope. For this purpose, the MVC API defines a new
 CDI scope identified by the annotation {\tt @RedirectScoped}. CDI beans in this scope
 are automatically created and destroyed by correlating a redirect and the request that
@@ -310,7 +310,6 @@ output page.
 Here is the JSP page for the hello-world example:
 
 \begin{listing}{1}
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
     <title>Hello</title>
