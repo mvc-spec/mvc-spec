@@ -50,7 +50,7 @@ import java.net.URI;
  * JAX-RS methods
  * {@link javax.ws.rs.core.Response#seeOther(java.net.URI)}} and
  * {@link javax.ws.rs.core.Response#temporaryRedirect(java.net.URI)}}
- * correspond to the status codes 303 and 307, respectively. Must be
+ * set to the status codes to 303 and 307, respectively. Must be
  * fired after {@link javax.mvc.event.AfterControllerEvent}.</p>
  *
  * <p>For example:

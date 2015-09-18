@@ -41,8 +41,8 @@ package javax.mvc.security;
 
 /**
  * Interface that provides encoders to <em>escape</em> code in JavaScript, HTML,
- * etc. Encoding data that may be mis-interpreted in a client (e.g., a browser)
- * can prevent XSS attacks. Implementations of this interface are injectable
+ * etc. Encoding data is a way to prevent XSS attacks by ensuring it is not
+ * misinterpreted as running code. Implementations of this interface are injectable
  * and accessible from EL via the {@link javax.mvc.MvcContext} class as {@code mvc.encoders}.
  *
  * @author Santiago Pericas-Geertsen

@@ -42,15 +42,16 @@ package javax.mvc;
 import javax.mvc.engine.ViewEngine;
 
 /**
- * <p>An abstraction that includes information about a view as well as an instance
+ * <p>An abstraction that encapsulates information about a view as well as an instance
  * of {@link javax.mvc.Models} and a {@link javax.mvc.engine.ViewEngine} class, in
  * which only the view information is mandatory. Instances of this class can be
  * returned by controller methods.
  *
  * <p>If no {@link javax.mvc.Models} is specified, the view engine is required to
  * inject it; if no {@link javax.mvc.engine.ViewEngine} is specified, then
- * the default selection mechanism to associate views and view engines is used.
- * Thus, a controller method returning an instance of this class can override
+ * the default selection mechanism that associates views with view engines must
+ * be used.
+ * It follows that a controller method returning an instance of this class can override
  * the {@link javax.mvc.Models} in request scope as well as the default lookup
  * mechanism for view engines.
  *
@@ -89,7 +90,7 @@ public class Viewable {
     }
 
     /**
-     * Constructs an instance using a view and a models.
+     * Constructs an instance using a view and a models instance.
      *
      * @param view the view.
      * @param models the models instance.
@@ -99,7 +100,7 @@ public class Viewable {
     }
 
     /**
-     * Constructs an instance using a view, a models and a view engine.
+     * Constructs an instance using a view, a models and a view engine instances.
      *
      * @param view the view.
      * @param models the models instance.
@@ -111,26 +112,57 @@ public class Viewable {
         this.viewEngine = viewEngine;
     }
 
+    /**
+     * Get the view.
+     *
+     * @return the view.
+     */
     public String getView() {
         return view;
     }
 
+    /**
+     * Set a new view.
+     *
+     * @param view the new view.
+     */
     public void setView(String view) {
         this.view = view;
     }
 
+    /**
+     * Get the models instance.
+     *
+     * @return the models instance or {@code null}.
+     */
     public Models getModels() {
         return models;
     }
 
+    /**
+     * Set the models instance.
+     *
+     * @param models the new models instance.
+     */
     public void setModels(Models models) {
         this.models = models;
     }
+
+    /**
+     * Get the view engine instance.
+     *
+     * @return the view engine instance or {@code null}.
+     */
 
     public Class<? extends ViewEngine> getViewEngine() {
         return viewEngine;
     }
 
+    /**
+     * Set the view engine instance.
+     *
+     * @param viewEngine the new view engine instance.
+     */
     public void setViewEngine(Class<? extends ViewEngine> viewEngine) {
         this.viewEngine = viewEngine;
     }

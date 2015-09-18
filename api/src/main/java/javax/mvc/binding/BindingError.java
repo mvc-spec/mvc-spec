@@ -40,12 +40,10 @@
 package javax.mvc.binding;
 
 /**
- * <p>Represents a single error that occurred while binding a parameter to a controller method argument
- * or controller field using a binding annotation like {@link javax.ws.rs.FormParam}.</p>
- *
- * <p>The message interpolation works similar to the interpolation algorithm defined in
- * section 5.3. of the Bean Validation 1.1 specification. Binding error message templates are
- * read from a {@link java.util.ResourceBundle} named <code>BindingMessages</code>.</p>
+ * <p>Represents a single error that occurred while binding a parameter to a controller
+ * method argument or controller field using a binding annotation like {@link
+ * javax.ws.rs.FormParam}. Binding error message templates are read from a
+ * {@link java.util.ResourceBundle} named <code>BindingMessages</code>.</p>
  *
  * @author Christian Kaltepoth
  * @since 1.0

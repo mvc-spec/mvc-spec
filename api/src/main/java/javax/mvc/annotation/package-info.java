@@ -39,7 +39,7 @@
  */
 
 /**
- * The annotations used by the MVC runtime.
+ * Annotations defined in the MVC API.
  *
  * @version 1.0
  */

@@ -49,7 +49,7 @@ import javax.ws.rs.core.UriInfo;
 /**
  * <p>Contextual data used by a {@link javax.mvc.engine.ViewEngine} to process a view.
  * This includes the view name, the models instance and the request and response
- * objects from the Servlet container.</p>
+ * objects from the Servlet container, among other data.</p>
  *
  * @author Santiago Pericas-Geertsen
  * @see javax.mvc.engine.ViewEngine

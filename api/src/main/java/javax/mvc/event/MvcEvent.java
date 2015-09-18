@@ -40,7 +40,7 @@
 package javax.mvc.event;
 
 /**
- * <p>Base interface for all MVC events. Every MVC event type must extend this interface.</p>
+ * <p>Base type for all MVC events. Every MVC event type must extend this interface.</p>
  *
  * @author Santiago Pericas-Geertsen
  * @since 1.0

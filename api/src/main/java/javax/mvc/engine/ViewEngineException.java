@@ -41,8 +41,7 @@ package javax.mvc.engine;
 
 /**
  * <p>Exception thrown by {@link javax.mvc.engine.ViewEngine#processView(ViewEngineContext)}
- * when unable to process a view. Additional information is available from underlying
- * <code>message</code> and <code>cause</code>.</p>
+ * when unable to process a view.</p>
  *
  * @author Santiago Pericas-Geertsen
  * @see Exception#getMessage()
@@ -53,14 +52,30 @@ public class ViewEngineException extends Exception {
 
     private static final long serialVersionUID = -429507729780110056L;
 
+    /**
+     * Construct an instance using a message.
+     *
+     * @param message the message.
+     */
     public ViewEngineException(String message) {
         super(message);
     }
 
+    /**
+     * Construct an instance using a message and a cause.
+     *
+     * @param message the message.
+     * @param cause the underlying cause.
+     */
     public ViewEngineException(String message, Throwable cause) {
         super(message, cause);
     }
 
+    /**
+     * Construct an instance using a cause.
+     *
+     * @param cause the underlying cause.
+     */
     public ViewEngineException(Throwable cause) {
         super(cause);
     }

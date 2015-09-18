@@ -88,7 +88,8 @@ public interface MvcContext {
      * returned by {@link #getContextPath()}.</p>
      *
      * <p>If the application path is empty or was set to {@code /*}, then an empty string is
-     * returned. If a JAX-RS application subclass is not found, {@code null} may be returned.</p>
+     * returned to ensure concatenation with {@link #getContextPath()} results in a well-formed
+     * path. If a JAX-RS application subclass is not found, {@code null} may be returned.</p>
      *
      * <p>For example, given the URI {@code http://host:port/myapp/resources/hello},
      * this method returns {@code /resources}.</p>

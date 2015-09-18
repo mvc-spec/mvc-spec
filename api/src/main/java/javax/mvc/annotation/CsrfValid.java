@@ -50,16 +50,18 @@ import static java.lang.annotation.ElementType.TYPE;
 import static java.lang.annotation.RetentionPolicy.RUNTIME;
 
 /**
- * <p>Controller annotation that can be used to validate a CSRF token value received
- * in a request whenever property {@link javax.mvc.security.Csrf#CSRF_PROTECTION}
- * is set to {@link javax.mvc.security.Csrf.CsrfOptions#EXPLICIT}. If property
+ * <p>A controller annotation to validate a CSRF token value received
+ * in a request whenever the property {@link javax.mvc.security.Csrf#CSRF_PROTECTION}
+ * is set to {@link javax.mvc.security.Csrf.CsrfOptions#EXPLICIT}. If the
  * property {@link javax.mvc.security.Csrf#CSRF_PROTECTION} is set to
  * {@link javax.mvc.security.Csrf.CsrfOptions#IMPLICIT}, then the use of this
- * annotation is unnecessary. MVC implementations are only REQUIRED to enforce CSRF
+ * annotation is redundant. MVC implementations are only REQUIRED to enforce CSRF
  * for POST controllers that consume payloads of type
- * {@link javax.ws.rs.core.MediaType#APPLICATION_FORM_URLENCODED_TYPE}.
+ * {@link javax.ws.rs.core.MediaType#APPLICATION_FORM_URLENCODED_TYPE}, but
+ * other HTTP methods and payloads may be optionally supported by the
+ * underlying implementation.
  *
- * <p>Even though this annotation is targeted to {@code TYPE}, it can only be used
+ * <p>Even though this annotation is also targeted to {@code TYPE}, it can only be used
  * to decorate individual controller methods.</p>
  *
  * @author Santiago Pericas-Geertsen

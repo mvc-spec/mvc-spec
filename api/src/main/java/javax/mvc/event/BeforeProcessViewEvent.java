@@ -42,7 +42,7 @@ package javax.mvc.event;
 import javax.mvc.engine.ViewEngine;
 
 /**
- * <p>Event fired after a view engine has been matched but before its
+ * <p>Event fired after a view engine has been selected but before its
  * {@link javax.mvc.engine.ViewEngine#processView(javax.mvc.engine.ViewEngineContext)}
  * method is called. Must be fired after {@link javax.mvc.event.ControllerRedirectEvent},
  * or if that event is not fired, after {@link javax.mvc.event.AfterControllerEvent}.</p>
