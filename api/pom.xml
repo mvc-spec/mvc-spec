@@ -9,7 +9,7 @@
     </parent>
     <groupId>javax.mvc</groupId>
     <artifactId>javax.mvc-api</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-edr2</version>
     <packaging>jar</packaging>
     <name>MVC ${project.version} API</name>
     <url>http://mvc-spec.java.net</url>
@@ -155,7 +155,7 @@
                                     <target>
                                         <copy todir="${project.build.directory}//generated-classes/jacoco">
                                             <fileset dir="${project.build.directory}/classes">
-                                                <exclude name="**/*.class"/>
+                                                <exclude name="**/*.class" />
                                             </fileset>
                                         </copy>
                                     </target>
@@ -209,5 +209,6 @@
     <scm>
         <connection>scm:git:git://java.net/mvc-spec~git</connection>
         <developerConnection>scm:git:ssh://mriem@git.java.net/mvc-spec~git</developerConnection>
-    </scm>
+      <tag>javax.mvc-api-1.0-edr2</tag>
+  </scm>
 </project>
