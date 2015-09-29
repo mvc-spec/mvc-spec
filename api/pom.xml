@@ -9,7 +9,7 @@
     </parent>
     <groupId>javax.mvc</groupId>
     <artifactId>javax.mvc-api</artifactId>
-    <version>1.0-SNAPSHOT</version>
+    <version>1.0-edr2</version>
     <packaging>jar</packaging>
     <name>MVC ${project.version} API</name>
     <url>http://mvc-spec.java.net</url>
@@ -86,9 +86,7 @@
                         <phase>validate</phase>
                         <configuration>
                             <target>
-                              <copy file="${basedir}/../spec/spec.pdf"
-                                tofile="${basedir}/src/main/spec/spec.pdf"
-                                overwrite="yes"/>
+                              <copy file="${basedir}/../spec/spec.pdf" tofile="${basedir}/src/main/spec/spec.pdf" overwrite="yes" />
                             </target>
                         </configuration>
                         <goals>
