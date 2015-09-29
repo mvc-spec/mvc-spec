@@ -92,7 +92,7 @@
                         <configuration>
                             <artifacts>
                                 <artifact>
-                                    <file>${basedir}/src/main/spec/spec.pdf</file>
+                                    <file>${basedir}/../spec/spec.pdf</file>
                                     <type>pdf</type>
                                     <classifier>spec</classifier>
                                 </artifact>
