@@ -79,6 +79,25 @@
                 </executions>
             </plugin>
             <plugin>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>validate</phase>
+                        <configuration>
+                            <target>
+                              <copy file="${basedir}/../spec/spec.pdf"
+                                tofile="${basedir}/src/main/spec/spec.pdf"
+                                overwrite="yes"/>
+                            </target>
+                        </configuration>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>build-helper-maven-plugin</artifactId>
                 <version>1.9.1</version>
@@ -92,7 +111,7 @@
                         <configuration>
                             <artifacts>
                                 <artifact>
-                                    <file>${basedir}/../spec/spec.pdf</file>
+                                    <file>${basedir}/src/main/spec/spec.pdf</file>
                                     <type>pdf</type>
                                     <classifier>spec</classifier>
                                 </artifact>
@@ -209,6 +228,6 @@
     <scm>
         <connection>scm:git:git://java.net/mvc-spec~git</connection>
         <developerConnection>scm:git:ssh://mriem@git.java.net/mvc-spec~git</developerConnection>
-      <tag>javax.mvc-api-1.0-edr2</tag>
-  </scm>
+        <tag>javax.mvc-api-1.0-edr2</tag>
+    </scm>
 </project>
