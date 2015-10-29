@@ -53,13 +53,14 @@ upon submission. Consider the following JSP,
         <input type="hidden" name="${mvc.csrf.name}" 
                              value="${mvc.csrf.token}"/>
     </form>
+</body>
 </html>
 \end{listing}
 
 The hidden field will be submitted with the form, giving the MVC implementation
 the opportunity to verify the token and ensure the validity of the post request. 
 
-Another way to convey this information to and form the client is via an HTTP
+Another way to convey this information to and from the client is via an HTTP
 header. MVC implementations are REQUIRED to support CSRF tokens both
 as form fields (with the help of the application developer as shown above) and
 as HTTP headers.
