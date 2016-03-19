@@ -99,31 +99,31 @@ public interface BindingResult {
     BindingError getBindingError(String param);
 
     /**
-     * Returns an immutable set of all constraint violations detected.
+     * Returns an immutable set of all validation errors detected.
      *
-     * @return All constraint violations detected
+     * @return All validation errors detected
      */
-    Set<ConstraintViolation<?>> getAllViolations();
+    Set<ValidationError> getAllValidationErrors();
 
     /**
-     * Returns an immutable set of all constraint violations detected
+     * Returns an immutable set of all validation errors detected
      * for a parameter binding specified by the given parameter name.
      *
      * @param param The parameter name
-     * @return All constraint violations for this parameter
-     * @see #getViolation(String)
+     * @return All validation errors for this parameter
+     * @see #getValidationError(String)
      */
-    Set<ConstraintViolation<?>> getViolations(String param);
+    Set<ValidationError> getValidationErrors(String param);
 
     /**
-     * Returns a single constraint violation detected for a parameter binding
+     * Returns a single validation error detected for a parameter binding
      * specified by the given parameter name. Will return the first if there
-     * is more than one violation <code>null</code> if no violation was detected.
+     * is more than one and <code>null</code> if no error was detected.
      *
      * @param param The parameter name
-     * @return The first constraint violation for the parameter or <code>null</code>
-     * @see #getViolation(String)
+     * @return The first validation error for the parameter or <code>null</code>
+     * @see #getValidationErrors(String)
      */
-    ConstraintViolation<?> getViolation(String param);
+    ValidationError getValidationError(String param);
 
 }
