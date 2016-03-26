@@ -42,6 +42,7 @@ package javax.mvc;
 import javax.mvc.security.Csrf;
 import javax.mvc.security.Encoders;
 import javax.ws.rs.core.Configuration;
+import java.util.Locale;
 
 /**
  * <p>This class provides contextual information such as context and application
@@ -49,7 +50,8 @@ import javax.ws.rs.core.Configuration;
  * In addition, it provides access to the security-related beans {@link
  * javax.mvc.security.Csrf} and {@link javax.mvc.security.Encoders}.</p>
  *
- * <p>Implementations of this class are injectable and accessible from EL using
+ * <p>Implementations of this class are injectable, must be
+ * {@link javax.enterprise.context.RequestScoped} and accessible from EL using
  * the name {@code mvc}. For example, the CSRF token name and value can be
  * accessed in EL using the expressions {@code mvc.csrf.name} and {@code
  * mvc.csrf.token}, respectively.</p>
@@ -123,4 +125,12 @@ public interface MvcContext {
      * @return instance of encoders.
      */
     Encoders getEncoders();
+
+    /**
+     * Returns the locale of the current request.
+     *
+     * @return The request locale
+     */
+    Locale getLocale();
+
 }
