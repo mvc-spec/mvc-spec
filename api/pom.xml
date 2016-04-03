@@ -10,7 +10,7 @@
     <groupId>javax.mvc</groupId>
     <artifactId>javax.mvc-api</artifactId>
     <version>1.0-SNAPSHOT</version>
-    <packaging>jar</packaging>
+    <packaging>bundle</packaging>
     <name>MVC ${project.version} API</name>
     <url>http://mvc-spec.java.net</url>
     <organization>
@@ -31,8 +31,38 @@
             <archive>users@mvc-spec.java.net</archive>
         </mailingList>
     </mailingLists>
+
+    <properties>
+        <api_package>javax.mvc</api_package>
+        <spec_version>1.0</spec_version>
+        <spec_impl_version>${project.version}</spec_impl_version>
+
+        <packages.export>javax.mvc.*</packages.export>
+    </properties>
+
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.glassfish.build</groupId>
+                <artifactId>spec-version-maven-plugin</artifactId>
+                <configuration>
+                    <spec>
+                        <nonFinal>false</nonFinal>
+                        <jarType>api</jarType>
+                        <specVersion>${spec_version}</specVersion>
+                        <specImplVersion>${spec_impl_version}</specImplVersion>
+                        <apiPackage>${api_package}</apiPackage>
+                    </spec>
+                </configuration>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>set-spec-properties</goal>
+                            <goal>check-module</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
@@ -125,6 +155,27 @@
                 <configuration>
                     <threshold>High</threshold>
                     <excludeFilterFile>findbugs-exclude.xml</excludeFilterFile>
+                </configuration>
+            </plugin>
+            <!--
+             This plugin is reponsible for packaging artifacts
+             as OSGi bundles.  Please refer to
+             http://felix.apache.org/site/apache-felix-maven-bundle-plugin-bnd.html
+             for more information about how to use this plugin.
+            -->
+            <plugin>
+                <groupId>org.apache.felix</groupId>
+                <artifactId>maven-bundle-plugin</artifactId>
+                <extensions>true</extensions>
+                <configuration>
+                    <instructions>
+                        <Bundle-Version>${spec.bundle.version}</Bundle-Version>
+                        <Bundle-SymbolicName>${spec.bundle.symbolic-name}</Bundle-SymbolicName>
+                        <Extension-Name>${spec.extension.name}</Extension-Name>
+                        <Implementation-Version>${spec.implementation.version}</Implementation-Version>
+                        <Specification-Version>${spec.specification.version}</Specification-Version>
+                        <Export-Package>${packages.export}</Export-Package>
+                    </instructions>
                 </configuration>
             </plugin>
         </plugins>
