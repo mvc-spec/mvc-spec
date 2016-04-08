@@ -39,6 +39,9 @@
  */
 package javax.mvc.engine;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import javax.mvc.Models;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Configuration;
@@ -97,4 +100,22 @@ public interface ViewEngineContext {
      * @see javax.ws.rs.core.Configuration
      */
     Configuration getConfiguration();
+    
+    /**
+     * Returns the outputstream for the response.
+     * 
+     * @see java.io.OutputStream
+     * @return an outputstream suitable to send binary data to the client
+     * @throws IOException if an output stream could not be obtained
+     */
+    OutputStream getOutputStream() throws IOException;
+    
+    /**
+     * Returns the writer for the response.
+     * 
+     * @see java.io.PrintWriter
+     * @return a PrintWriter object that can send character text to the client
+     * @throws IOException if a writer couldn't be obtained
+     */
+    PrintWriter getWriter() throws IOException;
 }
