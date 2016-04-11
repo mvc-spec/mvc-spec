@@ -2,3 +2,5 @@
 api/.idea
 api/target
 .DS_Store
+nbactions.xml
+nb-configuration.xml
