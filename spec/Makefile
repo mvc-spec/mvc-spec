@@ -10,9 +10,15 @@ SOURCES=spec.tex \
         chapters/titlepage.tex \
         chapters/license.tex \
         chapters/intro.tex \
-        chapters/environment.tex \
+        chapters/controllers.tex \
+        chapters/validation.tex \
+        chapters/security.tex \
+        chapters/events.tex \
+        chapters/applications.tex \
+        chapters/engines.tex \
         chapters/annotations.tex \
         chapters/changes.tex \
+        chapters/assertions.tex \
         chapters/refs.tex \
         references.bib
 
