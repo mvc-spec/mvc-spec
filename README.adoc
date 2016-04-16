@@ -1,0 +1,45 @@
+= JSR 371 Specification and API
+
+This project contains the specification document and Java API sources. The project
+is organized into two modules: _api_ and _spec_.
+The _api_ module contains the Java API sources, which may be used to generate the
+API JAR and JavaDoc.
+The _spec_ module contains the specification document sources, which may be used
+to generate the specification document.
+
+== Repository Structure
+The specification must originate from java.net per Oracle policy. To enable use
+of the facilities of GitHub, the java.net repository is kept in sync with the
+GitHub repository.
+
+Source Repository on java.net::
+`git://java.net/mvc-spec~git`
+
+Mirrored Respository on GitHub::
+`git@github.com:mvc-spec/mvc-spec.git`
+
+== Generating the Specification, API and JavaDoc
+
+Just enter `mvn clean install` at the command line. Maven will generate the following artifacts.
+
+API Jar::
+* The jar containing the api interfaces and classes.
+* In the directory: `/api/target`
+
+API JavaDoc::
+* The JavaDoc for the api interfaces and classes.
+* In the directory: `api/target/apidocs`
+
+Specification as PDF::
+
+* The ollowing Latex packages should be installed:
+
+** framed
+** moreverb
+** collection-fontsrecommended
+
+* Generating the PDF:
+
+```
+make clean && make all
+```
