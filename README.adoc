@@ -8,6 +8,7 @@ The _spec_ module contains the specification document sources, which may be used
 to generate the specification document.
 
 == Repository Structure
+
 The specification must originate from java.net per Oracle policy. To enable use
 of the facilities of GitHub, the java.net repository is kept in sync with the
 GitHub repository.
@@ -18,7 +19,7 @@ Source Repository on java.net::
 Mirrored Respository on GitHub::
 `git@github.com:mvc-spec/mvc-spec.git`
 
-== Generating the Specification, API and JavaDoc
+== Generating the API and JavaDoc
 
 Just enter `mvn clean install` at the command line. Maven will generate the following artifacts.
 
@@ -30,16 +31,17 @@ API JavaDoc::
 * The JavaDoc for the api interfaces and classes.
 * In the directory: `api/target/apidocs`
 
-Specification as PDF::
+== Generating the Specification
 
-* The ollowing Latex packages should be installed:
+The following Latex packages should be installed:
 
-** framed
-** moreverb
-** collection-fontsrecommended
+* framed
+* moreverb
+* collection-fontsrecommended
 
-* Generating the PDF:
+Generating the PDF:
 
 ```
-make clean && make all
+make clean all
 ```
+
