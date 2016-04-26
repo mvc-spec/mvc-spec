@@ -39,6 +39,12 @@ The following Latex packages should be installed:
 * moreverb
 * collection-fontsrecommended
 
+In case of Debian/Ubuntu you can install all required dependencies like this:
+
+```
+apt-get install make texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
+```
+
 Generating the PDF:
 
 ```
