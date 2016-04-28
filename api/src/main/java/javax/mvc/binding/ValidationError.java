@@ -66,8 +66,8 @@ public interface ValidationError {
     ConstraintViolation<?> getViolation();
 
     /**
-     * Returns the interpolated error message for this validation error. Same as calling
-     * <code>getViolation().getMessage()</code>.
+     * Returns the interpolated error message for this validation error using the current
+     * request locale.
      *
      * @return The human-readable error message
      */
