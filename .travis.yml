@@ -12,3 +12,5 @@ script:
   - make clean all
   - cd ../api
   - mvn clean install -B -V
+after_success:
+  - python <(curl -s https://raw.githubusercontent.com/TouK/sputnik-ci/master/sputnik-ci.py)
