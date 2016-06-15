@@ -39,10 +39,14 @@
  */
 package javax.mvc;
 
+import javax.mvc.annotation.UriRef;
 import javax.mvc.security.Csrf;
 import javax.mvc.security.Encoders;
 import javax.ws.rs.core.Configuration;
+import java.net.URI;
+import java.util.List;
 import java.util.Locale;
+import java.util.Map;
 
 /**
  * <p>This class provides contextual information such as context and application
@@ -132,5 +136,92 @@ public interface MvcContext {
      * @return The request locale
      */
     Locale getLocale();
+
+    /**
+     * <p>Creates an URI to be matched by a controller method. This is aimed primarily
+     * for use in view rendering technologies to avoid duplicating the values of the
+     * {@link javax.ws.rs.Path} annotations.</p>
+     *
+     * <p>The controller method can either be identified by the simple name of the controller class
+     * and the method name separated by '#' (MyController#myMethod) <em>or</em> by the value
+     * of the {@link UriRef} annotation.</p>
+     *
+     * <p>The created URI includes context- and application path.</p>
+     *
+     * <p>This method assumes that there is no parameter in the URI-template.</p>
+     *
+     * <p>For example:</p>
+     * <pre><code>${mvc.uri('MyController#myMethod')}</code></pre>
+     *
+     * @param identifier for the controller method.
+     * @return the constructed URI including context- and application path.
+     */
+    URI uri(String identifier);
+
+    /**
+     * <p>Creates an URI to be matched by a controller method. This is aimed primarily
+     * for use in view rendering technologies to avoid duplicating the values of the
+     * {@link javax.ws.rs.Path} annotations.</p>
+     *
+     * <p>The controller method can either be identified by the simple name of the controller class
+     * and the method name separated by '#' (MyController#myMethod) <em>or</em> by the value
+     * of the {@link UriRef} annotation.</p>
+     *
+     * <p>The created URI includes context- and application path.</p>
+     *
+     * <p>Any {@link javax.ws.rs.PathParam} parameter found in the URI-template
+     * will be replaced by the values of the supplied List in the same order as provided.
+     * Note that query parameters and matrix parameters are not supported
+     * by this method as their order is not predefined.</p>
+     *
+     * <p>For example:</p>
+     * <pre><code>${mvc.uri('MyController#myMethod', ['foo', 42])}</code></pre>
+     *
+     * @param identifier for the controller method.
+     * @param params a list of path parameters.
+     * @return the constructed URI including context- and application path.
+     * @throws IllegalArgumentException if there are any URI template parameters without a supplied value, or if a value is {@code null}.
+     */
+    URI uri(String identifier, List<Object> params);
+
+    /**
+     * <p>Creates an URI to be matched by a controller method. This is aimed primarily
+     * for use in view rendering technologies to avoid duplicating the values of the
+     * {@link javax.ws.rs.Path} annotations.</p>
+     *
+     * <p>The controller method can either be identified by the simple name of the controller class
+     * and the method name separated by '#' (MyController#myMethod) <em>or</em> by the value
+     * of the {@link UriRef} annotation.</p>
+     *
+     * <p>The created URI includes context- and application path.</p>
+     *
+     * <p>Any {@link javax.ws.rs.PathParam}, {@link javax.ws.rs.QueryParam}
+     * and {@link javax.ws.rs.MatrixParam} which could apply for given target
+     * method will be replaced if a matching key is found in the supplied Map.
+     * Please note that the map must contain values for all path parameters
+     * as they are required for building the URI. All other parameters are optional.</p>
+     * 
+     * <p>For example:</p>
+     * <pre><code>${mvc.uri('MyController#myMethod' {'foo': 'bar', 'id': 42})}</code></pre>
+     *
+     * @param identifier for the controller method.
+     * @param params a map of path-, query- and matrix parameters.
+     * @return the constructed URI including context- and application path.
+     * @throws IllegalArgumentException if there are any URI template parameters without a supplied value, or if a value is {@code null}.
+     */
+    URI uri(String identifier, Map<String, Object> params);
+
+    /**
+     * <p>Returns a {@link MvcUriBuilder} for building URIs to be matched
+     * by a controller method. This is aimed primarily for use in Java classes.</p>
+     *
+     * <p>The controller method can either be identified by the simple name of the controller class
+     * and the method name separated by '#' (MyController#myMethod) <em>or</em> by the value
+     * of the {@link UriRef} annotation.</p>
+     *
+     * @param identifier for the controller method.
+     * @return a reference to a {@link MvcUriBuilder}.
+     */
+    MvcUriBuilder uriBuilder(String identifier);
 
 }
