@@ -1,0 +1,116 @@
+\chapter{Internationalization}
+\label{i18n}
+
+This chapter introduces the notion of a {\em request locale} and describes how \mvc\
+handles internationalization and localization.
+
+\section{Introduction}
+\label{i18n_introduction}
+
+Internationalization and localization are very important concepts for any web application 
+framework. Therefore \mvc\ has been designed to make supporting multiple languages and
+regional differences in applications very easy.
+
+\mvc\ defines the term {\em request locale} as the locale which is used for any 
+locale-dependent operation within the lifecycle of a request. The request locale 
+MUST be resolved exactly once for each request using the resolving algorithm described in
+Section \ref{i18n_resolving_algorithm}.
+
+These locale-dependent operations include, but are not limited to:
+
+\begin{enumerate}
+\item Data type conversion as part of the data binding mechanism.
+\item Formatting of data when rendering it to the view.
+\item Generating binding and validation error messages in the specific language.
+\end{enumerate}
+
+The request locale is available from \code{MvcContext} and can be used by controllers, 
+view engines and other components to perform operations which depend on the current locale 
+\assertref{request-locale-context}. The example below shows a controller that uses the 
+request locale to create a \code{NumberFormat} instance.
+
+\begin{listing}{1}
+@Controller
+@Path("/foobar")
+public class MyController {
+
+    @Inject
+    private MvcContext mvc;
+    
+    @GET
+    public String get() {
+    
+        Locale locale = mvc.getLocale();
+        NumberFormat format = NumberFormat.getInstance(locale);
+    
+    }
+
+}
+\end{listing}
+
+The following sections will explain the locale resolving algorithm and the default
+resolver provided by the \mvc\ implementation.
+
+\section{Resolving Algorithm}
+\label{i18n_resolving_algorithm}
+
+The {\em locale resolver} is responsible to detect the request locale for each request
+processed by the \mvc\ runtime. A locale resolver MUST implement the
+\code{javax.mvc.locale.LocaleResolver} interface which is defined like this:
+
+\begin{listing}{1}
+public interface LocaleResolver {
+
+    Locale resolveLocale(LocaleResolverContext context);
+
+}
+\end{listing}
+
+There may be more than one locale resolver for a \mvc\ application. Locale resolvers
+are discovered using CDI \assertref{extension-resolvers}. Every CDI bean
+implementing the \code{LocaleResolver} interface and visible to the application 
+participates in the locale resolving algorithm.
+
+Implementations MUST use the following algorithm to resolve the request locale for
+each request \assertref{resolve-algorithm}:
+
+\begin{enumerate}
+\item Obtain a list of all CDI beans implementing the \code{LocaleResolver} interface
+ visible to the application's \code{BeanManager}.
+\item Sort the list of locale resolvers in descending order of priority using the
+ integer value from the \Priority\ annotation decorating the resolver class. If no
+ \Priority\ annotation is present, assume a default priority of \code{1000}.
+\item Call \code{resolveLocale()} on the first resolver in the list. If the resolver
+ returns \code{null}, continue with the next resolver in the list. If a resolver 
+ returns a non-null result, stop the algorithm and use the returned locale as the request 
+ locale. 
+\end{enumerate}
+
+Applications can either rely on the default locale resolver which is described
+in Section \ref{i18n_default_resolver} or provide a custom resolver which implements
+some other strategy for resolving the request locale. A custom strategy could for
+example track the locale using the session, a query parameter or the server's
+hostname.
+
+\section{Default Locale Resolver}
+\label{i18n_default_resolver}
+
+Every \mvc\ implementation MUST provide a default locale resolver with a priority of \code{0}
+which resolves the request locale according to the following algorithm 
+\assertref{default-locale-resolver}:
+
+\begin{enumerate}
+\item First check whether the client provided an \code{Accept-Locale} request header.
+ If this is the case, the locale with the highest quality factor is returned as
+ the result. 
+\item Check if there is an {\em application default locale} specified in the JAX-RS 
+ configuration. The application default locale can be configured using the key 
+ \code{LocaleResolver.DEFAULT\_LOCALE} and a \code{java.util.Locale} as the value. 
+ If such a default locale is found, return it as the result.
+\item If the previous steps were not successful, return the system default locale of the 
+ server.
+\end{enumerate}
+
+Please note that applications can customize the locale resolving process by providing
+a custom locale resolver with a priority higher than \code{0}.
+See Section \ref{i18n_resolving_algorithm} for details.

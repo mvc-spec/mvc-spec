@@ -31,4 +31,8 @@ return type of {\tt String}.
 \assert{csrf-support} CSRF validation required only for controllers annotated by {\tt @POST} 
 and consuming the media type {\tt x-www-form-urlencoded}.
 \assert{mvc-context} Application-scoped {\tt MvcContext} available for injection and as {\tt mvc} in EL.
+\assert{request-locale-context} The \code{MvcContext} must provide access to the current request locale.
+\assert{extension-resolvers} CDI beans implementing \code{javax.mvc.locale.LocaleResolver} provide an extension mechanism for the request locale resolving algorithm.
+\assert{resolve-algorithm} The request locale must be resolved as described in Section \ref{i18n_resolving_algorithm}.
+\assert{default-locale-resolver} Implementations must provide a default locale resolver as described in Section \ref{i18n_default_resolver}.
 \end{description}
