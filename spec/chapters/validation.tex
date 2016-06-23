@@ -174,7 +174,7 @@ to provide extension points for these conversions; if none are specified for
 the type at hand, a set of default parameter converters is available. Regardless
 of where the parameter converter is coming from, a failure to carry out a 
 conversion results in an \code{IllegalArgument\-Exception} thrown and, typically,
-a 500 error code returned the client. As explained before, applications can provide
+a 500 error code returned to the client. As explained before, applications can provide
 an exception mapper for \code{IllegalArgumentException} but this may be
 insufficient when error recovery using controller-specific logic is required. 
 

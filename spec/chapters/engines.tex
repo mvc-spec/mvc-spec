@@ -17,7 +17,7 @@ Implementations MUST provide built-in support for JSPs and Facelets view engines
 \assertref{builtin-engines}. Additional
 engines may be supported via an extension mechanism based on CDI. Namely, any CDI bean
 that implements the \code{javax.mvc.engine.ViewEngine} interface MUST be considered as
-a possible target for processing by calling its \code{support} method, discarding the
+a possible target for processing by calling its \code{supports} method, discarding the
 engine if this method returns \code{false} \assertref{extension-engines}.
 
 This is the interface that must be implemented by all \mvc\ view engines:
