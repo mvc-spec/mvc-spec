@@ -68,7 +68,7 @@ public interface Csrf {
          */
         OFF,
         /**
-         * Enabling CSRF requires use of {@link javax.mvc.annotation.CsrfValid} explicitly.
+         * Enabling CSRF requires use of {@link javax.mvc.annotation.CsrfValid} explicitly (default).
          */
         EXPLICIT,
         /**

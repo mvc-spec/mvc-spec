@@ -68,9 +68,9 @@ as HTTP headers.
 The application-level property {\tt javax.mvc.security.CsrfProtection} enables
  CSRF protection when set to one of the possible values defined in
 {\tt javax.mvc.security.Csrf.CsrfOptions}. The default value of this property is
-{\tt CsrfOptions.OFF}. Setting it to any other value will automatically inject a
-CSRF token as an HTTP header; the actual name of this header is 
-implementation dependent.
+{\tt CsrfOptions.EXPLICIT}. Any other value than {\tt CsrfOptions.OFF} will
+automatically inject a CSRF token as an HTTP header; the actual name of this
+header is implementation dependent.
 
 Automatic validation is enabled by setting this
 property to {\tt CsrfOptions.IMPLICIT}, in which case all post requests
