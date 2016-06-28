@@ -100,7 +100,7 @@ which resolves the request locale according to the following algorithm
 \assertref{default-locale-resolver}:
 
 \begin{enumerate}
-\item First check whether the client provided an \code{Accept-Locale} request header.
+\item First check whether the client provided an \code{Accept-Language} request header.
  If this is the case, the locale with the highest quality factor is returned as
  the result. 
 \item Check if there is an {\em application default locale} specified in the JAX-RS 
