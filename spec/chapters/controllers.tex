@@ -236,7 +236,7 @@ which defines a map between names and objects. Support for the \Models\
 interface is mandatory for all view engines; support for CDI \Named\ beans is
 OPTIONAL but highly RECOMMENDED. Application developers are encouraged to use CDI-based
 models whenever supported, and thus take advantage of the existing CDI and EL integration
-on the platform. 
+on the platform.
 
 Let us now revisit our hello-world example, this time also showing how to update
 a model. Since we intend to show the two ways in which models can be used, we define the
@@ -313,12 +313,14 @@ output page.
 Here is the JSP page for the hello-world example:
 
 \begin{listing}{1}
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<!doctype html>
 <html>
 <head>
-    <title>Hello</title>
+  <title>Hello</title>
 </head>
 <body>
-<h1>${greeting.message}</h1>
+  <h1>${greeting.message}</h1>
 </body>
 </html>
 \end{listing}
@@ -329,3 +331,16 @@ was either specified in a \Named\ annotation or used as a key in the \Models\ ma
 depending on which controller from Section \ref{models} triggered this view's 
 processing.
 
+Here is the corresponding Facelets example:
+
+\begin{listing}{1}
+<!DOCTYPE html>
+<html lang="en" xmlns:h="http://xmlns.jcp.org/jsf/html">
+<h:head>
+  <title>Hello</title>
+</h:head>
+<h:body>
+  <h:outputText value="#{greeting.message}" />
+</h:body>
+</html>
+\end{listing}
