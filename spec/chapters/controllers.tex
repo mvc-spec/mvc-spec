@@ -329,3 +329,17 @@ was either specified in a \Named\ annotation or used as a key in the \Models\ ma
 depending on which controller from Section \ref{models} triggered this view's 
 processing.
 
+\subsection{Building URIs in a View}
+\label{mvc_uri}
+
+In {\tt views} links and form actions require a URI. To avoid repeating the declarative
+mapping to URIs on controller methods MVC provides a way to build URIs from the
+{\tt MvcContext}:
+
+\begin{listing}{1}
+${mvc.uri('MyController#myMethod' {'id': 42, 'foo': 'bar'})}
+\end{listing}
+
+The controller method can either be identified by the simple name of the controller class
+and the method name separated by {\tt \#} ({\tt MyController\#myMethod}) {\em or} by the
+value of the {\tt @UriRef} annotation.
