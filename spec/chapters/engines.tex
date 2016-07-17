@@ -102,4 +102,7 @@ mapping the extension \code{*.xhtml} as shown next:
   </servlet-mapping>
 \end{listing}
 
-It is worth noting that if you opt to use Facelets as a view technology for your MVC application, regular JSF post-backs will not be processed by the MVC runtime.
+It is worth noting that if you opt to use Facelets as a view technology for your MVC application,
+regular JSF post-backs will not be processed by the MVC runtime. The usage of \code{<h:form />}
+and depending form components like \code{<h:inputText />} is not recommended as they would
+be the entry point to a real JSF application.
