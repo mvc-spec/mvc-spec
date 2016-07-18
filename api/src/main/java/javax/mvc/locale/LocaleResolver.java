@@ -65,9 +65,7 @@ import java.util.Locale;
  *
  * <p>The MVC implementation is required to provide a default locale resolver with a priority
  * of <code>0</code> which uses the <code>Accept-Language</code> request header to obtain the
- * locale. If resolving the locale this way isn't possible, the implementation should return
- * the application default locale specified via the {@link #DEFAULT_LOCALE} configuration
- * property. If the application default locale hasn't been set, the resolver must return
+ * locale. If resolving the locale this way isn't possible, the default resolver must return
  * {@link Locale#getDefault()}.</p>
  *
  * @author Christian Kaltepoth
@@ -77,15 +75,6 @@ import java.util.Locale;
  * @since 1.0
  */
 public interface LocaleResolver {
-
-    /**
-     * Name of the property that can be set in an application's {@link javax.ws.rs.core.Configuration}
-     * to set a application default locale. This locale will be used if the locale cannot be
-     * determined via the <code>Accept-Language</code> header sent by the client.
-     *
-     * @see javax.ws.rs.core.Application#getProperties()
-     */
-    String DEFAULT_LOCALE = "javax.mvc.locale.LocaleResolver.defaultLocale";
 
     /**
      * <p>Resolve the locale of the current request given a {@link LocaleResolverContext}.</p>

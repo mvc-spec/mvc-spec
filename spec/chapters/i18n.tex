@@ -103,11 +103,7 @@ which resolves the request locale according to the following algorithm
 \item First check whether the client provided an \code{Accept-Language} request header.
  If this is the case, the locale with the highest quality factor is returned as
  the result. 
-\item Check if there is an {\em application default locale} specified in the JAX-RS 
- configuration. The application default locale can be configured using the key 
- \code{LocaleResolver.DEFAULT\_LOCALE} and a \code{java.util.Locale} as the value. 
- If such a default locale is found, return it as the result.
-\item If the previous steps were not successful, return the system default locale of the 
+\item If the previous step was not successful, return the system default locale of the
  server.
 \end{enumerate}
 
