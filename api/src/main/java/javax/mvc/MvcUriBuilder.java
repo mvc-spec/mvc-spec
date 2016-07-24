@@ -17,26 +17,17 @@ public interface MvcUriBuilder {
      * <p>Adds a parameter which will substitute any {@link javax.ws.rs.PathParam},
      * {@link javax.ws.rs.QueryParam} and {@link javax.ws.rs.MatrixParam} with a matching name.</p>
      *
-     * @param param name of the paramater
-     * @param value value of the parameter
+     * @param name   the parameter name.
+     * @param values the parameter value(s), each object will be converted
+     *               to a {@code String} using its {@code toString()} method.
      * @return a reference to this MvcUriBuilder
      */
-    MvcUriBuilder param(String param, Object value);
-
-    /**
-     * <p>Adds a map of parameters which will substitute any {@link javax.ws.rs.PathParam},
-     * {@link javax.ws.rs.QueryParam} and {@link javax.ws.rs.MatrixParam} with a matching name.</p>
-     *
-     * @param params a map of params
-     * @return a reference to this MvcUriBuilder
-     */
-    MvcUriBuilder params(Map<String, Object> params);
+    MvcUriBuilder param(String name, Object... values);
 
     /**
      * <p>Builds a URI using the given parameters.</p>
      *
      * @return the URI built from the Builder
-     *
      * @see javax.ws.rs.core.UriBuilder#buildFromMap(Map)
      */
     URI build();
