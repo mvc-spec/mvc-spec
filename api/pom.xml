@@ -207,6 +207,11 @@
                         <owner>Ivar Grimstad</owner>
                         <project.inceptionYear>2017</project.inceptionYear>
                     </properties>
+                    <includes>
+                        <include>src/**/*.java</include>
+                        <include>findbugs-exclude.xml</include>
+                        <include>pom.xml</include>
+                    </includes>
                     <mapping>
                         <java>SLASHSTAR_STYLE</java>
                     </mapping>
