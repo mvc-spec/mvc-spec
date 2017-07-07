@@ -15,9 +15,10 @@
  */
 package javax.mvc.engine;
 
+import java.io.IOException;
+import java.io.OutputStream;
+import java.io.PrintWriter;
 import javax.mvc.Models;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Configuration;
 import javax.ws.rs.core.UriInfo;
@@ -28,9 +29,8 @@ import javax.ws.rs.core.UriInfo;
  * objects from the Servlet container, among other data.</p>
  *
  * @author Santiago Pericas-Geertsen
+ * @author Ivar Grimstad
  * @see javax.mvc.engine.ViewEngine
- * @see javax.servlet.http.HttpServletRequest
- * @see javax.servlet.http.HttpServletResponse
  * @since 1.0
  */
 public interface ViewEngineContext {
@@ -48,21 +48,6 @@ public interface ViewEngineContext {
      * @return the models instance.
      */
     Models getModels();
-
-    /**
-     * Returns HTTP request object from the Servlet container.
-     *
-     * @return HTTP request object.
-     */
-    HttpServletRequest getRequest();
-
-    /**
-     * Returns HTTP response object from the servlet container. The underlying
-     * output stream should be used to write the result of processing a view.
-     *
-     * @return HTTP response object.
-     */
-    HttpServletResponse getResponse();
 
     /**
      * Returns the {@link javax.ws.rs.core.UriInfo} instance containing information
@@ -91,4 +76,22 @@ public interface ViewEngineContext {
      * @see javax.ws.rs.core.Configuration
      */
     Configuration getConfiguration();
+    
+    /**
+     * Returns the outputstream for the response.
+     * 
+     * @see java.io.OutputStream
+     * @return an outputstream suitable to send binary data to the client
+     * @throws IOException if an output stream could not be obtained
+     */
+    OutputStream getOutputStream() throws IOException;
+    
+    /**
+     * Returns the writer for the response.
+     * 
+     * @see java.io.PrintWriter
+     * @return a PrintWriter object that can send character text to the client
+     * @throws IOException if a writer couldn't be obtained
+     */
+    PrintWriter getWriter() throws IOException;
 }
