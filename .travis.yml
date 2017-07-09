@@ -12,5 +12,15 @@ script:
   - make clean all
   - cd ../api
   - mvn clean install -B -V
-after_success:
-  - python <(curl -s https://raw.githubusercontent.com/TouK/sputnik-ci/master/sputnik-ci.py)
+  - cd ..
+deploy:
+  provider: script
+  script: cd api && mvn -s ../.travis/deploy-settings.xml -DperformRelease -DskipTests -Dgpg.skip=true deploy
+  skip_cleanup: true
+  on:
+    repo: mvc-spec/mvc-spec
+    branch: master
+env:
+  global:
+  - secure: Fo25+mOE7lP/cbEdal8xkekfcw5PxidLQY2ETBdXKDFFRGE8Av7C3NgrO4SMcWsLhSMRlHbFUU7QSYzY+O2qPKw9kzvQe7DFY9MytNXU3wDNK+ygEyGUuSrHEOmfIxrElUejTD1OS6yHdAP9vu8GkhyvZA5GkPMpUwfVcpEE/Ao3myfYLY56bbIhY7hycybhj3Ov3/a8OaZmaUAbmgm46HcFkXgmBBDS6qS9xz86JbkbOyXRW+SyGOP3TUqYAN56UxF8+OSJ9iBOvQRloPlxRbgKUXqpJHAr4ZuLpc975FE0B6f5qxRRt5BDympZkSedy+xjbHkc/1dfz2J3M2oiWjckT9AGaB/orzZxlPOFo7HD/6A5XLocJRlNwAuTF3fjtDmyTEftXJocQrV1c6LaB/FS+aU6Jiuf5dr0mUgTpX8UB9yxlaKMj2mf8sX7O+icUjIGBSdDWzTzbnIcACAhsB02wnsWwO6zCYCQD1NbT8p4wW4clYM03ZyDgGNszyqX/k8pf+pmpMLJL+raNoPwFPMscqbqlp8Zn0fW7jXCO0xXpkMJoxw0TCTFMydmCbXhsGDYv9VMU6ioQ/GoLmik8Y9vwSaFK2pxmh4v/OGK5vJJi6sqLUyTEB4BF1Q9tKi1f+yRYGeVfHRBHSevGaB7+JwH9ooOZiitOxzpH67gZ7E=
+  - secure: iY2buZHBhEZct7THPOj+WmuBfOUscefA3BKsxX4S77puZ0vjVdBNUOc83Uim/IJO0+Ni9F9dkfWAMxTaEmgGbXHLb45Rz4rT4vQr9gYRLJOiVtyGYGZpFKh95271woga8JMyda5AmvyqhgyL3MZWsJ6qWseCFeAcD9mwRpNKmPwqK94p8iBNhsKzJC7siifr4nJeU8oxeh9atcPTvI4B+SVsZ9ZIo/PDzTyRqX6F5byPtE99ldLWmieOiM88V9RY5Wb/OlgbssiRjXS8WlL/ATKVJaVin3y95fs6HbxUzV5+VS9poZoG4UmHu+sKpxZRtW3wOn7o1sznNglx/GfE/0GsrKmkRLmn2YwbQ7AeJTi26DiLUbrRGOwzuTuESvM/FjM9/pRu6bOHJaJ79NPKOYTS4EMwRWFoYcdzuYDOii2PVxdFsAa3R68BFpvX5aJm5mmnDOkVZpDUvCq6q+kr/wF5qwdngfgWAE+6Aw7SsVh4MZDqVVvIgVuH6d928BmGy3nZ9bPPidI2Ii8zLf+WTx1K1varQ2KlJpKR1HSbEz8OtSpNac3iojQICZciVL0+pbbcfFsAW7OXvRq9az3loZefvLYIFzDrzeScXWhSm5GPkYfve8b1T/R9nF/gI1dCnyJpcWH8GB2tYyf/xRwLHffQ0LHnsqWKADxwRIakbZ4=
