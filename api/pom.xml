@@ -133,7 +133,7 @@
                         <phase>validate</phase>
                         <configuration>
                             <target>
-                              <copy file="${basedir}/../spec/spec.pdf" tofile="${basedir}/src/main/spec/spec.pdf" overwrite="yes" />
+                              <copy file="${basedir}/../spec/spec.pdf" tofile="${project.build.directory}/pdf/spec.pdf" overwrite="yes" />
                             </target>
                         </configuration>
                         <goals>
@@ -156,7 +156,7 @@
                         <configuration>
                             <artifacts>
                                 <artifact>
-                                    <file>${basedir}/src/main/spec/spec.pdf</file>
+                                    <file>${project.build.directory}/pdf/spec.pdf</file>
                                     <type>pdf</type>
                                     <classifier>spec</classifier>
                                 </artifact>
