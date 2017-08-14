@@ -56,8 +56,8 @@
         <api_package>javax.mvc</api_package>
         <spec_version>1.0</spec_version>
         <spec_impl_version>${project.version}</spec_impl_version>
-
         <packages.export>javax.mvc.*</packages.export>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
     <build>
