@@ -19,7 +19,6 @@ package javax.mvc.security;
  * Cross Site Request Forgery (CSRF) interface with access to the CSRF header name
  * and the CSRF token value. Implementations of this interface are injectable
  * and accessible from EL via the {@link javax.mvc.MvcContext} class as {@code mvc.csrf}.
- * It is RECOMMENDED for instances of this class to be in session scope.
  *
  * @author Santiago Pericas-Geertsen
  * @see javax.mvc.annotation.CsrfValid
