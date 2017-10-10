@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?asciidoc-toc?>
+<?asciidoc-numbered?>
+<book xmlns="http://docbook.org/ns/docbook" xmlns:xl="http://www.w3.org/1999/xlink" version="5.0" xml:lang="en">
+<info>
+<title>Untitled</title>
+<date>2017-10-08</date>
+</info>
+<preface>
+<title></title>
+<simpara>Phillip&#8217;s first asciidoc</simpara>
+<simpara>The latest version of the project is $1.0-SNAPSHOT.</simpara>
+<warning>
+<simpara>Wolpertingers are known to nest in server racks.
+Enter at your own risk.</simpara>
+</warning>
+</preface>
+</book>
