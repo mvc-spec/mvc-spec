@@ -16,11 +16,13 @@ ifdef::backend-pdf[]
 :compat-mode:
 :pdf-page-size: Letter
 :source-highlighter: rouge
-:rouge-style: github
+:rouge-style: googlecode
 endif::[]
 
 include::chapters/license.asciidoc[]
 
 include::chapters/intro.asciidoc[]
+
+include::chapters/controllers.asciidoc[]
 
 include::chapters/annotations.asciidoc[]
