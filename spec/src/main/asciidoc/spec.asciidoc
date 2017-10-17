@@ -1,0 +1,34 @@
+:sectanchors:
+:doctype: book
+:compat-mode:
+:pdf-page-size: Letter
+= Model-View-Controller API
+Version 1.0 Early Draft (Second Edition) - July 9, 2017
+Comments to: jsr371-users@googlegroups.com
+
+// Settings:
+:experimental:
+:reproducible:
+:icons: font
+:listing-caption: Listing
+:sectnums:
+:toc:
+:toclevels: 3
+ifdef::backend-pdf[]
+:source-highlighter: rouge
+:rouge-style: github
+endif::[]
+
+
+//Editors:
+//Santiago Pericas-Geertsen
+//Manfred Riem
+//Christian Kaltepoth
+//
+
+//Ivar Grimstad & Christian Kaltepoth
+
+
+include::chapters/intro.asciidoc[]
+
+include::chapters/annotations.asciidoc[]
