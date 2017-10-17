@@ -1,10 +1,6 @@
-:sectanchors:
-:doctype: book
-:compat-mode:
-:pdf-page-size: Letter
-= Model-View-Controller API
-Version 1.0 Early Draft (Second Edition) - July 9, 2017
-Comments to: jsr371-users@googlegroups.com
+= Model-View-Controller API: Comments to jsr371-users@googlegroups.com
+Santiago Pericas-Geertsen, Manfred Riem, Christian Kaltepoth, Ivar Grimstad
+Version 1.0 Early Draft (Second Edition), July 9, 2017
 
 // Settings:
 :experimental:
@@ -15,19 +11,15 @@ Comments to: jsr371-users@googlegroups.com
 :toc:
 :toclevels: 3
 ifdef::backend-pdf[]
+:sectanchors:
+:doctype: book
+:compat-mode:
+:pdf-page-size: Letter
 :source-highlighter: rouge
 :rouge-style: github
 endif::[]
 
-
-//Editors:
-//Santiago Pericas-Geertsen
-//Manfred Riem
-//Christian Kaltepoth
-//
-
-//Ivar Grimstad & Christian Kaltepoth
-
+include::chapters/license.asciidoc[]
 
 include::chapters/intro.asciidoc[]
 
