@@ -29,7 +29,7 @@ Goals
 
 The following are goals of the API:
 
-[horizontal]
+[.Labeled horizontal]
 Goal 1:: 
     Leverage existing Java EE technologies.
 Goal 2::
@@ -48,7 +48,8 @@ Non-Goals
 ~~~~~~~~~
 
 The following are non-goals of the API:
-[horizontal]
+
+[.Labeled horizontal]
 Non-Goal 1::
   Define a new view (template) language and processor.
 Non-Goal 2::
@@ -84,7 +85,7 @@ https://www.mvc-spec.org/ozark/
 The expert group seeks feedback from the community on any aspect of this
 specification, please send comments to:
 
-mailto:jsr371-users@googlegroups.com
+jsr371-users@googlegroups.com
 
 [[terminology]]
 Terminology
@@ -128,7 +129,9 @@ All parts of this specification are normative, with the exception of
 examples, notes and sections explicitly marked as `Non-Normative'.
 Non-normative notes are formatted as shown below.
 
-*Note:* _This is a note._
+.Note
+[NOTE]
+This is a note.
 
 [[expert_group]]
 Expert Group Members
@@ -136,28 +139,23 @@ Expert Group Members
 
 This specification is being developed as part of JSR 371 under the Java Community Process. The following are the present expert group members:
 
-
-    * Mathieu Ancelin (Individual Member)
-    * Ivar Grimstad (Individual Member)
-    * Neil Griffin (Liferay, Inc)
-    * Joshua Wilson (RedHat)
-    * Rodrigo Turini (Caelum)
-    * Stefan Tilkov (innoQ Deutschland GmbH)
-    * Guilherme de Azevedo Silveira (Individual Member)
-    * Frank Caputo (Individual Member)
-    * Christian Kaltepoth (ingenit GmbH & Co. KG)
-    * Woong-ki Lee (TmaxSoft, Inc.)
-    * Paul Nicolucci (IBM)
-    * Kito D. Mann (Individual Member)
-    * Rahman Usta (Individual Member)
+** Mathieu Ancelin (Individual Member)
+** Ivar Grimstad (Individual Member)
+** Neil Griffin (Liferay, Inc)
+** Joshua Wilson (RedHat)
+** Rodrigo Turini (Caelum)
+** Stefan Tilkov (innoQ Deutschland GmbH)
+** Guilherme de Azevedo Silveira (Individual Member)
+** Frank Caputo (Individual Member)
+** Christian Kaltepoth (ingenit GmbH & Co. KG)
+** Woong-ki Lee (TmaxSoft, Inc.)
+** Paul Nicolucci (IBM)
+** Kito D. Mann (Individual Member)
+** Rahman Usta (Individual Member)
 
 [[acks]]
 Acknowledgements
 ~~~~~~~~~~~~~~~~
 
-During the course of this JSR we received many excellent suggestions.
-Special thanks to Marek Potociar, Dhiru Pandey and Ed Burns, all from
-Oracle. In addition, to everyone in the user’s alias that followed the
-expert discussions and provided feedback, including Peter Pilgrim, Ivar
-Grimstad, Jozef Hartinger, Florian Hirsch, Frans Tamura, Rahman Usta,
-Romain Manni-Bucau, Alberto Souza, among many others.
+During the course of this JSR we received many excellent suggestions. Special thanks to Marek Potociar, Dhiru Pandey and Ed Burns, all from Oracle. 
+In addition, to everyone in the user’s alias that followed the expert discussions and provided feedback, including Peter Pilgrim, Ivar Grimstad, Jozef Hartinger, Florian Hirsch, Frans Tamura, Rahman Usta, Romain Manni-Bucau, Alberto Souza, among many others.
