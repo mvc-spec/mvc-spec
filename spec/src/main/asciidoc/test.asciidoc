@@ -1,6 +1,0 @@
-Phillip's first asciidoc
-
-The latest version of the project is ${project-version}.
-
-WARNING: Wolpertingers are known to nest in server racks.   
-Enter at your own risk.
