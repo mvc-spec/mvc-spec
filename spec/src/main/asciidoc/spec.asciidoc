@@ -38,3 +38,5 @@ include::chapters/engines.asciidoc[]
 include::chapters/i18n.asciidoc[]
 
 include::chapters/annotations.asciidoc[]
+
+include::chapters/changes.asciidoc[]
