@@ -29,4 +29,6 @@ include::chapters/validation.asciidoc[]
 
 include::chapters/security.asciidoc[]
 
+include::chapters/events.asciidoc[]
+
 include::chapters/annotations.asciidoc[]
