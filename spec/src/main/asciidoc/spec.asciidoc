@@ -25,4 +25,8 @@ include::chapters/intro.asciidoc[]
 
 include::chapters/controllers.asciidoc[]
 
+include::chapters/validation.asciidoc[]
+
+include::chapters/security.asciidoc[]
+
 include::chapters/annotations.asciidoc[]
