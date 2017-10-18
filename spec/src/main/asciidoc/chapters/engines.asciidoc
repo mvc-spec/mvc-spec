@@ -1,0 +1,101 @@
+[[view_engines]]
+View Engines
+------------
+
+This chapter introduces the notion of a view engine as the mechanism by
+which views are processed in . The set of available view engines is
+extensible via CDI, enabling applications as well as other frameworks to
+provide support for additional view languages.
+
+[[view_engines_introduction]]
+Introduction
+~~~~~~~~~~~~
+
+A _view engine_ is responsible for processing views. In this context,
+processing entails (i) locating and loading a view (ii) preparing any
+required models and (iii) rendering the view and writing the result back
+to the client.
+
+Implementations MUST provide built-in support for JSPs and Facelets view
+engines . Additional engines may be supported via an extension mechanism
+based on CDI. Namely, any CDI bean that implements the interface MUST be
+considered as a possible target for processing by calling its method,
+discarding the engine if this method returns .
+
+This is the interface that must be implemented by all  view engines:
+
+1 public interface ViewEngine
+
+boolean supports(String view);
+
+void processView(ViewEngineContext context) throws ViewEngineException;
+
+[[selection_algorithm]]
+Selection Algorithm
+~~~~~~~~~~~~~~~~~~~
+
+As explained in Section [viewable], a  is an encapsulation for
+information that relates to a view. Every possible return type from a
+controller method is either a  or can be turned into one by calling a
+constructor. Thus, the following algorithm assumes only  as input.
+
+Implementations should perform the following steps while trying to find
+a suitable view engine for a  .
+
+1.  If calling on the  returns a non-null value, return that view
+engine.
+2.  Otherwise, lookup all instances of available via CDI. footnote:[The
+annotation in CDI can be used for this purpose.]
+3.  Call on every view engine found in the previous step, discarding
+those that return .
+4.  If the resulting set is empty, return .
+5.  Otherwise, sort the resulting set in descending order of priority
+using the integer value from the  annotation decorating the view engine
+class or the default value if the annotation is not present.
+6.  Return the first element in the resulting sorted set, that is, the
+view engine with the highest priority that supports the given .
+
+If a view engine that can process a  is not found, as a fall-back
+attempt to process the view by other means, implementations are REQUIRED
+to forward the request-response pair back to the Servlet container using
+a .
+
+The method has all the information necessary for processing in the ,
+including the view, a reference to , as well as the HTTP request and
+response from the underlying the Servlet container. Implementations MUST
+catch exceptions thrown during the execution of and re-throw them as ’s
+.
+
+Prior to the view render phase, all entries available in  MUST be bound
+in such a way that they become available to the view being processed.
+The exact mechanism for this depends on the actual view engine
+implementation. In the case of the built-in view engines for JSPs and
+Facelets, entries in  must be bound by calling ; calling this method
+ensures access to the named models from EL expressions.
+
+A view returned by a controller method represents a path within an
+application archive. If the path is relative, does not start with ,
+implementations MUST resolve view paths relative to value of , which is
+set to . If the path is absolute, no further processing is required . It
+is recommended to use relative paths and a location under to prevent
+direct access to views as static resources.
+
+[[faces_servlet]]
+FacesServlet
+~~~~~~~~~~~~
+
+Because Facelets support is not enabled by default, MVC applications
+that use Facelets are required to package a deployment descriptor with
+the following entry mapping the extension as shown next:
+
+1 <servlet> <servlet-name>Faces Servlet</servlet-name>
+<servlet-class>javax.faces.webapp.FacesServlet</servlet-class>
+<load-on-startup>1</load-on-startup> </servlet> <servlet-mapping>
+<servlet-name>Faces Servlet</servlet-name>
+<url-pattern>*.xhtml</url-pattern> </servlet-mapping>
+
+It is worth noting that if you opt to use Facelets as a view technology
+for your MVC application, regular JSF post-backs will not be processed
+by the MVC runtime. The usage of and depending form components like is
+not recommended as they would be the entry point to a real JSF
+application.

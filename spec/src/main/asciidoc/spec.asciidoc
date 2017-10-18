@@ -31,4 +31,6 @@ include::chapters/security.asciidoc[]
 
 include::chapters/events.asciidoc[]
 
+include::chapters/applications.asciidoc[]
+
 include::chapters/annotations.asciidoc[]

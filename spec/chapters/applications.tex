@@ -56,29 +56,29 @@ the {\tt MvcContext} object as follows:
 \end{listing}
 
 
-%For more information on security see Chapter~\ref{security}; for more information 
-%about the {\tt MvcContext} in general, refer to the Javadoc for the type.
+For more information on security see Chapter~\ref{security}; for more information 
+about the {\tt MvcContext} in general, refer to the Javadoc for the type.
 
-%\section{Providers in \mvc}
-%\label{providers_in_mvc}
+\section{Providers in \mvc}
+\label{providers_in_mvc}
 
-%Implementations are free to use their own providers in order to modify the standard 
-%\jaxrs\ pipeline for the purpose of implementing the \mvc\ semantics. Whenever mixing 
-%implementation and application providers, care should be taken to ensure the correct 
-%execution order using priorities.
+Implementations are free to use their own providers in order to modify the standard 
+\jaxrs\ pipeline for the purpose of implementing the \mvc\ semantics. Whenever mixing 
+implementation and application providers, care should be taken to ensure the correct 
+execution order using priorities.
 
-%\section{Annotation Inheritance}
-%\label{annotation_inheritance}
+\section{Annotation Inheritance}
+\label{annotation_inheritance}
 
-%\mvc\  applications MUST follow the annotation inheritance rules defined by \jaxrs\ 
-%\assertref{annotation-inheritance}. Namely, \mvc\ annotations may be used on methods of a 
-%super-class or an implemented interface. Such annotations are inherited 
-%by a corresponding sub-class or implementation class method provided that the method does 
-%not have any \mvc\ or \jaxrs\ annotations of its own: 
-%i.e., if a subclass or implementation method has any \mvc\ or \jaxrs\ annotations then all of the
-%annotations on the superclass or interface method are ignored.
+\mvc\  applications MUST follow the annotation inheritance rules defined by \jaxrs\ 
+\assertref{annotation-inheritance}. Namely, \mvc\ annotations may be used on methods of a 
+super-class or an implemented interface. Such annotations are inherited 
+by a corresponding sub-class or implementation class method provided that the method does 
+not have any \mvc\ or \jaxrs\ annotations of its own: 
+i.e., if a subclass or implementation method has any \mvc\ or \jaxrs\ annotations then all of the
+annotations on the superclass or interface method are ignored.
 
-%Annotations on a super-class take precedence over those on an implemented interface. The
-%precedence over conflicting annotations defined in multiple implemented interfaces is implementation dependent.
-%Note that, in accordance to the \jaxrs\ rules, inheritance of class or interface annotations 
-%is not supported. 
+Annotations on a super-class take precedence over those on an implemented interface. The
+precedence over conflicting annotations defined in multiple implemented interfaces is implementation dependent.
+Note that, in accordance to the \jaxrs\ rules, inheritance of class or interface annotations 
+is not supported. 
