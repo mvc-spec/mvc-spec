@@ -33,4 +33,6 @@ include::chapters/events.asciidoc[]
 
 include::chapters/applications.asciidoc[]
 
+include::chapters/engines.asciidoc[]
+
 include::chapters/annotations.asciidoc[]
