@@ -35,5 +35,4 @@ token results in a `ForbiddenException` thrown.
 |`UriRef`
 |Method
 |Defines a symbolic name for a controller method.
-
 |===
