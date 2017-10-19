@@ -1,3 +1,4 @@
+[appendix]
 [[annotation_table]]
 Summary of Annotations
 ----------------------

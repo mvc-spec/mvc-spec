@@ -88,7 +88,6 @@
                             <templateEngine>slim</templateEngine>
                             <headerFooter>true</headerFooter>
                             <compact>false</compact>
-                            <!--<outputDirectory>target/docbook/en-US</outputDirectory>-->
                             <attributes>
                                 <project-version>${project.version}</project-version>
                                 <numbered>true</numbered>
@@ -103,6 +102,7 @@
                 </executions>
                 <configuration>
                     <sourceDirectory>src/main/asciidoc</sourceDirectory>
+                    <sourceDocumentName>spec.asciidoc</sourceDocumentName>
                     <headerFooter>true</headerFooter>
                 </configuration>
             </plugin>
