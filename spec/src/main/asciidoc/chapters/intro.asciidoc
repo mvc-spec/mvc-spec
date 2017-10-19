@@ -12,7 +12,7 @@ typically handled by framework components with little or no interaction from app
 the majority of the controller logic is provided by the framework instead of the application.
 
 The API defined by this specification falls into the action-based category and is, therefore, not intended to be a replacement for
-component-based frameworks such as JavaServer Faces (JSF) , but simply a different approach to building Web applications on the Java EE platform.
+component-based frameworks such as JavaServer Faces (JSF) [<<jsf22,1>>], but simply a different approach to building Web applications on the Java EE platform.
 
 [[goals]]
 Goals
@@ -22,7 +22,7 @@ The following are goals of the API:
 
 [horizontal]
 Goal 1:: Leverage existing Java EE technologies.
-Goal 2:: Integrate with CDI [insert] and Bean Validation [insert].
+Goal 2:: Integrate with CDI [<<cdi11,2>>] and Bean Validation [<<bv11,3>>].
 Goal 3:: Define a solid core to build MVC applications without necessarily supporting all the features in its first version.
 Goal 4:: Explore layering on top of JAX-RS for the purpose of re-using its matching and binding layers.
 Goal 5:: Provide built-in support for JSPs and Facelets view languages.
@@ -75,10 +75,10 @@ Conventions
 ~~~~~~~~~~~
 
 The keywords `MUST', `MUST NOT', `REQUIRED', `SHALL', `SHALL NOT', `SHOULD', `SHOULD NOT', `RECOMMENDED', `MAY', and `OPTIONAL' 
-in this document are to be interpreted as described in RFC 2119 [insert].
+in this document are to be interpreted as described in RFC 2119 [<<rfc2119,4>>].
 
-Assertions defined by this specification are formatted as *\[[an-assertion]]* using a descriptive name as the label and are all listed in 
-<<annotation_table,Summary of Annotations>>,
+Assertions defined by this specification are formatted as *\[[an-assertion]]* using a descriptive name as the label and are all listed in the 
+<<annotation_table>> section.
 
 Java code and sample data fragments are formatted as shown below:
 
@@ -106,21 +106,24 @@ This is a note.
 Expert Group Members
 ~~~~~~~~~~~~~~~~~~~~
 
-This specification is being developed as part of JSR 371 under the Java Community Process. The following are the present expert group members:
+This specification is being developed as part of https://jcp.org/en/jsr/detail?id=371[JSR 371] under the Java Community Process. The following are the present expert group members:
 
-** Mathieu Ancelin (Individual Member)
-** Ivar Grimstad (Individual Member)
-** Neil Griffin (Liferay, Inc)
-** Joshua Wilson (RedHat)
-** Rodrigo Turini (Caelum)
-** Stefan Tilkov (innoQ Deutschland GmbH)
-** Guilherme de Azevedo Silveira (Individual Member)
-** Frank Caputo (Individual Member)
-** Christian Kaltepoth (ingenit GmbH & Co. KG)
-** Woong-ki Lee (TmaxSoft, Inc.)
-** Paul Nicolucci (IBM)
-** Kito D. Mann (Individual Member)
-** Rahman Usta (Individual Member)
+[cols="1,1"] 
+|===
+|Mathieu Ancelin (Individual Member)
+|Ivar Grimstad (Individual Member)
+|Neil Griffin (Liferay, Inc)
+|Joshua Wilson (RedHat)
+|Rodrigo Turini (Caelum)
+|Stefan Tilkov (innoQ Deutschland GmbH)
+|Guilherme de Azevedo Silveira (Individual Member)
+|Frank Caputo (Individual Member)
+|Christian Kaltepoth (ingenit GmbH & Co. KG)
+|Woong-ki Lee (TmaxSoft, Inc.)
+|Paul Nicolucci (IBM)
+|Kito D. Mann (Individual Member)
+|Rahman Usta (Individual Member)
+|===
 
 [[acks]]
 Acknowledgements

@@ -9,7 +9,7 @@ mechanism is based on CDI events that can be fired by implementations and observ
 Observers
 ~~~~~~~~~
 
-The package `javax.mvc.event` defines a number of event types that MUST be fired by implementations during the processing of a request [insert]. Implementations MAY
+The package `javax.mvc.event` defines a number of event types that MUST be fired by implementations during the processing of a request [<<mvc:event-firing>>]. Implementations MAY
 extend this set and also provide additional information on any of the events defined by this specification. The reader is referred to the
 implementation’s documentation for more information on event support.
 
@@ -40,7 +40,7 @@ Every event generated must include a unique ID whose getter is defined in `MvcEv
 additional information that is specific to the event; for example, the events shown in the example above allow applications to get information
 about the request URI and the resource (controller) selected.
 
-The chapter on <<view_engines,View Engines>> describes the algorithm used by implementations to select a specific view engine for processing; after a view engine is
+The <<view_engines>> section describes the algorithm used by implementations to select a specific view engine for processing; after a view engine is
 selected, the method `processView` is called. The events `BeforeProcessViewEvent` and `AfterProcessViewEvent` are fired around this call and can be observed in a similar manner:
 
 [source,java,numbered]
@@ -77,7 +77,7 @@ public class EventObserver {
 }
 ----
 
-For more information about the interaction between views and models, the reader is referred to the <<models,Models>> section.
+For more information about the interaction between views and models, the reader is referred to the <<models>> section.
 
 CDI events fired by implementations are _synchronous_, so it is recommended that applications carry out only simple tasks in their
 observer methods, avoiding long-running computations as well as blocking calls. For a complete list of events, the reader is referred to the

@@ -8,9 +8,9 @@ This chapter introduces the three components that comprise the
 [[controllers]]
 Controllers
 ~~~~~~~~~~~
-// TODO insert links
-An _MVC controller_ is a JAX-RS [insert] resource method decorated by `@Controller`. [insert] 
-If this annotation is applied to a class, then all resource methods in it are regarded as controllers [insert]. 
+
+An _MVC controller_ is a JAX-RS [<<jaxrs20,5>>] resource method decorated by `@Controller`. [<<mvc:controller>>] 
+If this annotation is applied to a class, then all resource methods in it are regarded as controllers [<<mvc:all-controllers>>]. 
 Using the `@Controller` annotation on a subset of methods defines a hybrid class in which certain methods are controllers and
 others are traditional JAX-RS resource methods.
 
@@ -35,7 +35,7 @@ be declared using `@Produces` just like in JAX-RS.
 
 A controller’s method return type determines how its result is processed:
 
-void:: A controller method that returns void is REQUIRED to be decorated by `@View` [insert].
+void:: A controller method that returns void is REQUIRED to be decorated by `@View` [<<mvc:void-controllers>>].
 String:: A string returned is interpreted as a view path.
 Viewable:: A `Viewable` is a class that encapsulates a view path as well as additional information related to its processing.
 _(Java Type)_:: The method `toString` is called on other Java types and the result interpreted as a view path.
@@ -79,26 +79,26 @@ public class HelloController {
 ----
 
 Controller methods that return a non-void type may also be decorated with `@View` as a way to specify a _default_ view for the controller. 
-The default view MUST be used only when such a non-void controller method returns a `null` value [insert].
+The default view MUST be used only when such a non-void controller method returns a `null` value [<<mvc:null-controllers>>].
 
 Note that, even though controller methods return types are restricted as explained above, MVC does not impose any restrictions on parameter types
 available to controller methods: i.e., all parameter types injectable in JAX-RS resources are also available in  controllers. 
-Likewise, injection of fields and properties is unrestricted and fully compatible with JAX-RS —modulo the restrictions explained in <<controller_instances,Controller Instances>>.
+Likewise, injection of fields and properties is unrestricted and fully compatible with JAX-RS —modulo the restrictions explained in the <<controller_instances>> section.
 
-Controller methods handle a HTTP request directly. Sub-resource locators as described in the JAX-RS Specification [insert] are not supported by MVC.
+Controller methods handle a HTTP request directly. Sub-resource locators as described in the JAX-RS Specification [<<jaxrs20,5>>] are not supported by MVC.
 
 [[controller_instances]]
 Controller Instances
 ^^^^^^^^^^^^^^^^^^^^
 
-Unlike in JAX-RS where resource classes can be native (created and managed by), CDI beans, managed beans or EJBs, MVC classes are REQUIRED to be CDI-managed beans only [insert]. 
+Unlike in JAX-RS where resource classes can be native (created and managed by JAX-RS), CDI beans, managed beans or EJBs, MVC classes are REQUIRED to be CDI-managed beans only [<<mvc:cdi-beans>>]. 
 It follows that a hybrid class that contains a mix of JAX-RS resource methods and MVC controllers must also be CDI managed.
 
-Like in JAX-RS, the default resource class instance lifecycle is _per-request_ [insert]. 
+Like in JAX-RS, the default resource class instance lifecycle is _per-request_ [<<mvc:per-request>>]. 
 That is, an instance of a controller class MUST be instantiated and initialized on every request. Implementations MAY support other
 lifecycles via CDI; the same caveats that apply to JAX-RS classes in other lifecycles applied to MVC classes 
 footnote:[In particular, CDI may need to create proxies when, for example, a per-request instance is as a member of a per-application instance.] 
-See [insert] for more information on lifecycles and their caveats.
+See [<<jaxrs20,5>>] for more information on lifecycles and their caveats.
 
 [[viewable]]
 Viewable
@@ -106,7 +106,7 @@ Viewable
 
 The `Viewable` class encapsulates information about a view as well as, optionally, information about how it should be processed. 
 More precisely, a `Viewable` instance may include references to `Models` and `ViewEngine` objects —for more information
-see Section [insert] and Chapter [insert], respectively. 
+see the <<models>> and <<view_engines>> sections, respectively. 
 `Viewable` defines traditional constructors for all these objects and it is, therefore, not a CDI-managed bean.
 
 The reader is referred to the Javadoc of the `Viewable` class for more information on its semantics.
@@ -152,7 +152,7 @@ public Response redirect() {
 ----
 
 Given the popularity of the POST-redirect-GET pattern, MVC implementations are REQUIRED to support view paths prefixed by 
-`redirect:` as a more concise way to trigger a client redirect [insert]. 
+`redirect:` as a more concise way to trigger a client redirect [<<mvc:redirect>>]. 
 Using this prefix, the controller shown above can be re-written as follows:
 
 [source,java,numbered]
@@ -284,7 +284,7 @@ In this example, the model is given the same name as that in the `@Named` annota
 
 As stated above, the use of typed CDI `@Named` beans is recommended over the `Models` map, but support for the latter may be necessary to integrate view
 engines that are not CDI aware. 
-For more information about view engines see Chapter [insert].
+For more information about view engines see the <<view_engines>> section.
 
 [[views]]
 Views
@@ -310,8 +310,8 @@ Here is the JSP page for the hello-world example:
 </html>
 ----
 
-In a JSP, model properties are accessible via EL [insert]. In the example above, the property `message` is read from the `greeting` model 
-whose name was either specified in a `@Named` annotation or used as a key in the `Models` map, depending on which controller from <<models, Modules>> triggered this view's processing.
+In a JSP, model properties are accessible via EL [<<el30,6>>]. In the example above, the property `message` is read from the `greeting` model 
+whose name was either specified in a `@Named` annotation or used as a key in the `Models` map, depending on which controller from the <<models>> section triggered this view's processing.
 
 Here is the corresponding Facelets example:
 
@@ -335,7 +335,7 @@ Building URIs in a View
 In views links and form actions require a URI. To avoid repeating the declarative mapping to URIs on controller 
 methods MVC provides a way to build URIs from the `MvcContext`:
 
-[source,html,numbered]
+[source,html]
 ----
 ${mvc.uri(’MyController#myMethod’ {’id’: 42, ’foo’: ’bar’})}
 ----

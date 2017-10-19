@@ -7,13 +7,13 @@
 
 {ownercaps} IS WILLING TO LICENSE THIS SPECIFICATION TO YOU ONLY UPON
 THE CONDITION THAT YOU ACCEPT ALL OF THE TERMS CONTAINED IN THIS LICENSE
-AGREEMENT (``AGREEMENT''). PLEASE READ THE TERMS AND CONDITIONS OF THIS
+AGREEMENT ("AGREEMENT"). PLEASE READ THE TERMS AND CONDITIONS OF THIS
 AGREEMENT CAREFULLY. BY DOWNLOADING THIS SPECIFICATION, YOU ACCEPT THE
 TERMS AND CONDITIONS OF THIS AGREEMENT. IF YOU ARE NOT WILLING TO BE
-BOUND BY THEM, SELECT THE ``DECLINE'' BUTTON AT THE BOTTOM OF THIS PAGE
+BOUND BY THEM, SELECT THE "DECLINE" BUTTON AT THE BOTTOM OF THIS PAGE
 AND THE DOWNLOADING PROCESS WILL NOT CONTINUE.
 
-Specification: JSR-371 MVC (``Specification'') +
+Specification: JSR-371 MVC ("Specification") +
 Version: 1.0 +
 Status: Pre-FCS Public Release +
 Release: Early Draft Release 2 +
@@ -54,24 +54,24 @@ interfaces, fields or methods within the Licensor Name Space other than
 those required/authorized by the Specification or Specifications being
 implemented;
 
-.. is clearly and prominently marked with the word ``UNTESTED'' or
-``EARLY ACCESS'' or ``INCOMPATIBLE'' or ``UNSTABLE'' or ``BETA'' in any
+.. is clearly and prominently marked with the word "UNTESTED" or
+"EARLY ACCESS" or "INCOMPATIBLE" or "UNSTABLE" or "BETA" in any
 list of available builds and in proximity to every link initiating its
 download, where the list or link is under Licensee’s control; and
 
 .. includes the following notice:
-``This is an implementation of an early-draft specification developed
+"This is an implementation of an early-draft specification developed
 under the Java Community Process (JCP) and is made available for testing
 and evaluation purposes only. The code is not compatible with any
-specification of the JCP.''
+specification of the JCP."
 
 . Distribute applications written to the Specification to third
 parties for their testing and evaluation use, provided that any such
 application includes the following notice:
-``This is an application written to interoperate with an early-draft
+"This is an application written to interoperate with an early-draft
 specification developed under the Java Community Process (JCP) and is
 made available for testing and evaluation purposes only. The code is not
-compatible with any specification of the JCP.''
+compatible with any specification of the JCP."
 
 The grant set forth above concerning your distribution of
 implementations of the Specification is contingent upon your agreement
@@ -90,8 +90,8 @@ immediately without notice from {owner} if you fail to comply with
 any provision of this license. Upon termination, you must cease use of
 or destroy the Specification.
 
-``Licensor Name Space'' means the public class or interface declarations
-whose names begin with ``java'', ``javax'', ``com.[Specification Lead]''
+"Licensor Name Space" means the public class or interface declarations
+whose names begin with "java", "javax", "com.[Specification Lead]"
 or their equivalents in any subsequent naming convention adopted through
 the Java Community Process, or any recognized successors or replacements
 thereof
@@ -106,7 +106,7 @@ countries.
 
 DISCLAIMER OF WARRANTIES
 
-THE SPECIFICATION IS PROVIDED ``AS IS'' AND IS EXPERIMENTAL AND MAY
+THE SPECIFICATION IS PROVIDED "AS IS" AND IS EXPERIMENTAL AND MAY
 CONTAIN DEFECTS OR DEFICIENCIES WHICH CANNOT OR WILL NOT BE CORRECTED BY
 {ownercaps}. {ownercaps} MAKES NO REPRESENTATIONS OR WARRANTIES,
 EITHER EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO, WARRANTIES OF
@@ -158,7 +158,7 @@ REPORT
 
 You may wish to report any ambiguities, inconsistencies or inaccuracies
 you may find in connection with your evaluation of the Specification
-(``Feedback''). To the extent that you provide {owner} with any
+("Feedback"). To the extent that you provide {owner} with any
 Feedback, you hereby: (i) agree that such Feedback is provided on a
 non-proprietary and non-confidential basis, and (ii) grant {owner}
 a perpetual, non-exclusive, worldwide, fully paid-up, irrevocable

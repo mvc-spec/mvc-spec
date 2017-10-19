@@ -34,7 +34,7 @@ embedding additional, difficult-to-guess data fields in requests that contain se
 obtained from the trusted site but unlike cookies it is never stored in the browser.
 
 MVC implementations provide CSRF protection using the `Csrf` object and the `@CsrfValid` annotation. The `Csrf` object is available to applications
-via the injectable `MvcContext` type or in EL as `mvc.csrf`. For more information about `MvcContext`, please refer to <<mvc_context,MVC Context>>.
+via the injectable `MvcContext` type or in EL as `mvc.csrf`. For more information about `MvcContext`, please refer to the <<mvc_context>> section.
 
 Applications may use the `Csrf` object to inject a hidden field in a form that can be validated upon submission. Consider the following JSP,
 
@@ -66,7 +66,7 @@ automatically inject a CSRF token as an HTTP header; the actual name of this hea
 
 Automatic validation is enabled by setting this property to `CsrfOptions.IMPLICIT`, in which case all post requests must include
 either an HTTP header or a hidden field with the correct token. Finally, if the property is set to `CsrfOptions.EXPLICIT` then application
-developers must annotate controllers using `@CsrfValid` to manually enable validation [insert] as shown in the following example.
+developers must annotate controllers using `@CsrfValid` to manually enable validation [<<mvc:csrf-options>>] as shown in the following example.
 
 [source,java,numbered]
 ----
@@ -88,7 +88,7 @@ public class CsrfController {
 ----
 
 MVC implementations are required to support CSRF validation of tokens for controllers annotated with `@POST` and consuming the media type
-`x-www-form-urlencoded` [insert]; other media types and scenarios may also be supported but are OPTIONAL.
+`x-www-form-urlencoded` [<<mvc:csrf-support>>]; other media types and scenarios may also be supported but are OPTIONAL.
 
 [[cross-site-scripting]]
 Cross-site Scripting

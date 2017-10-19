@@ -69,16 +69,16 @@ Moreover, exception mappers do not get access to the (partially valid) bound dat
 Validation Exceptions
 ~~~~~~~~~~~~~~~~~~~~~
 
-MVC provides an alternative exception handling mechanism that is specific for the use case described in <<exception_mappers, Exception Mappers>>.
+MVC provides an alternative exception handling mechanism that is specific for the use case described in the <<exception_mappers>> section.
 Rather than funnelling exception handling into a single location while providing no access to the bound data, controller methods may opt to act
 as exception handlers as well. In other words, controller methods can get called even if parameter validation fails as long as they declare
 themselves capable of handling errors.
 
 A controller class that, either directly or indirectly via inheritance, defines a field or a property of type `javax.mvc.binding.BindingResult` will have its controller methods
 called even if an error is encountered while validating parameters. Implementations MUST introspect the controller bean for a field or a property of this type to 
-determine the correct semantics; fields and property setters of this type MUST be annotated with `@Inject` to guarantee proper bean initialization [insert].
+determine the correct semantics; fields and property setters of this type MUST be annotated with `@Inject` to guarantee proper bean initialization [<<mvc:validation-result>>].
 
-Let us revisit the example from <<exception_mappers,Exception Mappers>>, this time using the controller method as an exception handler:
+Let us revisit the example from the <<exception_mappers>> section, this time using the controller method as an exception handler:
 
 [source,java,numbered]
 ----
