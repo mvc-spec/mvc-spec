@@ -89,6 +89,7 @@
                             <headerFooter>true</headerFooter>
                             <compact>false</compact>
                             <attributes>
+                                <pagenums/>
                                 <project-version>${project.version}</project-version>
                                 <numbered>true</numbered>
                                 <docinfo>true</docinfo>

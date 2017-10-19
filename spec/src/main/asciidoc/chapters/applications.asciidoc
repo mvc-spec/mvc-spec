@@ -15,7 +15,7 @@ also applies to an MVC application. Some MVC applications may be _hybrid_ and in
 The controllers and providers that make up an application are configured via an application-supplied subclass of `Application` from JAX-RS. An implementation 
 MAY provide alternate mechanisms for locating controllers, but as in JAX-RS, the use of an `Application` subclass is the only way to guarantee portability.
 
-All the rules described in the Servlet section of the JAX-RS Specification [insert] apply to MVC as well. This section recommends the use of
+All the rules described in the Servlet section of the http://jcp.org/en/jsr/detail?id=339[JAX-RS Specification] [<<jaxrs20,5>>] apply to MVC as well. This section recommends the use of
 the Servlet 3 framework pluggability mechanism and describes its semantics for the cases in which an `Application` subclass is present and absent. 
 
 The path in the application's URL space in which MVC controllers live must be specified either using the `@ApplicationPath` annotation on the application
@@ -32,7 +32,7 @@ MVC Context
 ~~~~~~~~~~~
 
 MVC applications can inject an instance of `MvcContext` to access configuration, security and path-related information. Instances of `MvcContext` are provided
-by implementations and are always in application scope [insert]. 
+by implementations and are always in application scope [<<mvc:mvc-context>>]. 
 For convenience, the `MvcContext` instance is also available using the name `mvc` in EL.
 
 As an example, a view can refer to a CSS file by using the context path available in the `MvcContext` object as follows:
@@ -56,7 +56,7 @@ implementation and application providers, care should be taken to ensure the cor
 Annotation Inheritance
 ~~~~~~~~~~~~~~~~~~~~~~
 
-MVC applications MUST follow the annotation inheritance rules defined by JAX-RS [insert]. Namely, MVC annotations may be used on methods of a 
+MVC applications MUST follow the annotation inheritance rules defined by JAX-RS [<<mvc:annotation-inheritance>>]. Namely, MVC annotations may be used on methods of a 
 super-class or an implemented interface. Such annotations are inherited by a corresponding sub-class or implementation class method provided that the method does 
 not have any MVC or JAX-RS annotations of its own: i.e., if a subclass or implementation method has any MVC or JAX-RS annotations then all of the
 annotations on the superclass or interface method are ignored.

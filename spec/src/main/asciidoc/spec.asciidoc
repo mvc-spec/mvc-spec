@@ -1,4 +1,4 @@
-= Model-View-Controller API: Comments to jsr371-users@googlegroups.com
+= MVC: Model-View-Controller API
 Santiago Pericas-Geertsen, Manfred Riem, Christian Kaltepoth, Ivar Grimstad
 Version 1.0 Early Draft (Second Edition), July 9, 2017
 
@@ -18,6 +18,10 @@ ifdef::backend-pdf[]
 :source-highlighter: rouge
 :rouge-style: googlecode
 endif::[]
+
+[NOTE]
+[.text-center]
+Comments to jsr371-users@googlegroups.com
 
 include::chapters/license.asciidoc[]
 

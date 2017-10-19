@@ -4,47 +4,69 @@ Summary of Assertions
 ---------------------
 [[mvc:controller]]
 *\[[mvc:controller]]* Controller methods are JAX-RS resource methods annotated with `@Controller`.
+
 [[mvc:all-controllers]]
 *\[[mvc:all-controllers]]* All resource methods in a class annotated with `@Controller` must be controllers.
+
 [[mvc:void-controllers]]
 *\[[mvc:void-controllers]]* Controller methods that return void must be annotated with `@View`.
+
 [[mvc:cdi-beans]]
 *\[[mvc:cdi-beans]]* MVC beans are managed by CDI.
+
 [[mvc:per-request]]
 *\[[mvc:per-request]]* Default scope for MVC beans is request scope.
+
 [[mvc:validation-result]]
 *\[[mvc:validation-result]]* If validation fails, controller methods must still be called if a `ValidationResult` field or property is defined.
+
 [[mvc:event-firing]]
 *\[[mvc:event-firing]]* All events in `javax.mvc.event` must be fired. See Javadoc for more information on each event in that package.
+
 [[mvc:builtin-engines]]
 *\[[mvc:builtin-engines]]* Implementations must provide support for JSPs and Facelets.
+
 [[mvc:extension-engines]]
 *\[[mvc:extension-engines]]* CDI beans that implement `javax.mvc.engine.ViewEngine` provide an ex- tension mechanism for view engines.
+
 [[mvc:selection-algorithm]]
-*\[[mvc:selection-algorithm]]* Implementations must use algorithm in Section 7.2 to select view engines.
+*\[[mvc:selection-algorithm]]* Implementations must use algorithm in the <<selection_algorithm>> section to select view engines.
+
 [[mvc:request-forward]]
 *\[[mvc:request-forward]]* Forward request for which no view engine is found.
+
 [[mvc:exception-wrap]]
 *\[[mvc:exception-wrap]]* Exceptions thrown during view processing must be wrapped.
+
 [[mvc:view-resolution]]
-*\[[mvc:view-resolution]]* Relative paths to views must be resolved as explained in Section 7.2.
+*\[[mvc:view-resolution]]* Relative paths to views must be resolved as explained in the <<selection_algorithm>> section.
+
 [[mvc:null-controllers]]
 *\[[mvc:null-controllers]]* The `@View` annotation is treated as a default value for any controller method that returns a null value.
+
 [[mvc:redirect]]
 *\[[mvc:redirect]]* Support HTTP redirects using the redirect: prefix and a controller return type of String.
+
 [[mvc:annotation-inheritance]]
 *\[[mvc:annotation-inheritance]]* Annotation inheritance is derived from JAX-RS and extended to MVC annotations.
+
 [[mvc:csrf-options]]
 *\[[mvc:csrf-options]]* CSRF support for configuration options defined by `Csrf.CsrfOptions`.
+
 [[mvc:csrf-support]]
 *\[[mvc:csrf-support]]* CSRF validation required only for controllers annotated by `@POST` and consuming the media type `x-www-form-urlencoded`.
+
 [[mvc:mvc-context]]
 *\[[mvc:mvc-context]]* Application-scoped `MvcContext` available for injection and as `mvc` in EL.
-[[mvc:request-locale-context]]*
+
+[[mvc:request-locale-context]]
 *\[[mvc:request-locale-context]]* The `MvcContext` must provide access to the current request locale.
+
 [[mvc:extension-resolvers]]
 *\[[mvc:extension-resolvers]]* CDI beans implementing `javax.mvc.locale.LocaleResolver` provide an extension mechanism for the request locale resolving algorithm.
+
 [[mvc:resolve-algorithm]]
-*\[[mvc:resolve-algorithm]]* The request locale must be resolved as described in Section 8.2.
+*\[[mvc:resolve-algorithm]]* The request locale must be resolved as described in the <<i18n_resolving_algorithm>> section.
+
 [[mvc:default-locale-resolver]]
-*\[[mvc:default-locale-resolver]]* Implementations must provide a default locale resolver as described in Section 8.3.
+*\[[mvc:default-locale-resolver]]* Implementations must provide a default locale resolver as described in the <<i18n_default_resolver>> section.
