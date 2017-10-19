@@ -1,5 +1,7 @@
-This specification is dual licensed under the JCP License and the Apache
-2.0 License.
+[colophon]
+== License
+
+This specification is dual licensed under the JCP License and the Apache 2.0 License.
 
 include::license_jcp.asciidoc[]
 

@@ -42,3 +42,5 @@ include::chapters/annotations.asciidoc[]
 include::chapters/changes.asciidoc[]
 
 include::chapters/assertions.asciidoc[]
+
+include::chapters/refs.asciidoc[]
