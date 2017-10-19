@@ -1,3 +1,4 @@
+[appendix]
 [[change-log]]
 Change Log
 ----------
