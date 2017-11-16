@@ -1,0 +1,153 @@
+[[exception_handling]]
+Exception Handling
+------------------
+
+This chapter discusses exception handling in the MVC API. Exception handling in MVC is based on the underlying mechanism provided by JAX-RS, 
+but with additional support for handling binding and validation exceptions that are common in MVC frameworks.
+
+[[exception_mappers]]
+Exception Mappers
+~~~~~~~~~~~~~~~~~
+
+The general exception handling mechanism in MVC controllers is identical to that defined for resource methods in the JAX-RS specification. 
+In a nutshell, applications can implement exception mapping providers for the purpose of converting exceptions to responses. 
+If an exception mapper is not found for a particular exception type, default rules apply that describe how to process the exception depending on whether it is checked
+or unchecked, and using additional rules for the special case of a `WebApplicationException` that includes a response. 
+The reader is referred to the JAX-RS specification for more information.
+
+Let us consider the case of a `ConstraintViolationException` that is thrown as a result of a bean validation failure:
+
+[source,java,numbered]
+----
+@Controller
+@Path("form")
+public class FormController {
+
+    @POST
+    public Response formPost(@Valid @BeanParam FormDataBean form) {
+        return Response.status(OK).entity("data.jsp").build();
+    }
+}
+----
+
+The method `formPost` defines a bean parameter of type `FormDataBean` which, for the sake of the example, 
+we assume includes validation constraints such as  `@Min(18)`, `@Size(min=1)`, etc. 
+The presence of `@Valid` triggers validation of the bean on every HTML form post; 
+if validation fails, a `ConstraintViolationException` (a subclass of `ValidationException`) is thrown.
+
+An application can handle the exception by including an exception mapper as follows:
+
+[source,java,numbered]
+----
+public class FormViolationMapper 
+                implements ExceptionMapper<ConstraintViolationException> {
+
+    @Inject
+    private ErrorDataBean error;
+
+    @Override
+    public Response toResponse(ConstraintViolationException e) {
+        final Set<ConstraintViolation<?>> set = e.getConstraintViolations();
+        if (!set.isEmpty()) {
+            // fill out ErrorDataBean ...
+        }
+        return Response.status(Response.Status.BAD_REQUEST)
+            .entity("error.jsp").build();
+    }
+}
+----
+
+This exception mapper updates an instance of `ErrorDataBean` and returns the `error.jsp` view (wrapped in a response as required by the method signature) with the
+intent to provide a human-friendly description of the exception.
+
+Even though using exception mappers is a convenient way to handle exceptions in general, there are cases in which finer control is necessary. 
+The mapper defined above will be invoked for all instances of `ConstraintViolationException` thrown in an application. Given that applications may include several
+form-post controllers, handling all exceptions in a single location makes it difficult to provide controller-specific customizations.
+Moreover, exception mappers do not get access to the (partially valid) bound data, or `FormDataBean` in the example above.
+
+[[validation_exceptions]]
+Validation Exceptions
+~~~~~~~~~~~~~~~~~~~~~
+
+MVC provides an alternative exception handling mechanism that is specific for the use case described in the <<exception_mappers>> section.
+Rather than funnelling exception handling into a single location while providing no access to the bound data, controller methods may opt to act
+as exception handlers as well. In other words, controller methods can get called even if parameter validation fails as long as they declare
+themselves capable of handling errors.
+
+A controller class that, either directly or indirectly via inheritance, defines a field or a property of type `javax.mvc.binding.BindingResult` will have its controller methods
+called even if an error is encountered while validating parameters. Implementations MUST introspect the controller bean for a field or a property of this type to 
+determine the correct semantics; fields and property setters of this type MUST be annotated with `@Inject` to guarantee proper bean initialization [<<mvc:validation-result>>].
+
+Let us revisit the example from the <<exception_mappers>> section, this time using the controller method as an exception handler:
+
+[source,java,numbered]
+----
+@Controller
+@Path("form")
+public class FormController {
+
+    @Inject
+    private BindingResult br;
+    
+    @Inject
+    private ErrorDataBean error;
+    
+    @POST
+    @ValidateOnExecution(type = ExecutableType.NONE)
+    public Response formPost(@Valid @BeanParam FormDataBean form) {
+        if (br.isFailed()) {
+            // fill out ErrorDataBean ...
+            return Response.status(BAD_REQUEST).entity("error.jsp").build();
+        }
+        return Response.status(OK).entity("data.jsp").build();
+    }
+}
+----
+
+The presence of the injection target for the field `br` indicates to an implementation that controller methods in this class can handle errors.
+As a result, methods in this class that validate parameters should call `br.isFailed()` to verify if validation errors were found. 
+footnote:[The `ValidateOnExecution` annotation is necessary to ensure that CDI and BV do not abort the invocation upon detecting a violation. Thus, to ensure the correct semantics, validation must be performed by the JAX-RS implementation before the method is called.]
+
+The class `BindingResult` provides methods to get detailed information about any violations found during validation. 
+Instances of this class are always in request scope; the reader is referred to the Javadoc for more information.
+
+As previously stated, properties of type `BindingResult` are also supported. Here is a modified version of the example in which a property is used instead:
+
+[source,java,numbered]
+----
+@Controller
+@Path("form")
+public class FormController {
+
+    private BindingResult br;
+    
+    public BindingResult getBr() {
+        return br;
+    }
+
+    @Inject
+    public void setBr(BindingResult br) {
+        this.br = br;
+    }
+    //...
+}
+----
+
+Note that the `@Inject` annotation has been moved from the field to the setter, thus ensuring the bean is properly initialized by CDI when it is
+created. Implementations MUST give precedence to a property (calling its getter and setter) over a field if both are present in the same class.
+
+[[binding_exceptions]]
+Binding Exceptions
+~~~~~~~~~~~~~~~~~~
+
+As suggested by its name, instances of `BindingResult` also track any binding errors that occur while mapping request parameters to Java types. 
+Binding errors are discovered even before validation takes place. An example of a binding error is that of a query parameter bound to an `int` whose value
+cannot be converted to that type.
+
+JAX-RS uses the notion of a parameter converter to provide extension points for these conversions; if none are specified for the type at hand, 
+a set of default parameter converters is available. Regardless of where the parameter converter is coming from, a failure to carry out a conversion
+results in an `IllegalArgumentException` thrown and, typically, a 500 error code returned to the client. As explained before, applications can provide an exception
+mapper for `IllegalArgumentException` but this may be insufficient when error recovery using controller-specific logic is required.
+
+Controllers can call the same `isFailed` method to check for binding errors —the method returns true if at least one error of either kind is found.
+Additional methods in the `BindingResult` type allow to get specific information related to binding errors. See the Javadoc for more information.
