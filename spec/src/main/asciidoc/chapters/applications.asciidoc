@@ -1,0 +1,65 @@
+[[applications]]
+Applications
+------------
+
+This chapter introduces the notion of an MVC application and explains how it relates to a JAX-RS application.
+
+[[mvc_applications]]
+MVC Applications
+~~~~~~~~~~~~~~~~
+
+An MVC application consists of one or more JAX-RS resources that are annotated with `@Controller` and, just like JAX-RS applications, zero or more providers. If no
+resources are annotated with `@Controller`, then the resulting application is a JAX-RS application instead. In general, everything that applies to a JAX-RS application
+also applies to an MVC application. Some MVC applications may be _hybrid_ and include a mix of MVC controllers and JAX-RS resource methods.
+
+The controllers and providers that make up an application are configured via an application-supplied subclass of `Application` from JAX-RS. An implementation 
+MAY provide alternate mechanisms for locating controllers, but as in JAX-RS, the use of an `Application` subclass is the only way to guarantee portability.
+
+All the rules described in the Servlet section of the http://jcp.org/en/jsr/detail?id=339[JAX-RS Specification] [<<jaxrs20,5>>] apply to MVC as well. This section recommends the use of
+the Servlet 3 framework pluggability mechanism and describes its semantics for the cases in which an `Application` subclass is present and absent. 
+
+The path in the application's URL space in which MVC controllers live must be specified either using the `@ApplicationPath` annotation on the application
+subclass or in the web.xml as part of the `url-pattern` element. MVC applications SHOULD use a non-empty path or pattern: i.e., _"/"_ or _"/*"_ 
+should be avoided whenever possible. 
+
+The reason for this is that MVC implementations often forward requests to the Servlet container, and the use of the aforementioned
+values may result in the unwanted processing of the forwarded request by the JAX-RS servlet once again. Most JAX-RS applications avoid using
+these values, and many use `"/resources"` or `"/resources/*"` by convention. For consistency, it is recommended for MVC applications to use
+these patterns as well.
+
+[[mvc_context]]
+MVC Context
+~~~~~~~~~~~
+
+MVC applications can inject an instance of `MvcContext` to access configuration, security and path-related information. Instances of `MvcContext` are provided
+by implementations and are always in application scope [<<mvc:mvc-context>>]. 
+For convenience, the `MvcContext` instance is also available using the name `mvc` in EL.
+
+As an example, a view can refer to a CSS file by using the context path available in the `MvcContext` object as follows:
+
+[source,html]
+----
+<link rel="stylesheet" type="text/css" href="${mvc.contextPath}/my.css">
+----
+
+For more information on security see the Chapter on <<security,Security>>; for more information 
+about the `MvcContext` in general, refer to the Javadoc for the type.
+
+[[providers_in_mvc]]
+Providers in MVC
+~~~~~~~~~~~~~~~~
+
+Implementations are free to use their own providers in order to modify the standard JAX-RS pipeline for the purpose of implementing the MVC semantics. Whenever mixing 
+implementation and application providers, care should be taken to ensure the correct execution order using priorities.
+
+[[annotation_inheritance]]
+Annotation Inheritance
+~~~~~~~~~~~~~~~~~~~~~~
+
+MVC applications MUST follow the annotation inheritance rules defined by JAX-RS [<<mvc:annotation-inheritance>>]. Namely, MVC annotations may be used on methods of a 
+super-class or an implemented interface. Such annotations are inherited by a corresponding sub-class or implementation class method provided that the method does 
+not have any MVC or JAX-RS annotations of its own: i.e., if a subclass or implementation method has any MVC or JAX-RS annotations then all of the
+annotations on the superclass or interface method are ignored.
+
+Annotations on a super-class take precedence over those on an implemented interface. The precedence over conflicting annotations defined in multiple implemented 
+interfaces is implementation dependent. Note that, in accordance to the JAX-RS rules, inheritance of class or interface annotations is not supported. 

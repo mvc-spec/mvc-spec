@@ -1,0 +1,50 @@
+= MVC: Model-View-Controller API
+Santiago Pericas-Geertsen, Manfred Riem, Christian Kaltepoth, Ivar Grimstad
+Version 1.0 Early Draft (Second Edition), July 9, 2017
+
+// Settings:
+:experimental:
+:reproducible:
+:icons: font
+:listing-caption: Listing
+:sectnums:
+:toc:
+:toclevels: 3
+ifdef::backend-pdf[]
+:sectanchors:
+:doctype: book
+:compat-mode:
+:pdf-page-size: Letter
+:source-highlighter: rouge
+:rouge-style: googlecode
+endif::[]
+
+[NOTE]
+[.text-center]
+Comments to jsr371-users@googlegroups.com
+
+include::chapters/license.asciidoc[]
+
+include::chapters/intro.asciidoc[]
+
+include::chapters/controllers.asciidoc[]
+
+include::chapters/validation.asciidoc[]
+
+include::chapters/security.asciidoc[]
+
+include::chapters/events.asciidoc[]
+
+include::chapters/applications.asciidoc[]
+
+include::chapters/engines.asciidoc[]
+
+include::chapters/i18n.asciidoc[]
+
+include::chapters/annotations.asciidoc[]
+
+include::chapters/changes.asciidoc[]
+
+include::chapters/assertions.asciidoc[]
+
+include::chapters/refs.asciidoc[]

@@ -1,0 +1,345 @@
+[[mvc]]
+Models, Views and Controllers
+-----------------------------
+
+This chapter introduces the three components that comprise the
+ architectural pattern: models, views and controllers.
+
+[[controllers]]
+Controllers
+~~~~~~~~~~~
+
+An _MVC controller_ is a JAX-RS [<<jaxrs20,5>>] resource method decorated by `@Controller`. [<<mvc:controller>>] 
+If this annotation is applied to a class, then all resource methods in it are regarded as controllers [<<mvc:all-controllers>>]. 
+Using the `@Controller` annotation on a subset of methods defines a hybrid class in which certain methods are controllers and
+others are traditional JAX-RS resource methods.
+
+A simple hello-world controller can be defined as follows:
+
+[source,java,numbered]
+----
+@Path("hello")
+public class HelloController {
+
+    @GET 
+    @Controller 
+    public String hello(){
+        return "hello.jsp";
+    }
+}
+----
+In this example, `hello` is a controller method that returns a path to a JavaServer Page (JSP). 
+The semantics of controller methods differ slightly from JAX-RS resource methods; in particular, a return type of `String` is
+interpreted as a view path rather than text content. Moreover, the default media type for a response is assumed to be `text/html`, but otherwise can
+be declared using `@Produces` just like in JAX-RS.
+
+A controller’s method return type determines how its result is processed:
+
+void:: A controller method that returns void is REQUIRED to be decorated by `@View` [<<mvc:void-controllers>>].
+String:: A string returned is interpreted as a view path.
+Viewable:: A `Viewable` is a class that encapsulates a view path as well as additional information related to its processing.
+_(Java Type)_:: The method `toString` is called on other Java types and the result interpreted as a view path.
+Response:: A JAX-RS `Response` whose entity’s type is one of the above.
+
+The following class defines equivalent controller methods:
+
+
+[source,java,numbered]
+----
+@Controller
+@Path("hello")
+public class HelloController {
+
+    @GET @Path("void")
+    @View("hello.jsp")
+    public void helloVoid() {
+    }
+
+    @GET @Path("string")
+    public String helloString() {
+        return "hello.jsp";
+    }
+
+    @GET @Path("viewable")
+    public Viewable helloViewable() {
+        return new Viewable("hello.jsp");
+    }
+
+    @GET @Path("response")
+    public Response helloResponse() {
+        return Response.status(Response.Status.OK)
+            .entity("hello.jsp").build();
+    }
+
+    @GET @Path("myview")
+    public MyView helloMyView() {
+        return new MyView("hello.jsp"); // toString() -> "hello.jsp"
+    }
+}
+----
+
+Controller methods that return a non-void type may also be decorated with `@View` as a way to specify a _default_ view for the controller. 
+The default view MUST be used only when such a non-void controller method returns a `null` value [<<mvc:null-controllers>>].
+
+Note that, even though controller methods return types are restricted as explained above, MVC does not impose any restrictions on parameter types
+available to controller methods: i.e., all parameter types injectable in JAX-RS resources are also available in  controllers. 
+Likewise, injection of fields and properties is unrestricted and fully compatible with JAX-RS —modulo the restrictions explained in the <<controller_instances>> section.
+
+Controller methods handle a HTTP request directly. Sub-resource locators as described in the JAX-RS Specification [<<jaxrs20,5>>] are not supported by MVC.
+
+[[controller_instances]]
+Controller Instances
+^^^^^^^^^^^^^^^^^^^^
+
+Unlike in JAX-RS where resource classes can be native (created and managed by JAX-RS), CDI beans, managed beans or EJBs, MVC classes are REQUIRED to be CDI-managed beans only [<<mvc:cdi-beans>>]. 
+It follows that a hybrid class that contains a mix of JAX-RS resource methods and MVC controllers must also be CDI managed.
+
+Like in JAX-RS, the default resource class instance lifecycle is _per-request_ [<<mvc:per-request>>]. 
+That is, an instance of a controller class MUST be instantiated and initialized on every request. Implementations MAY support other
+lifecycles via CDI; the same caveats that apply to JAX-RS classes in other lifecycles applied to MVC classes 
+footnote:[In particular, CDI may need to create proxies when, for example, a per-request instance is as a member of a per-application instance.] 
+See [<<jaxrs20,5>>] for more information on lifecycles and their caveats.
+
+[[viewable]]
+Viewable
+^^^^^^^^
+
+The `Viewable` class encapsulates information about a view as well as, optionally, information about how it should be processed. 
+More precisely, a `Viewable` instance may include references to `Models` and `ViewEngine` objects —for more information
+see the <<models>> and <<view_engines>> sections, respectively. 
+`Viewable` defines traditional constructors for all these objects and it is, therefore, not a CDI-managed bean.
+
+The reader is referred to the Javadoc of the `Viewable` class for more information on its semantics.
+
+[[response]]
+Response
+^^^^^^^^
+
+Returning a `Response` object gives applications full access to all the parts in a response, including the headers. 
+For example, an instance of `Response` can modify the HTTP status code upon encountering an error condition; 
+JAX-RS provides a fluent API to build responses as shown next.
+
+[source,java,numbered]
+----
+@GET
+@Controller
+public Response getById(@PathParam("id") String id) {
+    if (id.length() == 0) {
+        return Response.status(Response.Status.BAD_REQUEST)
+            .entity("error.jsp").build();
+    }
+    //...
+}
+----
+
+Direct access to `Response` enables applications to override content types, set character encodings, set cache control policies, trigger an HTTP redirect, etc. 
+For more information, the reader is referred to the Javadoc for the `Response` class.
+
+[[redirect]]
+Redirect and @RedirectScoped
+^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+As stated in the previous section, controllers can redirect clients by returning a `Response` instance using the JAX-RS API. 
+For example,
+
+[source,java,numbered]
+----
+@GET
+@Controller
+public Response redirect() {
+    return Response.seeOther(URI.create("see/here")).build();
+}
+----
+
+Given the popularity of the POST-redirect-GET pattern, MVC implementations are REQUIRED to support view paths prefixed by 
+`redirect:` as a more concise way to trigger a client redirect [<<mvc:redirect>>]. 
+Using this prefix, the controller shown above can be re-written as follows:
+
+[source,java,numbered]
+----
+@GET
+@Controller
+public String redirect() {
+    return "redirect:see/here";
+}
+----
+
+In either case, the HTTP status code returned is 302 and relative paths are resolved relative to the application path 
+–for more information please refer to the Javadoc for the `seeOther` method in JAX-RS. 
+It is worth noting that redirects require client cooperation (all browsers support it, but certain CLI clients may not) 
+and result in a completely new request-response cycle in order to access the intended controller.
+
+MVC applications can leverage CDI by defining beans in scopes such as request and session. 
+A bean in request scope is available only during the processing of a single request, while a bean in session scope is
+available throughout an entire web session which can potentially span tens or even hundreds of requests.
+
+Sometimes it is necessary to share data between the request that returns a redirect instruction and the new request that is triggered as a result. 
+That is, a scope that spans at most two requests and thus fits between a request and a session scope. 
+For this purpose, the MVC API defines a new CDI scope identified by the annotation `@RedirectScoped`.
+CDI beans in this scope are automatically created and destroyed by correlating a redirect and the request that follows. 
+The exact mechanism by which requests are correlated is implementation dependent, but popular techniques include URL rewrites and cookies.
+
+Let us assume that `MyBean` is annotated by `@RedirectScoped` and given the name `mybean`, and consider the following controller:
+
+[source,java,numbered]
+----
+@Controller
+@Path("submit")
+public class MyController {
+
+    @Inject
+    private MyBean myBean;
+
+    @POST
+    public String post() {
+        myBean.setValue("Redirect about to happen");
+        return "redirect:/submit";
+    }
+
+    @GET
+    public String get() {
+        return "mybean.jsp"; // mybean.value accessed in JSP
+    }
+}
+----
+
+The bean `myBean` is injected in the controller and available not only during the first `POST`, but also during the subsequent `GET` request,
+enabling _communication_ between the two interactions; the creation and destruction of the bean is under control of CDI, 
+and thus completely transparent to the application just like any other built-in scope.
+
+[[models]]
+Models
+~~~~~~
+
+MVC controllers are responsible for combining data models and views (templates) to produce web application pages. 
+This specification supports two kinds of models: the first is based on CDI `@Named` beans, 
+and the second on the `Models` interface which defines a map between names and objects.
+Support for the `Models` interface is mandatory for all view engines; 
+support for CDI `@Named` beans is OPTIONAL but highly RECOMMENDED. 
+Application developers are encouraged to use CDI-based models whenever supported by the view engine, 
+and thus take advantage of the existing CDI and EL integration on the platform.
+
+Let us now revisit our hello-world example, this time also showing how to update a model. Since we intend to show the two ways in which models
+can be used, we define the model as a CDI `@Named` bean in request scope even though this is only necessary for the CDI case:
+
+[source,java,numbered]
+----
+@Named("greeting")
+@RequestScoped
+public class Greeting {
+
+    private String message;
+
+    public String getMessage() { 
+        return message; 
+    }
+
+    public void setMessage(String message) { 
+        this.message = message; 
+    }
+    //...
+}
+----
+
+Given that the view engine for JSPs supports `@Named` beans, all the controller needs to do is fill out the model and return the view. 
+Access to the model is straightforward using CDI injection:
+
+[source,java,numbered]
+----
+@Path("hello")
+public class HelloController {
+
+    @Inject
+    private Greeting greeting;
+
+    @GET
+    @Controller
+    public String hello() {
+        greeting.setMessage("Hello there!");
+        return "hello.jsp";
+    }
+}
+----
+
+If the view engine that processes the view returned by the controller is not CDI enabled, then controllers can use the `Models` map instead:
+
+[source,java,numbered]
+----
+@Path("hello")
+public class HelloController {
+
+    @Inject
+    private Models models;
+
+    @GET
+    @Controller
+    public String hello() {
+        models.put("greeting", new Greeting("Hello there!"));
+        return "hello.jsp";
+    }
+}
+----
+
+In this example, the model is given the same name as that in the `@Named` annotation above, but using the injectable `Models` map instead.
+
+As stated above, the use of typed CDI `@Named` beans is recommended over the `Models` map, but support for the latter may be necessary to integrate view
+engines that are not CDI aware. 
+For more information about view engines see the <<view_engines>> section.
+
+[[views]]
+Views
+~~~~~
+
+A _view_, sometimes also referred to as a template, defines the structure of the output page and can refer to one or more models. 
+It is the responsibility of a _view engine_ to process (render) a view by extracting the information in the models and producing the output page.
+
+Here is the JSP page for the hello-world example:
+
+// TODO: HTML not rendering nicely. Needs a JSP renderer..
+[source,html,numbered]
+----
+<%@ page contentType="text/html; charset=UTF-8" language="java" %>
+<!doctype html>
+<html>
+    <head>
+        <title>Hello</title>
+    </head>
+    <body>
+        <h1>${greeting.message}</h1>                                
+    </body>
+</html>
+----
+
+In a JSP, model properties are accessible via EL [<<el30,6>>]. In the example above, the property `message` is read from the `greeting` model 
+whose name was either specified in a `@Named` annotation or used as a key in the `Models` map, depending on which controller from the <<models>> section triggered this view's processing.
+
+Here is the corresponding Facelets example:
+
+[source,html,numbered]
+----
+<!DOCTYPE html>
+<html lang="en" xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:head>
+        <title>Hello</title>
+    </h:head>
+    <h:body>
+        <h:outputText value="#{greeting.message}" /> 
+    </h:body>
+</html>
+----
+
+[[mvc_uri]]
+Building URIs in a View
+^^^^^^^^^^^^^^^^^^^^^^^
+
+In views links and form actions require a URI. To avoid repeating the declarative mapping to URIs on controller 
+methods MVC provides a way to build URIs from the `MvcContext`:
+
+[source,html]
+----
+${mvc.uri(’MyController#myMethod’ {’id’: 42, ’foo’: ’bar’})}
+----
+
+The controller method can either be identified by the simple name of the controller class and the method name separated by 
+`#(MyController#myMethod)` _or_ by the value of the `@UriRef` annotation.
+Please refer to the Javadocs of `MvcContext` for a full description of the different ways to provide parameter values for building URIs.

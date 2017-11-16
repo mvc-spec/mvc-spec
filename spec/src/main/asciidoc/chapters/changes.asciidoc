@@ -1,0 +1,25 @@
+[appendix]
+[[change-log]]
+Change Log
+----------
+
+[[changes-since-1.0-early-draft]]
+Changes Since 1.0 Early Draft
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Section <<binding_exceptions>> New section related to the use of `BindingResult` to handle binding errors.
+* Section <<validation_exceptions>> The type `ValidationResult` renamed to `BindingResult` after extending its scope to binding errors as well.
+* Section <<redirect>> Introduce the redirect scope and related annotation.
+* Section <<mvc_context>>: New section about injectable `MvcContext`.
+* Chapter <<security>>: New chapter about security.
+* Section <<faces_servlet>>: New section about and its configuration.
+* Chapter <<events>>: Updated based on changes to package.
+* Section <<annotation_inheritance>>: New section on annotation inheritance rules.
+* Section <<redirect>>: New section about HTTP redirects.
+* Section <<controllers>>: Allow  to be used for controller methods returning a value.
+* Section <<controllers>>: Controller methods can return arbitrary Java types on which is called, interpreting the result as a view path.
+* Section <<controllers>>: Updated return type sample using unique paths.
+* Section <<i18n>>: New chapter about internationalization.
+* Section <<controllers>>: Clarified that Sub-resource locators are not supported.
+* Appendix <<annotation_table>>: Added `UriRef` annotation.
+* Section <<controllers>>: Added a facelets example and a warning about the usage of in section <<view_engines>>.
