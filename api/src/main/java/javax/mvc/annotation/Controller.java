@@ -30,11 +30,10 @@ import static java.lang.annotation.ElementType.*;
  *
  * <p>A controller method that returns void is required to be annotated with
  * {@link javax.mvc.annotation.View}. A controller method can return a view path
- * as a {@link java.lang.String} or as part of a {@link javax.mvc.Viewable} or a
- * {@link javax.ws.rs.core.Response}. If a controller returns {@code null} and it is
- * annotated with {@link javax.mvc.annotation.View}, then the value of this
- * annotation is used as a default. If a controller method returns a
- * different Java type, its {@code toString} is called and the result
+ * as a {@link java.lang.String} or a {@link javax.ws.rs.core.Response}. If a controller
+ * returns {@code null} and it is annotated with {@link javax.mvc.annotation.View},
+ * then the value of this annotation is used as a default. If a controller method
+ * returns a different Java type, its {@code toString} is called and the result
  * interpreted as a view path.</p>
  *
  * <p>Example:
@@ -46,7 +45,6 @@ import static java.lang.annotation.ElementType.*;
  * </code></pre>
  *
  * @author Santiago Pericas-Geertsen
- * @see javax.mvc.Viewable
  * @see javax.mvc.annotation.View
  * @see javax.ws.rs.core.Response
  * @since 1.0
