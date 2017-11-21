@@ -137,7 +137,7 @@
                         <phase>validate</phase>
                         <configuration>
                             <target>
-                              <copy file="${basedir}/../spec/spec.pdf" tofile="${project.build.directory}/pdf/spec.pdf" overwrite="yes" />
+                              <copy file="../spec/target/generated-docs/spec.pdf" tofile="${project.build.directory}/pdf/spec.pdf" overwrite="yes" />
                             </target>
                         </configuration>
                         <goals>
