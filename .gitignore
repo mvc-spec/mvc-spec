@@ -1,6 +1,5 @@
 .idea
-api/.idea
-api/target
+target
 .DS_Store
 nbactions.xml
 nb-configuration.xml

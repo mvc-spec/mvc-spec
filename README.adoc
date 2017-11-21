@@ -21,27 +21,6 @@ API JavaDoc::
 
 == Generating the Specification
 
-=== Asciidoc
 run `mvn clean install` in the `spec` directory
 
 The PDF and HTML will be generated in `spec/target/generated-docs/`
-
-=== Latex (deprecated)
-The following Latex packages should be installed:
-
-* framed
-* moreverb
-* collection-fontsrecommended
-
-In case of Debian/Ubuntu you can install all required dependencies like this:
-
-```
-apt-get install make texlive-latex-base texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended
-```
-
-Generating the PDF:
-
-```
-make clean all
-```
-
