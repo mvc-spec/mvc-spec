@@ -37,7 +37,6 @@ A controller’s method return type determines how its result is processed:
 
 void:: A controller method that returns void is REQUIRED to be decorated by `@View` [<<mvc:void-controllers>>].
 String:: A string returned is interpreted as a view path.
-_(Java Type)_:: The method `toString` is called on other Java types and the result interpreted as a view path.
 Response:: A JAX-RS `Response` whose entity’s type is one of the above.
 
 The following class defines equivalent controller methods:
@@ -63,11 +62,6 @@ public class HelloController {
     public Response helloResponse() {
         return Response.status(Response.Status.OK)
             .entity("hello.jsp").build();
-    }
-
-    @GET @Path("myview")
-    public MyView helloMyView() {
-        return new MyView("hello.jsp"); // toString() -> "hello.jsp"
     }
 }
 ----
