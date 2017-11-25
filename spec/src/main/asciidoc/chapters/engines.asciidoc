@@ -32,20 +32,16 @@ public interface ViewEngine {
 Selection Algorithm
 ~~~~~~~~~~~~~~~~~~~
 
-As explained in the <<viewable>> section, a `Viewable` is an encapsulation for information that relates to a view. Every possible return type from a
-controller method is either a `Viewable` or can be turned into one by calling a constructor. Thus, the following algorithm assumes only `Viewable` as input.
+Implementations should perform the following steps while trying to find a suitable view engine for a view [<<mvc:selection-algorithm>>].
 
-Implementations should perform the following steps while trying to find a suitable view engine for a `Viewable` [<<mvc:selection-algorithm>>].
-
-. If calling `getViewEngine` on the `Viewable` returns a non-null value, return that view engine.
-. Otherwise, lookup all instances of `javax.mvc.engine.ViewEngine` available via CDI. footnote:[The `@Any` annotation in CDI can be used for this purpose.]
+. Lookup all instances of `javax.mvc.engine.ViewEngine` available via CDI. footnote:[The `@Any` annotation in CDI can be used for this purpose.]
 . Call `supports` on every view engine found in the previous step, discarding those that return `false`.
 . If the resulting set is empty, return `null`.
 . Otherwise, sort the resulting set in descending order of priority using the integer value from the `@Priority` annotation decorating the view engine class +
 or the default value `Priorities.DEFAULT` if the annotation is not present.
-. Return the first element in the resulting sorted set, that is, the view engine with the highest priority that supports the given `Viewable`.
+. Return the first element in the resulting sorted set, that is, the view engine with the highest priority that supports the given view.
 
-If a view engine that can process a `Viewable` is not found, as a fall-back attempt to process the view by other means, implementations are REQUIRED to forward 
+If a view engine that can process a view is not found, as a fall-back attempt to process the view by other means, implementations are REQUIRED to forward
 the request-response pair back to the Servlet container using a `RequestDispatcher` [<<mvc:request-forward>>].
 
 The `processView` method has all the information necessary for processing in the `ViewEngineContext`, including the view, a reference to `Models`, as well as the 
