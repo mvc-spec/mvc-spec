@@ -37,7 +37,6 @@ A controller’s method return type determines how its result is processed:
 
 void:: A controller method that returns void is REQUIRED to be decorated by `@View` [<<mvc:void-controllers>>].
 String:: A string returned is interpreted as a view path.
-Viewable:: A `Viewable` is a class that encapsulates a view path as well as additional information related to its processing.
 _(Java Type)_:: The method `toString` is called on other Java types and the result interpreted as a view path.
 Response:: A JAX-RS `Response` whose entity’s type is one of the above.
 
@@ -58,11 +57,6 @@ public class HelloController {
     @GET @Path("string")
     public String helloString() {
         return "hello.jsp";
-    }
-
-    @GET @Path("viewable")
-    public Viewable helloViewable() {
-        return new Viewable("hello.jsp");
     }
 
     @GET @Path("response")
@@ -99,17 +93,6 @@ That is, an instance of a controller class MUST be instantiated and initialized 
 lifecycles via CDI; the same caveats that apply to JAX-RS classes in other lifecycles applied to MVC classes 
 footnote:[In particular, CDI may need to create proxies when, for example, a per-request instance is as a member of a per-application instance.] 
 See [<<jaxrs20,5>>] for more information on lifecycles and their caveats.
-
-[[viewable]]
-Viewable
-^^^^^^^^
-
-The `Viewable` class encapsulates information about a view as well as, optionally, information about how it should be processed. 
-More precisely, a `Viewable` instance may include references to `Models` and `ViewEngine` objects —for more information
-see the <<models>> and <<view_engines>> sections, respectively. 
-`Viewable` defines traditional constructors for all these objects and it is, therefore, not a CDI-managed bean.
-
-The reader is referred to the Javadoc of the `Viewable` class for more information on its semantics.
 
 [[response]]
 Response
