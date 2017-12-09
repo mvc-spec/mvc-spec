@@ -19,6 +19,9 @@ ifdef::backend-pdf[]
 :rouge-style: googlecode
 endif::[]
 
+
+:mvc-api-source-dir: ../../../../../api/src/main/java/
+
 [NOTE]
 [.text-center]
 Comments to jsr371-users@googlegroups.com

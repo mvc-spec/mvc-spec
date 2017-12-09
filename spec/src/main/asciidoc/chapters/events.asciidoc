@@ -33,6 +33,16 @@ public class EventObserver {
 }
 ----
 
+[source,java,numbered]
+----
+include::{mvc-api-source-dir}javax/mvc/event/BeforeControllerEvent.java[lines=21..-1]
+----
+
+[source,java,numbered]
+----
+include::{mvc-api-source-dir}javax/mvc/event/AfterControllerEvent.java[lines=21..-1]
+----
+
 Observer methods in CDI are defined using the `@Observes` annotation on a parameter position. The class `EventObserver` is a CDI bean in application scope whose 
 methods `onBeforeController` and `onAfterController` are called before and after a controller is called.
 
@@ -56,6 +66,16 @@ public class EventObserver {
         // ...
     }
 }
+----
+
+[source,java,numbered]
+----
+include::{mvc-api-source-dir}javax/mvc/event/BeforeProcessViewEvent.java[lines=20..-1]
+----
+
+[source,java,numbered]
+----
+include::{mvc-api-source-dir}javax/mvc/event/AfterProcessViewEvent.java[lines=20..-1]
 ----
 
 To complete the example, let us assume that the information about the selected view engine needs to be conveyed to the client. To ensure that
