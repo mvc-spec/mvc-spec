@@ -52,11 +52,7 @@ the `javax.mvc.locale.LocaleResolver` interface which is defined like this:
 
 [source,java,numbered]
 ----
-public interface LocaleResolver {
-
-    Locale resolveLocale(LocaleResolverContext context);
-
-}
+include::{mvc-api-source-dir}javax/mvc/locale/LocaleResolver.java[lines=21..-1]
 ----
 
 There may be more than one locale resolver for a MVC application. Locale resolvers are discovered using CDI [<<mvc:extension-resolvers>>]. Every CDI bean implementing the
