@@ -125,6 +125,20 @@ This specification is being developed as part of https://jcp.org/en/jsr/detail?i
 |Rahman Usta (Individual Member)
 |===
 
+[[contributors]]
+Contributors
+~~~~~~~~~~~~
+
+The following are the contributors of the specification:
+
+[cols="1,1"]
+|===
+|Daniel Dias dos Santos
+|Florian Hirsch
+|Phillip Krüger
+|
+|===
+
 [[acks]]
 Acknowledgements
 ~~~~~~~~~~~~~~~~
