@@ -75,7 +75,7 @@ as exception handlers as well. In other words, controller methods can get called
 the error is defined accordingly.
 
 Parameter bindings such as `@FormParam` and `@QueryParam` may be annotated with `@MvcBinding` to enable MVC-specific binding rules. For MVC
-bindings a failed validation doesn't result in a `ConstraintViolationException` being thrown. Instead, the corresponding `ConstraintViolation`
+bindings a failed validation does not result in a `ConstraintViolationException` being thrown. Instead, the corresponding `ConstraintViolation`
 is stored in a request-scoped instance of `BindingResult` which can be injected into the controller. This allows the controller to handle the error
 instead of relying on a global error handling mechanism like a `ExceptionMapper`.
 
@@ -129,7 +129,7 @@ public class FormController {
 ----
 
 In this example details about validation errors will be available via `BindingResult` which is injected into the controller.
-Therefore, controller methods should call `br.isFailed()` to verify if validation errors were found and handle them accordantly.
+Therefore, controller methods should call `br.isFailed()` to verify if validation errors were found and handle them accordingly.
 footnote:[The `ValidateOnExecution` annotation is necessary to ensure that CDI and BV do not abort the invocation upon detecting a violation.]
 
 The class `BindingResult` provides methods to get detailed information about any violations found during validation. 
