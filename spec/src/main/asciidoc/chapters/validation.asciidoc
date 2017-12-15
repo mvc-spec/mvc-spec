@@ -128,9 +128,20 @@ public class FormController {
 }
 ----
 
-In this example details about validation errors will be available via `BindingResult` which is injected into the controller.
-Therefore, controller methods should call `br.isFailed()` to verify if validation errors were found and handle them accordingly.
-footnote:[The `ValidateOnExecution` annotation is necessary to ensure that CDI and BV do not abort the invocation upon detecting a violation.]
+[source,java,numbered]
+----
+include::{mvc-api-source-dir}javax/mvc/binding/BindingResult.java[lines=22..-1]
+----
+
+[source,java,numbered]
+----
+include::{mvc-api-source-dir}javax/mvc/binding/ValidationError.java[lines=20..-1]
+----
+
+
+The presence of the injection target for the field `br` indicates to an implementation that controller methods in this class can handle errors.
+As a result, methods in this class that validate parameters should call `br.isFailed()` to verify if validation errors were found. 
+footnote:[The `ValidateOnExecution` annotation is necessary to ensure that CDI and BV do not abort the invocation upon detecting a violation. Thus, to ensure the correct semantics, validation must be performed by the JAX-RS implementation before the method is called.]
 
 The class `BindingResult` provides methods to get detailed information about any violations found during validation. 
 Instances of this class are always in request scope; the reader is referred to the Javadoc for more information.
