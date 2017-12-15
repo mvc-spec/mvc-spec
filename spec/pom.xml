@@ -45,7 +45,11 @@
             <archive>jsr371-users@googlegroups.com</archive>
         </mailingList>
     </mailingLists>
-    
+
+    <properties>
+        <maven.deploy.skip>true</maven.deploy.skip>
+    </properties>
+
     <build>
         <plugins>
             <plugin>

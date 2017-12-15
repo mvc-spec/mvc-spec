@@ -1,14 +1,10 @@
 language: java
 jdk: oraclejdk8
 script:
-  - cd spec
   - mvn clean install -B -V
-  - cd ../api
-  - mvn clean install -B -V
-  - cd ..
 deploy:
   provider: script
-  script: cd api && mvn -s ../.travis/deploy-settings.xml -DperformRelease -DskipTests -Dgpg.skip=true deploy
+  script: mvn -s .travis/deploy-settings.xml -DperformRelease -DskipTests -Dgpg.skip=true deploy
   skip_cleanup: true
   on:
     repo: mvc-spec/mvc-spec
@@ -17,4 +13,3 @@ env:
   global:
     - secure: "iJFl971N9L3Bi1+2Z8DGexI+5VObaenykZB9+xohWEKSwzRjusa6/pmzk9+1Cm7RicwDubmx5kmcJvkZki5EF5wVP7lnuHodM2d281052qq/2TcaCN3/DmyGg1QuunCDvZpVWfu1e1F5KMwmp+brt6yaUQVPVN/ehKyT++niO7ZOlhjaB2Gn02bPwW8BZ8aEUt2mNPNwSOJ7R1g4yV+Ji7lleWTIMbJCa1bmg9YncHLyCU8un5vm/fok5fcmwZwrtnckbSU2fgIo8GDXKbblsHOSC2FeYfQFhFzMjh3+bhPhKHmQN7IG4puseNhsuJHGWAzK9hXdaacl+yZ+3WvPr7jf8E4ZL2RinCLaZwxkgHiImrm9Ay9FGMckyyobaPL3Uos1T2MBkhAIle9bh7GAw8GUYbZbCz+IUESTyloQn8Tg4Nspw7xna3W5uBzYySEBgJWKDnQBuWF9HOhJTzJunNWFfLrQEOXaQkyYks5+1VzMm2kKL10hJ55TwG/9zKA7AWspdeaK53ZdtzEfuVLfLymkpKZbtp872sdHbfveV8eeRwFoD4b8TF9K5oxMDQYzeP3N3zlpFsvXtjzQoAOxRE96n/1FiYTQQvbbiTf43lW/HI4QqyA6sV897zjdX5qhnTJT6iFZWxkCgt63Acnrz+CzMdFtL8CCEXnfJi/oIbY="
     - secure: "SPvU5ZPDcFpIGScO42HXWrGoUw/s8IIDJrj9Ne343ag7dNXq91Kd2sxYE3EyYiZVt/6YIneYv4adezzfD94xHL2apiaIRy+OzheG8ohgU5nSxra4jXi+gUQMjrmIybL6qyQe7rDxI6zkUvjB6h10i3bZw4a6lf1afqFwmrHST6dXBqIKgmOJ668nzmOqxozjQ1PfbgS1N5D5s5Oh0zncIq7dqP26fK3lrytHfq+cfjMolNeE99CXDwy2HJkFoYtmjCCrT6mi5WzVUGa2g3w1nidDGqIIOIWImu4GLdgaKCZb55XFbtgTNzzYf8SXvmgqTxqftCL8pyLk1vMX3dxctn/E9AdwkhpcXouCJkDvSJ2LznYAjX0CwDIAK34/T7Ad60sjBpZGK17QcNRkvqyG6A8434GKbaY8sRXSQJIyTHgPNqDYTuYKJDehiKY2xF5zeG3aVjHO5jzoeNNMlgeOT3tjGZAK6z5szDQXSInMozMHqdu93pHSBzKn17e3pVGuelOo42B1bxsPSHQVbSWXIl0n2fhNe1B2k5PI++D4qwEBJ0Cpe9nwGmUJ0SB1u5omSDOiW2+cueE7dsUV6KWLvXolD8h37fVOkbgpULbIsJXLcwYnjP3Zvj4pf9KEPPSi5vgBYCOh0R1bLDh2emzcMPWlHlvZaeRCucTT7eJ4etI="
-
