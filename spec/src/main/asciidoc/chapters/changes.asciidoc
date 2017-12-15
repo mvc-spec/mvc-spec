@@ -3,6 +3,22 @@
 Change Log
 ----------
 
+[[changes-since-1.0-early-draft-2]]
+Changes Since 1.0 Early Draft 2
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+
+* Section <<controllers>>: Remove support for returning arbitrary objects from controller methods
+* Section <<controllers>> and <<selection_algorithm>>: Removed Viewable class
+* Updated specification license
+* Section <<controllers>>: Added a facelets example and a warning about the usage of in section <<view_engines>>.
+* Section <<mvc_uri>>: Added support for generating URLs in the view
+* Section <<i18n>>: Simplify default locale resolver algorithm
+* Section <<models>>: Clarified that CDI support is only optional for view engines not implementations
+* Section <<security>>: Make CsrfOptions.EXPLICIT the default
+* Section <<i18n>>: New chapter about internationalization.
+* Section <<controllers>>: Clarified that Sub-resource locators are not supported.
+
+
 [[changes-since-1.0-early-draft]]
 Changes Since 1.0 Early Draft
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -19,7 +35,3 @@ Changes Since 1.0 Early Draft
 * Section <<controllers>>: Allow  to be used for controller methods returning a value.
 * Section <<controllers>>: Controller methods can return arbitrary Java types on which is called, interpreting the result as a view path.
 * Section <<controllers>>: Updated return type sample using unique paths.
-* Section <<i18n>>: New chapter about internationalization.
-* Section <<controllers>>: Clarified that Sub-resource locators are not supported.
-* Appendix <<annotation_table>>: Added `UriRef` annotation.
-* Section <<controllers>>: Added a facelets example and a warning about the usage of in section <<view_engines>>.
