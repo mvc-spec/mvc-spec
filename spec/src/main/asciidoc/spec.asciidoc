@@ -1,5 +1,5 @@
 = MVC: Model-View-Controller API
-Santiago Pericas-Geertsen, Manfred Riem, Christian Kaltepoth, Ivar Grimstad
+Ivar Grimstad, Christian Kaltepoth
 Version 1.0 Public Review, December 2017
 
 // Settings:
