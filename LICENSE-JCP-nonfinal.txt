@@ -6,7 +6,7 @@ Version:  1.0
 
 Status: Pre-FCS Public Release
 
-Release: Early Draft Release 2
+Release: Public Review Release
 
 Copyright 2017 Ivar Grimstad (ivar.grimstad@gmail.com)
 All rights reserved.

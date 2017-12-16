@@ -1,6 +1,6 @@
 = MVC: Model-View-Controller API
 Santiago Pericas-Geertsen, Manfred Riem, Christian Kaltepoth, Ivar Grimstad
-Version 1.0 Early Draft (Second Edition), July 9, 2017
+Version 1.0 Public Review, December 2017
 
 // Settings:
 :experimental:

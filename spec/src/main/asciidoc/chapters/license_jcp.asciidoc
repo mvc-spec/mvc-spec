@@ -16,7 +16,7 @@ AND THE DOWNLOADING PROCESS WILL NOT CONTINUE.
 Specification: JSR-371 MVC ("Specification") +
 Version: 1.0 +
 Status: Pre-FCS Public Release +
-Release: Early Draft Release 2 +
+Release: Public Review Release +
 Copyright (C) 2017 {owner} ({owneremail}) +
 All rights reserved.
 
