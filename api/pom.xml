@@ -379,6 +379,5 @@
     <scm>
         <connection>scm:git:https://github.com/mvc-spec/mvc-spec.git</connection>
         <developerConnection>scm:git:https://github.com/mvc-spec/mvc-spec.git</developerConnection>
-        <tag>javax.mvc-api-1.0-edr2</tag>
     </scm>
 </project>
