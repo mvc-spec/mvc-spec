@@ -23,11 +23,32 @@
     <version>1.0-SNAPSHOT</version>
     <packaging>bundle</packaging>
     <name>MVC ${project.version} API</name>
+    <description>MVC ${project.version} API</description>
     <url>https://www.mvc-spec.org/</url>
     <organization>
         <name>Ivar Grimstad</name>
         <url>https://www.mvc-spec.org/</url>
     </organization>
+    <licenses>
+        <license>
+            <name>Apache License 2.0</name>
+            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+        </license>
+    </licenses>
+    <developers>
+        <developer>
+            <id>ivargrimstad</id>
+            <email>ivar.grimstad@gmail.com</email>
+            <name>Ivar Grimstad</name>
+            <timezone>CET</timezone>
+        </developer>
+        <developer>
+            <id>chkal</id>
+            <email>christian@kaltepoth.de</email>
+            <name>Christian Kaltepoth</name>
+            <timezone>CET</timezone>
+        </developer>
+    </developers>
     <issueManagement>
         <system>github</system>
         <url>https://github.com/mvc-spec/mvc-spec/issues</url>
