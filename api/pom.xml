@@ -68,9 +68,11 @@
                 <version>1.2</version>
                 <configuration>
                     <spec>
-                        <nonFinal>false</nonFinal>
+                        <nonFinal>true</nonFinal>
                         <jarType>api</jarType>
-                        <specVersion>${spec_version}</specVersion>
+                        <specVersion>0.0</specVersion>
+                        <newSpecVersion>${spec_version}</newSpecVersion>
+                        <specBuild>01</specBuild>
                         <specImplVersion>${spec_impl_version}</specImplVersion>
                         <apiPackage>${api_package}</apiPackage>
                     </spec>
