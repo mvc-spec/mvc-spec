@@ -402,5 +402,6 @@
     <scm>
         <connection>scm:git:https://github.com/mvc-spec/mvc-spec.git</connection>
         <developerConnection>scm:git:https://github.com/mvc-spec/mvc-spec.git</developerConnection>
+        <url>https://github.com/mvc-spec/mvc-spec</url>
     </scm>
 </project>
