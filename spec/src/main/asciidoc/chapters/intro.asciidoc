@@ -102,6 +102,20 @@ Non-normative notes are formatted as shown below.
 [NOTE]
 This is a note.
 
+[[spec_leads]]
+Specification Leads
+~~~~~~~~~~~~~~~~~~~
+
+The following table lists the current and former specification leads:
+
+[cols="1,1"]
+|===
+|Ivar Grimstad (Individual Member)|(Jan 2017 - present)
+|Christian Kaltepoth (ingenit GmbH & Co. KG)|(May 2017 - present)
+|Santiago Pericas-Geertsen (Oracle)|(Aug 2014 - Jan 2017)
+|Manfred Riem (Oracle)|(Aug 2014 - Jan 2017)
+|===
+
 [[expert_group]]
 Expert Group Members
 ~~~~~~~~~~~~~~~~~~~~
@@ -123,6 +137,9 @@ This specification is being developed as part of https://jcp.org/en/jsr/detail?i
 |Paul Nicolucci (IBM)
 |Kito D. Mann (Individual Member)
 |Rahman Usta (Individual Member)
+|Florian Hirsch (adorsys GmbH & Co KG)
+|Santiago Pericas-Geertsen (Oracle)
+|Manfred Riem (Oracle)
 |===
 
 [[contributors]]
@@ -134,9 +151,7 @@ The following are the contributors of the specification:
 [cols="1,1"]
 |===
 |Daniel Dias dos Santos
-|Florian Hirsch
 |Phillip Krüger
-|
 |===
 
 [[acks]]

@@ -71,14 +71,38 @@ Validation Exceptions
 
 MVC provides an alternative exception handling mechanism that is specific for the use case described in the <<exception_mappers>> section.
 Rather than funnelling exception handling into a single location while providing no access to the bound data, controller methods may opt to act
-as exception handlers as well. In other words, controller methods can get called even if parameter validation fails as long as they declare
-themselves capable of handling errors.
+as exception handlers as well. In other words, controller methods can get called even if parameter validation fails as long as the binding that caused
+the error is defined accordingly.
 
-A controller class that, either directly or indirectly via inheritance, defines a field or a property of type `javax.mvc.binding.BindingResult` will have its controller methods
-called even if an error is encountered while validating parameters. Implementations MUST introspect the controller bean for a field or a property of this type to 
-determine the correct semantics; fields and property setters of this type MUST be annotated with `@Inject` to guarantee proper bean initialization [<<mvc:validation-result>>].
+Parameter bindings such as `@FormParam` and `@QueryParam` may be annotated with `@MvcBinding` to enable MVC-specific binding rules. For MVC
+bindings a failed validation does not result in a `ConstraintViolationException` being thrown. Instead, the corresponding `ConstraintViolation`
+is stored in a request-scoped instance of `BindingResult` which can be injected into the controller. This allows the controller to handle the error
+instead of relying on a global error handling mechanism like a `ExceptionMapper`.
 
-Let us revisit the example from the <<exception_mappers>> section, this time using the controller method as an exception handler:
+Let us revisit the example from the <<exception_mappers>> section, this time using `@MvcBinding` for the data binding:
+
+[source,java,numbered]
+----
+public class FormDataBean {
+
+    @MvcBinding
+    @FormParam("age")
+    @Min(18)
+    private long age;
+
+    public long getAge() {
+        return age;
+    }
+
+    public void setAge(long age) {
+        this.age = age;
+    }
+
+}
+----
+
+Given that the property `age` is annotated with `@MvcBinding`, the controller can act as the exception handler by handling
+the error itself:
 
 [source,java,numbered]
 ----
@@ -151,7 +175,7 @@ created. Implementations MUST give precedence to a property (calling its getter 
 Binding Exceptions
 ~~~~~~~~~~~~~~~~~~
 
-As suggested by its name, instances of `BindingResult` also track any binding errors that occur while mapping request parameters to Java types. 
+As suggested by its name, instances of `BindingResult` also track binding errors of MVC bindings that occur while mapping request parameters to Java types.
 Binding errors are discovered even before validation takes place. An example of a binding error is that of a query parameter bound to an `int` whose value
 cannot be converted to that type.
 
