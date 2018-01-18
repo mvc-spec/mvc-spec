@@ -125,7 +125,7 @@ public interface MvcContext {
      *
      * <p>This method assumes that there is no parameter in the URI-template.</p>
      *
-     * <p>For example:</p>
+     * <p>For example in JSP:</p>
      * <pre><code>${mvc.uri('MyController#myMethod')}</code></pre>
      *
      * @param identifier for the controller method.
@@ -150,8 +150,8 @@ public interface MvcContext {
      * Please note that the map must contain values for all path parameters
      * as they are required for building the URI. All other parameters are optional.</p>
      * 
-     * <p>For example:</p>
-     * <pre><code>${mvc.uri('MyController#myMethod' {'foo': 'bar', 'id': 42})}</code></pre>
+     * <p>For example in JSP:</p>
+     * <pre><code>${mvc.uri('MyController#myMethod', {'foo': 'bar', 'id': 42})}</code></pre>
      *
      * @param identifier for the controller method.
      * @param params a map of path-, query- and matrix parameters.
