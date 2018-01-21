@@ -310,11 +310,11 @@ Building URIs in a View
 ^^^^^^^^^^^^^^^^^^^^^^^
 
 In views links and form actions require a URI. To avoid repeating the declarative mapping to URIs on controller 
-methods MVC provides a way to build URIs from the `MvcContext`:
+methods MVC provides a way to build URIs from the `MvcContext`, as an example in JSP:
 
 [source,html]
 ----
-${mvc.uri(’MyController#myMethod’ {’id’: 42, ’foo’: ’bar’})}
+${mvc.uri('MyController#myMethod', {'id': 42, 'foo': 'bar'})}
 ----
 
 The controller method can either be identified by the simple name of the controller class and the method name separated by 
