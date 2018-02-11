@@ -71,7 +71,7 @@ The default view MUST be used only when such a non-void controller method return
 
 Note that, even though controller methods return types are restricted as explained above, MVC does not impose any restrictions on parameter types
 available to controller methods: i.e., all parameter types injectable in JAX-RS resources are also available in  controllers. 
-Likewise, injection of fields and properties is unrestricted and fully compatible with JAX-RS —modulo the restrictions explained in the <<controller_instances>> section.
+Likewise, injection of fields and properties is unrestricted and fully compatible with JAX-RS — module the restrictions explained in the <<controller_instances>> section.
 
 Controller methods handle a HTTP request directly. Sub-resource locators as described in the JAX-RS Specification [<<jaxrs20,5>>] are not supported by MVC.
 
