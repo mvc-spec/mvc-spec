@@ -141,7 +141,7 @@ public String redirect() {
 }
 ----
 
-In either case, the HTTP status code returned is 302 and relative paths are resolved relative to the application path 
+In either case, the HTTP status code returned is 303 (See Other) and relative paths are resolved relative to the application path 
 –for more information please refer to the Javadoc for the `seeOther` method in JAX-RS. 
 It is worth noting that redirects require client cooperation (all browsers support it, but certain CLI clients may not) 
 and result in a completely new request-response cycle in order to access the intended controller.
