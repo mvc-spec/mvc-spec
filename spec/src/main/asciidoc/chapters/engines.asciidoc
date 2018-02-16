@@ -72,5 +72,7 @@ the following entry mapping the extension `*.xhtml` as shown next:
 </servlet-mapping>
 ----
 
+Alternatively to a `web.xml` deployment descriptor an empty `faces-config.xml` file can be placed in the `WEB-INF` folder to enable Facelets support.
+
 It is worth noting that if you opt to use Facelets as a view technology for your MVC application, regular JSF post-backs will not be processed by the MVC runtime. 
 The usage of `<h:form />` and depending form components like `<h:inputText />` is not recommended as they would be the entry point to a real JSF application.
