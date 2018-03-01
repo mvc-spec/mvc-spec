@@ -16,21 +16,21 @@
 package javax.mvc.engine;
 
 import javax.mvc.Models;
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.Configuration;
+import javax.ws.rs.core.MediaType;
+import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.UriInfo;
+import java.io.OutputStream;
 
 /**
  * <p>Contextual data used by a {@link javax.mvc.engine.ViewEngine} to process a view.
  * This includes the view name, the models instance and the request and response
- * objects from the Servlet container, among other data.</p>
+ * objects from the container, among other data.</p>
  *
  * @author Santiago Pericas-Geertsen
+ * @author Christian Kaltepoth
  * @see javax.mvc.engine.ViewEngine
- * @see javax.servlet.http.HttpServletRequest
- * @see javax.servlet.http.HttpServletResponse
  * @since 1.0
  */
 public interface ViewEngineContext {
@@ -50,19 +50,56 @@ public interface ViewEngineContext {
     Models getModels();
 
     /**
-     * Returns HTTP request object from the Servlet container.
+     * Returns the HTTP request object from the container. The type of the request object
+     * depends on the environment. In a servlet environment you can use this method to get
+     * the <code>HttpServletRequest</code> object.
      *
+     * @param type The expected type of the HTTP request object.
+     * @param <T>  The expected type of the HTTP request object
      * @return HTTP request object.
      */
-    HttpServletRequest getRequest();
+    <T> T getRequest(Class<T> type);
 
     /**
-     * Returns HTTP response object from the servlet container. The underlying
-     * output stream should be used to write the result of processing a view.
+     * <p>Returns the HTTP response object from the container. The type of the response object
+     * depends on the environment. In a servlet environment you can use this method to get
+     * the <code>HttpServletResponse</code> object.</p>
      *
+     * <p>Please note that you should generally prefer using {@link #getOutputStream()}
+     * and {@link #getResponseHeaders()} to write the result of processing the view, because
+     * these methods are guaranteed to work in all supported environments.</p>
+     *
+     * @param type The expected type of the HTTP response object.
+     * @param <T>  The expected type of the HTTP request object
      * @return HTTP response object.
      */
-    HttpServletResponse getResponse();
+    <T> T getResponse(Class<T> type);
+
+    /**
+     * Get the mutable response headers multivalued map. This map can be modified
+     * to change the HTTP response headers. Please note that changing the map will only have
+     * an effect on the headers if modifications are performed before data is written
+     * to the output stream obtained from {@link #getOutputStream()}.
+     *
+     * @return mutable multivalued map of response headers.
+     */
+    MultivaluedMap<String, Object> getResponseHeaders();
+
+    /**
+     * The output stream which should be used to write the result of processing a view.
+     *
+     * @return The output stream
+     */
+    OutputStream getOutputStream();
+
+    /**
+     * The media type to use for the response. Please note that {@link ViewEngine}
+     * implementations should respect the <i>charset</i> parameter of the media type when
+     * writing data to the output stream obtained from {@link #getOutputStream()}.
+     *
+     * @return The media type
+     */
+    MediaType getMediaType();
 
     /**
      * Returns the {@link javax.ws.rs.core.UriInfo} instance containing information

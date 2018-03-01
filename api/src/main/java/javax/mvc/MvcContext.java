@@ -57,7 +57,6 @@ public interface MvcContext {
      * <p>For example, given the URI {@code http://host:port/myapp/resources/hello},
      * this method returns {@code /myapp}.</p>
      *
-     * @see javax.servlet.ServletContext#getContextPath()
      * @return the application's context path.
      */
     String getContextPath();
