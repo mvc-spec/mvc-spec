@@ -90,6 +90,11 @@ public class CsrfController {
 MVC implementations are required to support CSRF validation of tokens for controllers annotated with `@POST` and consuming the media type
 `x-www-form-urlencoded` [<<mvc:csrf-support>>]; other media types and scenarios may also be supported but are OPTIONAL.
 
+If CSRF protection is enabled for a controller method and the CSRF validation fails (because the token is either missing or invalid),
+the MVC implementation MUST throw a `javax.mvc.security.CsrfValidationException`.
+The implementation MUST provide a default exception mapper for this exception which handles it by responding with a 403 (Forbidden) status code.
+Applications MAY provide a custom exception mapper for `CsrfValidationException` to change this default behavior.
+
 [[cross-site-scripting]]
 Cross-site Scripting
 ~~~~~~~~~~~~~~~~~~~~
