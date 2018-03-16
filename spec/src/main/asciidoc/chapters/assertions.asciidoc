@@ -2,8 +2,12 @@
 [[assertions]]
 Summary of Assertions
 ---------------------
+
+[[list-of-assertions]]
+List of all Assertions
+~~~~~~~~~~~~~~~~~~~~~~
 [[mvc:controller]]
-*\[[mvc:controller]]* Controller methods are JAX-RS resource methods annotated with `@Controller`.
+*\[[mvc:controller]]* [tck-testable tck-test-id-Controller_Annotation]#Controller methods are JAX-RS resource methods annotated with `@Controller`.#
 
 [[mvc:all-controllers]]
 *\[[mvc:all-controllers]]* All resource methods in a class annotated with `@Controller` must be controllers.
