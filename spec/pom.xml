@@ -126,6 +126,7 @@
             <plugin>
                 <groupId>org.codehaus.mojo</groupId>
                 <artifactId>xml-maven-plugin</artifactId>
+                <version>1.0.1</version>
                 <executions>
                     <execution>
                         <goals>
@@ -136,8 +137,8 @@
                 <configuration>
                     <transformationSets>
                         <transformationSet>
-                            <dir>target/generated-docs</dir>
-                            <outputDir>target/generated-docs/tck-audit</outputDir>
+                            <dir>${project.build.directory}/generated-docs</dir>
+                            <outputDir>${project.build.directory}/tck-audit</outputDir>
                             <includes>spec.xml</includes>
                             <fileMappers>
                                 <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.RegExpFileMapper">
@@ -149,13 +150,11 @@
                             <parameters>
                                 <parameter>
                                     <name>currentDate</name>
-                                    <value>${NOW}</value>
+                                    <value>${maven.build.timestamp}</value>
                                 </parameter>
-                            </parameters>
-                            <parameters>
                                 <parameter>
                                     <name>revision</name>
-                                    <value>1.0</value>
+                                    <value>${project.version}</value>
                                 </parameter>
                             </parameters>
                         </transformationSet>
