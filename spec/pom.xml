@@ -146,7 +146,7 @@
                                     <replacement>tck-audit.xml</replacement>
                                 </fileMapper>
                             </fileMappers>
-                            <stylesheet>src/main/resources/tck-audit.xsl</stylesheet>
+                            <stylesheet>src/main/xsl/tck-audit.xsl</stylesheet>
                             <parameters>
                                 <parameter>
                                     <name>currentDate</name>
