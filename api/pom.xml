@@ -160,7 +160,10 @@
                         <phase>validate</phase>
                         <configuration>
                             <target>
-                              <copy file="../spec/target/generated-docs/spec.pdf" tofile="${project.build.directory}/pdf/spec.pdf" overwrite="yes" />
+                                <copy todir="${project.build.directory}/spec/" overwrite="yes">
+                                    <fileset dir="../spec/target/generated-docs/" includes="spec.pdf"/>
+                                    <fileset dir="../spec/target/tck-audit/" includes="tck-audit.xml"/>
+                                </copy>
                             </target>
                         </configuration>
                         <goals>
@@ -183,9 +186,14 @@
                         <configuration>
                             <artifacts>
                                 <artifact>
-                                    <file>${project.build.directory}/pdf/spec.pdf</file>
+                                    <file>${project.build.directory}/spec/spec.pdf</file>
                                     <type>pdf</type>
                                     <classifier>spec</classifier>
+                                </artifact>
+                                <artifact>
+                                    <file>${project.build.directory}/spec/tck-audit.xml</file>
+                                    <type>xml</type>
+                                    <classifier>audit</classifier>
                                 </artifact>
                             </artifacts>
                         </configuration>

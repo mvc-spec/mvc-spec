@@ -24,7 +24,7 @@
     <packaging>pom</packaging>
     <name>MVC ${project.version} Spec</name>
     <url>https://www.mvc-spec.org/</url>
-    
+
     <organization>
         <name>Ivar Grimstad</name>
         <url>https://www.mvc-spec.org/</url>
@@ -34,7 +34,7 @@
         <system>github</system>
         <url>https://github.com/mvc-spec/mvc-spec/issues</url>
     </issueManagement>
-    
+
     <mailingLists>
         <mailingList>
             <name>JSR371 Expert Group List</name>
@@ -100,15 +100,65 @@
                                 <experimental>false</experimental>
                                 <toc>true</toc>
                             </attributes>
-                            
                         </configuration>
-                        
+                    </execution>
+                    <execution>
+                        <id>output-docbook</id>
+                        <phase>generate-resources</phase>
+                        <goals>
+                            <goal>process-asciidoc</goal>
+                        </goals>
+                        <configuration>
+                            <backend>docbook</backend>
+                            <doctype>article</doctype>
+                            <attributes>
+                                <imagesdir>images</imagesdir>
+                            </attributes>
+                        </configuration>
                     </execution>
                 </executions>
                 <configuration>
                     <sourceDirectory>src/main/asciidoc</sourceDirectory>
                     <sourceDocumentName>spec.asciidoc</sourceDocumentName>
                     <headerFooter>true</headerFooter>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.codehaus.mojo</groupId>
+                <artifactId>xml-maven-plugin</artifactId>
+                <version>1.0.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>transform</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <transformationSets>
+                        <transformationSet>
+                            <dir>${project.build.directory}/generated-docs</dir>
+                            <outputDir>${project.build.directory}/tck-audit</outputDir>
+                            <includes>spec.xml</includes>
+                            <fileMappers>
+                                <fileMapper implementation="org.codehaus.plexus.components.io.filemappers.RegExpFileMapper">
+                                    <pattern>spec.xml</pattern>
+                                    <replacement>tck-audit.xml</replacement>
+                                </fileMapper>
+                            </fileMappers>
+                            <stylesheet>src/main/xsl/tck-audit.xsl</stylesheet>
+                            <parameters>
+                                <parameter>
+                                    <name>currentDate</name>
+                                    <value>${maven.build.timestamp}</value>
+                                </parameter>
+                                <parameter>
+                                    <name>revision</name>
+                                    <value>${project.version}</value>
+                                </parameter>
+                            </parameters>
+                        </transformationSet>
+                    </transformationSets>
                 </configuration>
             </plugin>
         </plugins>
