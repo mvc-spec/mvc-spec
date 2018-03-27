@@ -1,4 +1,4 @@
-= MVC: Model-View-Controller API
+= MVC 1.0: Model-View-Controller Specification
 Ivar Grimstad, Christian Kaltepoth
 Version 1.0 Public Review, December 2017
 
@@ -21,10 +21,6 @@ endif::[]
 
 
 :mvc-api-source-dir: ../../../../../api/src/main/java/
-
-[NOTE]
-[.text-center]
-Comments to jsr371-users@googlegroups.com
 
 include::chapters/license.asciidoc[]
 
