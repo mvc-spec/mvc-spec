@@ -273,7 +273,7 @@ Here is the JSP page for the hello-world example:
 
 [source,html,numbered]
 ----
-<!doctype html>
+<!DOCTYPE html>
 <html>
     <head>
         <title>Hello</title>
