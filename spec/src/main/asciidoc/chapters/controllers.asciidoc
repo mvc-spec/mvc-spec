@@ -61,7 +61,8 @@ public class HelloController {
     @GET @Path("response")
     public Response helloResponse() {
         return Response.status(Response.Status.OK)
-            .entity("hello.jsp").build();
+            .entity("hello.jsp")
+            .build();
     }
 }
 ----
@@ -83,9 +84,9 @@ Unlike in JAX-RS where resource classes can be native (created and managed by J
 It follows that a hybrid class that contains a mix of JAX-RS resource methods and MVC controllers must also be CDI managed.
 
 Like in JAX-RS, the default resource class instance lifecycle is _per-request_ [<<mvc:per-request>>]. 
-That is, an instance of a controller class MUST be instantiated and initialized on every request. Implementations MAY support other
-lifecycles via CDI; the same caveats that apply to JAX-RS classes in other lifecycles applied to MVC classes 
-footnote:[In particular, CDI may need to create proxies when, for example, a per-request instance is as a member of a per-application instance.] 
+Implementations MAY support other
+lifecycles via CDI; the same caveats that apply to JAX-RS classes in other lifecycles applied to MVC classes.
+In particular, CDI may need to create proxies when, for example, a per-request instance is as a member of a per-application instance.
 See [<<jaxrs20,5>>] for more information on lifecycles and their caveats.
 
 [[response]]
@@ -103,7 +104,8 @@ JAX-RS provides a fluent API to build responses as shown next.
 public Response getById(@PathParam("id") String id) {
     if (id.length() == 0) {
         return Response.status(Response.Status.BAD_REQUEST)
-            .entity("error.jsp").build();
+            .entity("error.jsp")
+            .build();
     }
     //...
 }
@@ -141,7 +143,7 @@ public String redirect() {
 }
 ----
 
-In either case, relative paths are resolved relative to the application path - for more information please refer to the Javadoc for the `seeOther` method in JAX-RS.
+In either case, relative paths are resolved relative to the JAX-RS application path - for more information please refer to the Javadoc for the `seeOther` method.
 It is worth noting that redirects require client cooperation (all browsers support it, but certain CLI clients may not) 
 and result in a completely new request-response cycle in order to access the intended controller.
 If a controller returns a `redirect:` view path, MVC implementations SHOULD use the 303 (See other) status code for the redirect, but MAY prefer 302 (Found) if HTTP 1.0 compatibility is required.
