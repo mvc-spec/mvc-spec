@@ -21,11 +21,10 @@ Goals
 The following are goals of the API:
 
 [horizontal]
-Goal 1:: Leverage existing Java EE technologies.
-Goal 2:: Integrate with CDI [<<cdi11,2>>] and Bean Validation [<<bv11,3>>].
-Goal 3:: Define a solid core to build MVC applications without necessarily supporting all the features in its first version.
-Goal 4:: Explore layering on top of JAX-RS for the purpose of re-using its matching and binding layers.
-Goal 5:: Provide built-in support for JSPs and Facelets view languages.
+Goal 1:: Leverage existing Java EE technologies like CDI [<<cdi11,2>>] and Bean Validation [<<bv11,3>>].
+Goal 2:: Define a solid core to build MVC applications without necessarily supporting all the features in its first version.
+Goal 3:: Build on top of JAX-RS for the purpose of re-using its matching and binding layers.
+Goal 4:: Provide built-in support for JSPs and Facelets view languages.
 
 [[non_goals]]
 Non-Goals
