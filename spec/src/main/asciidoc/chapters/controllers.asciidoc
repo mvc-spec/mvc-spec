@@ -308,14 +308,79 @@ Here is the corresponding example using Facelets instead of JSP:
 Building URIs in a View
 ^^^^^^^^^^^^^^^^^^^^^^^
 
-In views links and form actions require a URI. To avoid repeating the declarative mapping to URIs on controller 
-methods MVC provides a way to build URIs from the `MvcContext`, as an example in JSP:
+A typical application requires to build URIs for the view, which often refer to controller methods within the same application.
+Typical examples for such URIs include HTML links and form actions.
+As building URIs manually is difficult and duplicating path patterns between the controller class and the view is error prone,
+MVC provides a simple way to generate URIs using the `MvcContext` class.
+
+See the following controller as an example:
+
+[source,java,numbered]
+----
+@Controller
+@Path("books")
+public class BookController {
+
+    @GET
+    public String list() {
+      // ...
+    }
+
+    @GET
+    @Path("{id}")
+    public String detail( @PathParam("id") long id ) {
+      // ...
+    }
+
+}
+----
+
+Assuming the application is deployed with the context path `/myapp` and is using the application path `/mvc`,
+URIs for these controller methods can be created with an EL expression like this:
 
 [source,html]
 ----
-${mvc.uri('MyController#myMethod', {'id': 42, 'foo': 'bar'})}
+<!-- /myapp/mvc/books -->
+${mvc.uri('BookController#list')}
+
+<!-- /myapp/mvc/books/1234 -->
+${mvc.uri('BookController#detail', { 'isbn': 1234 })}
 ----
 
-The controller method can either be identified by the simple name of the controller class and the method name separated by 
-`#(MyController#myMethod)` _or_ by the value of the `@UriRef` annotation.
-Please refer to the Javadocs of `MvcContext` for a full description of the different ways to provide parameter values for building URIs.
+The controller method is referenced using the simple name of the controller class and the corresponding method name separated by `#`.
+If the URI contains path, query or matrix parameters, concrete values can be supplied using a map.
+Please note that the keys of this map must match the parameter name used in the `@PathParam`, `@QueryParam` or `@MatrixParam` annotation.
+MVC implementations MUST apply the corresponding URI encoding rules depending on whether the value is used in a query, path or matrix parameter.
+
+The syntax used above to reference the controller method works well in most cases.
+However, because of the simple nature of this reference style, it will require controller class names to be unique.
+Also, the references may break if the controller class or method name changes as part of a refactoring.
+
+Therefore, applications can use the `@UriRef` annotation to define a stable and unique name for a controller method.
+
+[source,java,numbered]
+----
+@Controller
+@Path("books")
+public class BookController {
+
+    @GET
+    @UriRef("book-list")
+    public String list() {
+      // ...
+    }
+
+    // ...
+
+}
+----
+
+Given such a controller class, the view can generate a matching URI by referencing the controller method using this reference.
+
+[source,html]
+----
+<!-- /myapp/mvc/books -->
+${mvc.uri('book-list')}
+----
+
+Please note that this feature will work with JSP, Facelets and all view engines which support invoking methods on CDI model objects.
