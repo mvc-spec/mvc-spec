@@ -193,10 +193,9 @@ Models
 MVC controllers are responsible for combining data models and views (templates) to produce web application pages. 
 This specification supports two kinds of models: the first is based on CDI `@Named` beans, 
 and the second on the `Models` interface which defines a map between names and objects.
-Support for the `Models` interface is mandatory for all view engines; 
-support for CDI `@Named` beans is OPTIONAL but highly RECOMMENDED. 
-Application developers are encouraged to use CDI-based models whenever supported by the view engine, 
-and thus take advantage of the existing CDI and EL integration on the platform.
+MVC provides view engines for JSP and Facelets out of the box, which support both types.
+For all other view engines supporting the `Models` interface is mandatory,
+support for CDI `@Named` beans is OPTIONAL but highly RECOMMENDED.
 
 Let us now revisit our hello-world example, this time also showing how to update a model. Since we intend to show the two ways in which models
 can be used, we define the model as a CDI `@Named` bean in request scope even though this is only necessary for the CDI case:
@@ -240,7 +239,9 @@ public class HelloController {
 }
 ----
 
-If the view engine that processes the view returned by the controller is not CDI enabled, then controllers can use the `Models` map instead:
+This will allow the view to access the greeting using the EL expression `${hello.greeting}`.
+
+Instead of using CDI beans annotated with `@Named`, controllers can also use the `Models` map to pass data to the view:
 
 [source,java,numbered]
 ----
@@ -261,8 +262,6 @@ public class HelloController {
 
 In this example, the model is given the same name as that in the `@Named` annotation above, but using the injectable `Models` map instead.
 
-As stated above, the use of typed CDI `@Named` beans is recommended over the `Models` map, but support for the latter may be necessary to integrate view
-engines that are not CDI aware. 
 For more information about view engines see the <<view_engines>> section.
 
 [[views]]
@@ -274,11 +273,9 @@ It is the responsibility of a _view engine_ to process (render) a view by extrac
 
 Here is the JSP page for the hello-world example:
 
-// TODO: HTML not rendering nicely. Needs a JSP renderer..
 [source,html,numbered]
 ----
-<%@ page contentType="text/html; charset=UTF-8" language="java" %>
-<!doctype html>
+<!DOCTYPE html>
 <html>
     <head>
         <title>Hello</title>
@@ -292,7 +289,7 @@ Here is the JSP page for the hello-world example:
 In a JSP, model properties are accessible via EL [<<el30,6>>]. In the example above, the property `message` is read from the `greeting` model 
 whose name was either specified in a `@Named` annotation or used as a key in the `Models` map, depending on which controller from the <<models>> section triggered this view's processing.
 
-Here is the corresponding Facelets example:
+Here is the corresponding example using Facelets instead of JSP:
 
 [source,html,numbered]
 ----
