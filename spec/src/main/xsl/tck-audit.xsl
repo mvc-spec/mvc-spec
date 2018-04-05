@@ -204,9 +204,9 @@
 
         <assertion>
             <xsl:choose>
-                <xsl:when test="contains(@role, 'test-id-')">
+                <xsl:when test="contains(@role, 'id-')">
                     <xsl:variable name="cutLeftPart">
-                        <xsl:value-of select="substring-after(@role, 'test-id-')"/>
+                        <xsl:value-of select="substring-after(@role, 'id-')"/>
                     </xsl:variable>
                     <xsl:attribute name="id">
                         <xsl:value-of select="substring-before(concat($cutLeftPart, ' '), ' ')"/>

@@ -6,20 +6,6 @@ Summary of Assertions
 [[list-of-assertions]]
 List of all Assertions
 ~~~~~~~~~~~~~~~~~~~~~~
-[[mvc:controller]]
-*\[[mvc:controller]]* [tck-testable tck-test-id-Controller_Annotation]#Controller methods are JAX-RS resource methods annotated with `@Controller`.#
-
-[[mvc:all-controllers]]
-*\[[mvc:all-controllers]]* All resource methods in a class annotated with `@Controller` must be controllers.
-
-[[mvc:void-controllers]]
-*\[[mvc:void-controllers]]* Controller methods that return void must be annotated with `@View`.
-
-[[mvc:cdi-beans]]
-*\[[mvc:cdi-beans]]* MVC beans are managed by CDI.
-
-[[mvc:per-request]]
-*\[[mvc:per-request]]* Default scope for MVC beans is request scope.
 
 [[mvc:validation-result]]
 *\[[mvc:validation-result]]* If validation fails, controller methods must still be called if a `ValidationResult` field or property is defined.
@@ -47,9 +33,6 @@ List of all Assertions
 
 [[mvc:null-controllers]]
 *\[[mvc:null-controllers]]* The `@View` annotation is treated as a default value for any controller method that returns a null value.
-
-[[mvc:redirect]]
-*\[[mvc:redirect]]* Support HTTP redirects using the redirect: prefix and a controller return type of String.
 
 [[mvc:annotation-inheritance]]
 *\[[mvc:annotation-inheritance]]* Annotation inheritance is derived from JAX-RS and extended to MVC annotations.
