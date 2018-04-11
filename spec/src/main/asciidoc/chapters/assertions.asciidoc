@@ -37,12 +37,6 @@ List of all Assertions
 [[mvc:annotation-inheritance]]
 *\[[mvc:annotation-inheritance]]* Annotation inheritance is derived from JAX-RS and extended to MVC annotations.
 
-[[mvc:csrf-options]]
-*\[[mvc:csrf-options]]* CSRF support for configuration options defined by `Csrf.CsrfOptions`.
-
-[[mvc:csrf-support]]
-*\[[mvc:csrf-support]]* CSRF validation required only for controllers annotated by `@POST` and consuming the media type `x-www-form-urlencoded`.
-
 [[mvc:mvc-context]]
 *\[[mvc:mvc-context]]* Application-scoped `MvcContext` available for injection and as `mvc` in EL.
 
