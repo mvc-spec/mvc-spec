@@ -14,8 +14,19 @@ extend this set and also provide additional information on any of the events def
 implementation’s documentation for more information on event support.
 
 Observing events can be useful for applications to learn about the lifecycle of a request, perform logging, monitor performance, etc. The
-events `BeforeControllerEvent` and `AfterControllerEvent` are fired around the invocation of a controller; applications
-can monitor these events using an observer as shown next.
+events `BeforeControllerEvent` and `AfterControllerEvent` are fired around the invocation of a controller.
+
+[source,java,numbered]
+----
+include::{mvc-api-source-dir}javax/mvc/event/BeforeControllerEvent.java[lines=21..-1]
+----
+
+[source,java,numbered]
+----
+include::{mvc-api-source-dir}javax/mvc/event/AfterControllerEvent.java[lines=21..-1]
+----
+
+Applications can monitor these events using an observer as shown next.
 
 [source,java,numbered]
 ----
@@ -33,17 +44,7 @@ public class EventObserver {
 }
 ----
 
-[source,java,numbered]
-----
-include::{mvc-api-source-dir}javax/mvc/event/BeforeControllerEvent.java[lines=21..-1]
-----
-
-[source,java,numbered]
-----
-include::{mvc-api-source-dir}javax/mvc/event/AfterControllerEvent.java[lines=21..-1]
-----
-
-Observer methods in CDI are defined using the `@Observes` annotation on a parameter position. The class `EventObserver` is a CDI bean in application scope whose 
+Observer methods in CDI are defined using the `@Observes` annotation on a parameter position. The class `EventObserver` is a CDI bean in application scope whose
 methods `onBeforeController` and `onAfterController` are called before and after a controller is called.
 
 Every event generated must include a unique ID whose getter is defined in `MvcEvent`, the base type for all events. Moreover, each event includes
@@ -51,7 +52,19 @@ additional information that is specific to the event; for example, the events sh
 about the request URI and the resource (controller) selected.
 
 The <<view_engines>> section describes the algorithm used by implementations to select a specific view engine for processing; after a view engine is
-selected, the method `processView` is called. The events `BeforeProcessViewEvent` and `AfterProcessViewEvent` are fired around this call and can be observed in a similar manner:
+selected, the method `processView` is called. The events `BeforeProcessViewEvent` and `AfterProcessViewEvent` are fired around this call.
+
+[source,java,numbered]
+----
+include::{mvc-api-source-dir}javax/mvc/event/BeforeProcessViewEvent.java[lines=20..-1]
+----
+
+[source,java,numbered]
+----
+include::{mvc-api-source-dir}javax/mvc/event/AfterProcessViewEvent.java[lines=20..-1]
+----
+
+These events can be observed in a similar manner:
 
 [source,java,numbered]
 ----
@@ -66,16 +79,6 @@ public class EventObserver {
         // ...
     }
 }
-----
-
-[source,java,numbered]
-----
-include::{mvc-api-source-dir}javax/mvc/event/BeforeProcessViewEvent.java[lines=20..-1]
-----
-
-[source,java,numbered]
-----
-include::{mvc-api-source-dir}javax/mvc/event/AfterProcessViewEvent.java[lines=20..-1]
 ----
 
 To complete the example, let us assume that the information about the selected view engine needs to be conveyed to the client. To ensure that
@@ -98,6 +101,14 @@ public class EventObserver {
 ----
 
 For more information about the interaction between views and models, the reader is referred to the <<models>> section.
+
+The last event supported by MVC is `ControllerRedirectEvent`, which is fired just before the MVC implementation returns a redirect status code.
+Please note that this event MUST be fired after `AfterControllerEvent`.
+
+[source,java,numbered]
+----
+include::{mvc-api-source-dir}javax/mvc/event/ControllerRedirectEvent.java[lines=20..-1]
+----
 
 CDI events fired by implementations are _synchronous_, so it is recommended that applications carry out only simple tasks in their
 observer methods, avoiding long-running computations as well as blocking calls. For a complete list of events, the reader is referred to the
