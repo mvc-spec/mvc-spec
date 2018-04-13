@@ -27,16 +27,18 @@ sites. For example, such a malicious site could include the following HTML snipp
 <img src="http://yourbank.com/transfer?from=yours&to=mine&sum=1000000">
 ----
 
-which will result in the browser executing a bank transfer in an attempt to load an image.
+This will result in the browser executing a bank transfer in an attempt to load an image.
 
 In practice, most sites require the use of form posts to submit requests such as bank transfers. The common way to prevent CSRF attacks is by
 embedding additional, difficult-to-guess data fields in requests that contain sensible commands. This additional data, known as a token, is
 obtained from the trusted site but unlike cookies it is never stored in the browser.
 
-MVC implementations provide CSRF protection using the `Csrf` object and the `@CsrfValid` annotation. The `Csrf` object is available to applications
-via the injectable `MvcContext` type or in EL as `mvc.csrf`. For more information about `MvcContext`, please refer to the <<mvc_context>> section.
+MVC implementations provide CSRF protection using the `Csrf` object and the `@CsrfValid` annotation.
+[tck-testable tck-id-csrf-obj]#The `Csrf` object is available to applications via the injectable `MvcContext` type or in EL as `mvc.csrf`#.
+For more information about `MvcContext`, please refer to the <<mvc_context>> section.
 
-Applications may use the `Csrf` object to inject a hidden field in a form that can be validated upon submission. Consider the following JSP,
+[tck-testable tck-id-csrf-hidden-field]#Applications may use the `Csrf` object to inject a hidden field in a form that can be validated upon submission#.
+Consider the following JSP:
 
 [source,html,numbered]
 ----
@@ -57,16 +59,16 @@ Applications may use the `Csrf` object to inject a hidden field in a form that c
 The hidden field will be submitted with the form, giving the MVC implementation the opportunity to verify the token and ensure the
 validity of the post request.
 
-Another way to convey this information to and from the client is via an HTTP header. MVC implementations are REQUIRED to support CSRF tokens
-both as form fields (with the help of the application developer as shown above) and as HTTP headers.
+Another way to convey this information to and from the client is via an HTTP header.
+[tck-testable tck-id-csrf-verify]#MVC implementations are REQUIRED to support CSRF tokens both as form fields (with the help of the application developer as shown above) and as HTTP headers#.
 
-The application-level property `javax.mvc.security.CsrfProtection` enables CSRF protection when set to one of the possible values defined in
-`javax.mvc.security.Csrf.CsrfOptions`. The default value of this property is `CsrfOptions.EXPLICIT`. Any other value than `CsrfOptions.OFF` will
-automatically inject a CSRF token as an HTTP header; the actual name of this header is implementation dependent.
+The application-level property `javax.mvc.security.CsrfProtection` enables CSRF protection when set to one of the possible values defined in `javax.mvc.security.Csrf.CsrfOptions`.
+[tck-testable tck-id-csrf-opt-default]#The default value of this property is `CsrfOptions.EXPLICIT`#.
+[tck-testable tck-id-csrf-inject-header]#Any other value than `CsrfOptions.OFF` will automatically inject a CSRF token as an HTTP header#.
+The actual name of this header is implementation dependent.
 
-Automatic validation is enabled by setting this property to `CsrfOptions.IMPLICIT`, in which case all post requests must include
-either an HTTP header or a hidden field with the correct token. Finally, if the property is set to `CsrfOptions.EXPLICIT` then application
-developers must annotate controllers using `@CsrfValid` to manually enable validation [<<mvc:csrf-options>>] as shown in the following example.
+[tck-testable tck-id-csrf-implicit]#Automatic validation is enabled by setting this property to `CsrfOptions.IMPLICIT`, in which case all post requests must include either an HTTP header or a hidden field with the correct token#.
+[tck-testable tck-id-csrf-explict]#Finally, if the property is set to `CsrfOptions.EXPLICIT` then application developers must annotate controllers using `@CsrfValid` to manually enable validation as shown in the following example#.
 
 [source,java,numbered]
 ----
@@ -87,13 +89,13 @@ public class CsrfController {
 }
 ----
 
-MVC implementations are required to support CSRF validation of tokens for controllers annotated with `@POST` and consuming the media type
-`x-www-form-urlencoded` [<<mvc:csrf-support>>]; other media types and scenarios may also be supported but are OPTIONAL.
+[tck-testable tck-id-csrf-mediatype]#MVC implementations are required to support CSRF validation of tokens for controllers annotated with `@POST` and consuming the media type `x-www-form-urlencoded`#;
+other media types and scenarios may also be supported but are OPTIONAL.
 
 If CSRF protection is enabled for a controller method and the CSRF validation fails (because the token is either missing or invalid),
-the MVC implementation MUST throw a `javax.mvc.security.CsrfValidationException`.
-The implementation MUST provide a default exception mapper for this exception which handles it by responding with a 403 (Forbidden) status code.
-Applications MAY provide a custom exception mapper for `CsrfValidationException` to change this default behavior.
+[tck-testable tck-id-csrf-exception]#the MVC implementation MUST throw a `javax.mvc.security.CsrfValidationException`#.
+[tck-testable tck-id-csrf-default-mapper]#The implementation MUST provide a default exception mapper for this exception which handles it by responding with a 403 (Forbidden) status code#.
+[tck-testable tck-id-csrf-custom-mapper]#Applications MAY provide a custom exception mapper for `CsrfValidationException` to change this default behavior#.
 
 [[cross-site-scripting]]
 Cross-site Scripting
@@ -108,6 +110,6 @@ There are lots of different variations of this the XSS attack, but most can be p
 properly _sanitized_ before it is manipulated, stored in a database, returned to the client, etc. Data escaping/encoding is the recommended
 way to deal with untrusted data and prevent XSS attacks.
 
-MVC applications can gain access to encoders through the `MvcContext` object; the methods defined by `javax.mvc.security.Encoders` can be used
-by applications to contextually encode data in an attempt to prevent XSS attacks. The reader is referred to the Javadoc for this type for further
-information.
+[tck-testable tck-id-xss-encoders-obj]#MVC applications can gain access to encoders through the `MvcContext` object#;
+[tck-testable tck-id-xss-escaping]#the methods defined by `javax.mvc.security.Encoders` can be used by applications to contextually encode data in an attempt to prevent XSS attacks#.
+The reader is referred to the Javadoc for this type for further information.
