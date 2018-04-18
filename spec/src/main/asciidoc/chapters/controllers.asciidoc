@@ -193,7 +193,7 @@ Models
 MVC controllers are responsible for combining data models and views (templates) to produce web application pages. 
 This specification supports two kinds of models: the first is based on CDI `@Named` beans,
 and the second on the `Models` interface which defines a map between names and objects.
-[tck-testable tck-id-buildin-both-models]#MVC provides view engines for JSP and Facelets out of the box, which support both types#.
+[tck-testable tck-id-builtin-both-models]#MVC provides view engines for JSP and Facelets out of the box, which support both types#.
 For all other view engines supporting the `Models` interface is mandatory,
 support for CDI `@Named` beans is OPTIONAL but highly RECOMMENDED.
 
@@ -347,8 +347,8 @@ ${mvc.uri('BookController#list')}
 ${mvc.uri('BookController#detail', { 'isbn': 1234 })}
 ----
 
-[tck-testable tck-id-class-method-name]#The controller method is referenced using the simple name of the controller class and the corresponding method name# separated by `\#`.
-[tck-testable tck-id-map]#If the URI contains path, query or matrix parameters, concrete values can be supplied using a map#.
+[tck-testable tck-id-class-method-name]#The controller method is referenced using the simple name of the controller class and the corresponding method name separated by `pass:[#]`#.
+[tck-testable tck-id-param-map]#If the URI contains path, query or matrix parameters, concrete values can be supplied using a map#.
 Please note that the keys of this map must match the parameter name used in the `@PathParam`, `@QueryParam` or `@MatrixParam` annotation.
 [tck-testable tck-id-uri-encoding]#MVC implementations MUST apply the corresponding URI encoding rules depending on whether the value is used in a query, path or matrix parameter#.
 
