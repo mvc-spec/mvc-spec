@@ -10,9 +10,6 @@ List of all Assertions
 [[mvc:validation-result]]
 *\[[mvc:validation-result]]* If validation fails, controller methods must still be called if a `ValidationResult` field or property is defined.
 
-[[mvc:event-firing]]
-*\[[mvc:event-firing]]* All events in `javax.mvc.event` must be fired. See Javadoc for more information on each event in that package.
-
 [[mvc:builtin-engines]]
 *\[[mvc:builtin-engines]]* Implementations must provide support for JSPs and Facelets.
 
