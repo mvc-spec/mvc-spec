@@ -21,11 +21,8 @@ the Servlet 3 framework pluggability mechanism and describes its semantics for t
 The path in the application's URL space in which MVC controllers live must be specified either using the `@ApplicationPath` annotation on the application
 subclass or in the web.xml as part of the `url-pattern` element. MVC applications SHOULD use a non-empty path or pattern: i.e., _"/"_ or _"/*"_ 
 should be avoided whenever possible. 
-
 The reason for this is that MVC implementations often forward requests to the Servlet container, and the use of the aforementioned
-values may result in the unwanted processing of the forwarded request by the JAX-RS servlet once again. Most JAX-RS applications avoid using
-these values, and many use `"/resources"` or `"/resources/*"` by convention. For consistency, it is recommended for MVC applications to use
-these patterns as well.
+values may result in the unwanted processing of the forwarded request by the JAX-RS servlet once again.
 
 [[mvc_context]]
 MVC Context
