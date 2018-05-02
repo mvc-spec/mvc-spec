@@ -32,7 +32,7 @@ MVC Context
 ~~~~~~~~~~~
 
 MVC applications can inject an instance of `MvcContext` to access configuration, security and path-related information. Instances of `MvcContext` are provided
-by implementations and are always in application scope [<<mvc:mvc-context>>]. 
+by implementations and are always in request scope [<<mvc:mvc-context>>].
 For convenience, the `MvcContext` instance is also available using the name `mvc` in EL.
 
 As an example, a view can refer to a CSS file by using the context path available in the `MvcContext` object as follows:

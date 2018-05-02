@@ -35,7 +35,7 @@ List of all Assertions
 *\[[mvc:annotation-inheritance]]* Annotation inheritance is derived from JAX-RS and extended to MVC annotations.
 
 [[mvc:mvc-context]]
-*\[[mvc:mvc-context]]* Application-scoped `MvcContext` available for injection and as `mvc` in EL.
+*\[[mvc:mvc-context]]* Request-scoped `MvcContext` available for injection and as `mvc` in EL.
 
 [[mvc:request-locale-context]]
 *\[[mvc:request-locale-context]]* The `MvcContext` must provide access to the current request locale.
