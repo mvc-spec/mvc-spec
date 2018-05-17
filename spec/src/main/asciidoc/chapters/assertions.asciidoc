@@ -10,24 +10,6 @@ List of all Assertions
 [[mvc:validation-result]]
 *\[[mvc:validation-result]]* If validation fails, controller methods must still be called if a `ValidationResult` field or property is defined.
 
-[[mvc:builtin-engines]]
-*\[[mvc:builtin-engines]]* Implementations must provide support for JSPs and Facelets.
-
-[[mvc:extension-engines]]
-*\[[mvc:extension-engines]]* CDI beans that implement `javax.mvc.engine.ViewEngine` provide an ex- tension mechanism for view engines.
-
-[[mvc:selection-algorithm]]
-*\[[mvc:selection-algorithm]]* Implementations must use algorithm in the <<selection_algorithm>> section to select view engines.
-
-[[mvc:request-forward]]
-*\[[mvc:request-forward]]* Forward request for which no view engine is found.
-
-[[mvc:exception-wrap]]
-*\[[mvc:exception-wrap]]* Exceptions thrown during view processing must be wrapped.
-
-[[mvc:view-resolution]]
-*\[[mvc:view-resolution]]* Relative paths to views must be resolved as explained in the <<selection_algorithm>> section.
-
 [[mvc:null-controllers]]
 *\[[mvc:null-controllers]]* The `@View` annotation is treated as a default value for any controller method that returns a null value.
 
