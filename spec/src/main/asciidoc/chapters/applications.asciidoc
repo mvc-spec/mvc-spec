@@ -29,11 +29,11 @@ MVC Context
 [tck-testable tck-id-request-scope]#Instances of `MvcContext` are provided by implementations and are always in request scope#.
 [tck-testable tck-id-el-access]#For convenience, the `MvcContext` instance is also available using the name `mvc` in EL#.
 
-As an example, a view can refer to a CSS file by using the context path available in the `MvcContext` object as follows:
+As an example, a view can refer to a controller by using the base path available in the `MvcContext` object as follows:
 
 [source,html]
 ----
-<link rel="stylesheet" type="text/css" href="${mvc.contextPath}/my.css">
+<a href="${mvc.basePath}/books">Click here</a>
 ----
 
 For more information on security see the Chapter on <<security,Security>>; for more information about the `MvcContext` in general, refer to the Javadoc for the type.
