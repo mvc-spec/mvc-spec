@@ -50,41 +50,9 @@ public interface MvcContext {
     Configuration getConfig();
 
     /**
-     * <p>Get the application's context path. The value returned must be normalized
-     * to start with a slash ({@code '/'}) but not end with one. Thus, the path returned by
-     * this method can be prepended to that returned by {@link #getApplicationPath()}.</p>
-     *
-     * <p>For example, given the URI {@code http://host:port/myapp/resources/hello},
-     * this method returns {@code /myapp}.</p>
-     *
-     * @return the application's context path.
-     */
-    String getContextPath();
-
-    /**
-     * <p>Get the application's path which was set using the {@link javax.ws.rs.ApplicationPath}
-     * annotation. The value returned must be normalized to start with a slash ({@code '/'}) but
-     * not end with one. Thus, the path returned by this method can be appended to that
-     * returned by {@link #getContextPath()}.</p>
-     *
-     * <p>If the application path is empty or was set to {@code /*}, then an empty string is
-     * returned to ensure concatenation with {@link #getContextPath()} results in a well-formed
-     * path. If a JAX-RS application subclass is not found, {@code null} may be returned.</p>
-     *
-     * <p>For example, given the URI {@code http://host:port/myapp/resources/hello},
-     * this method returns {@code /resources}.</p>
-     *
-     * @return the application's path or {@code null} if not found.
-     */
-    String getApplicationPath();
-
-    /**
      * <p>Get the application's base path which is defined as the concatenation of context
      * and application paths. It follows that the value returned by this method always
      * starts with a slash but never ends with one.</p>
-     *
-     * <p>If a JAX-RS application subclass is not found, causing {@link #getApplicationPath()}
-     * to return {@code null}, then the value returned is the same as {@link #getContextPath}.</p>
      *
      * @return the application's base path.
      */
