@@ -41,4 +41,12 @@ public interface BindingError {
      */
     String getParamName();
 
+    /**
+     * Provides access to the raw submitted value of the parameter which caused the
+     * binding to fail.
+     *
+     * @return The raw value submitted for the parameter
+     */
+    String getSubmittedValue();
+
 }
