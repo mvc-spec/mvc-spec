@@ -15,7 +15,7 @@
  */
 package javax.mvc;
 
-import javax.mvc.annotation.UriRef;
+import javax.mvc.uri.UriRef;
 import javax.mvc.security.Csrf;
 import javax.mvc.security.Encoders;
 import javax.ws.rs.core.Configuration;
