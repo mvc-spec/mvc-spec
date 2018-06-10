@@ -21,7 +21,7 @@ package javax.mvc.security;
  * and accessible from EL via the {@link javax.mvc.MvcContext} class as {@code mvc.csrf}.
  *
  * @author Santiago Pericas-Geertsen
- * @see javax.mvc.annotation.CsrfValid
+ * @see CsrfValid
  * @since 1.0
  */
 public interface Csrf {
@@ -43,7 +43,7 @@ public interface Csrf {
          */
         OFF,
         /**
-         * Enabling CSRF requires use of {@link javax.mvc.annotation.CsrfValid} explicitly (default).
+         * Enabling CSRF requires use of {@link CsrfValid} explicitly (default).
          */
         EXPLICIT,
         /**
