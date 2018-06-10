@@ -13,8 +13,9 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
-package javax.mvc;
+package javax.mvc.uri;
 
+import javax.mvc.MvcContext;
 import java.net.URI;
 import java.util.Map;
 
