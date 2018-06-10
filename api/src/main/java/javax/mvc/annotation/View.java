@@ -15,6 +15,7 @@
  */
 package javax.mvc.annotation;
 
+import javax.mvc.Controller;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
@@ -40,7 +41,7 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * </code></pre>
  *
  * @author Santiago Pericas-Geertsen
- * @see javax.mvc.annotation.Controller
+ * @see Controller
  * @since 1.0
  */
 @Target({METHOD, TYPE})
