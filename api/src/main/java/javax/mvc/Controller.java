@@ -29,9 +29,9 @@ import static java.lang.annotation.ElementType.*;
  * it applies to all methods in the type.</p>
  *
  * <p>A controller method that returns void is required to be annotated with
- * {@link javax.mvc.annotation.View}. A controller method can return a view path
+ * {@link View}. A controller method can return a view path
  * as a {@link java.lang.String} or a {@link javax.ws.rs.core.Response}. If a controller
- * returns {@code null} and it is annotated with {@link javax.mvc.annotation.View},
+ * returns {@code null} and it is annotated with {@link View},
  * then the value of this annotation is used as a default.</p>
  *
  * <p>Example:
@@ -43,7 +43,7 @@ import static java.lang.annotation.ElementType.*;
  * </code></pre>
  *
  * @author Santiago Pericas-Geertsen
- * @see javax.mvc.annotation.View
+ * @see View
  * @see javax.ws.rs.core.Response
  * @since 1.0
  */
