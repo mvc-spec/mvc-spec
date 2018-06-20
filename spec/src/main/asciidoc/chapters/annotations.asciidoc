@@ -38,7 +38,7 @@ token results in a `ForbiddenException` thrown.
 
 |`MvcBinding`
 |Field, method or parameter
-|Declares that constrain violations will be handled by a
+|Declares that constraint violations will be handled by a
 |controller through `BindingResult` instead of triggering
 |a `ConstraintViolationException`.
 |===
