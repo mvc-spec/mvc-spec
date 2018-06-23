@@ -35,4 +35,10 @@ token results in a `ForbiddenException` thrown.
 |`UriRef`
 |Method
 |Defines a symbolic name for a controller method.
+
+|`MvcBinding`
+|Field, method or parameter
+|Declares that constraint violations will be handled by a
+|controller through `BindingResult` instead of triggering
+|a `ConstraintViolationException`.
 |===
