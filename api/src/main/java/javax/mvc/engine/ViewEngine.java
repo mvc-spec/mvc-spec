@@ -17,7 +17,7 @@ package javax.mvc.engine;
 
 /**
  * <p>View engines are responsible for processing views and are discovered
- * using CDI. Implementations must inject all instances of this interface,
+ * using CDI. Implementations must look up all instances of this interface,
  * and process a view as follows:
  * <ol>
  *     <li>Gather the set of candidate view engines by calling {@link #supports(String)}
@@ -45,8 +45,7 @@ package javax.mvc.engine;
 public interface ViewEngine {
 
     /**
-     * Name of property that can be set in an application's {@link javax.ws.rs.core.Configuration}
-     * to override the root location for views in an archive.
+     * Name of property that can be set to override the root location for views in an archive.
      *
      * @see javax.ws.rs.core.Application#getProperties()
      */
