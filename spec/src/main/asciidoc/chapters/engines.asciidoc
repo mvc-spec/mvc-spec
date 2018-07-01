@@ -32,7 +32,7 @@ Selection Algorithm
 . Lookup all instances of `javax.mvc.engine.ViewEngine` available via CDI.
 . Call `supports` on every view engine found in the previous step, discarding those that return `false`.
 . If the resulting set is empty, return `null`.
-. Otherwise, sort the resulting set in descending order of priority using the integer value from the `@Priority` annotation decorating the view engine class or the default value `Priorities.DEFAULT` if the annotation is not present.
+. Otherwise, sort the resulting set in descending order of priority using the integer value from the `@Priority` annotation decorating the view engine class or the default value `ViewEngine.PRIORITY_DEFAULT` if the annotation is not present.
 . Return the first element in the resulting sorted set, that is, the view engine with the highest priority that supports the given view.
 
 [tck-testable tck-id-no-engine-found]#If a view engine that can process a view is not found, implementations are REQUIRED to throw a `ViewEngineException`#.
