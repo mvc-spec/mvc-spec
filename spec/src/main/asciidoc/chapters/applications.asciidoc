@@ -56,4 +56,31 @@ i.e., if a subclass or implementation method has any MVC or JAX-RS annotations t
 
 [tck-testable tck-id-class-vs-iface]#Annotations on a super-class take precedence over those on an implemented interface#. 
 The precedence over conflicting annotations defined in multiple implemented interfaces is implementation dependent. 
-Note that, in accordance to the JAX-RS rules, inheritance of class or interface annotations is not supported. 
+Note that, in accordance to the JAX-RS rules, inheritance of class or interface annotations is not supported.
+
+[[configuration_in_mvc]]
+Configuration in MVC
+~~~~~~~~~~~~~~~~~~~~
+
+Implementations MUST support configuration via the native JAX-RS configuration mechanism but MAY support other configuration sources.
+
+There are concrete configurations, that all MVC the implementations are `REQUIRED` the support such as: 
+
+- `ViewEngine.VIEW_FOLDER` 
+- `Csrf.CSRF_PROTECTION`
+
+Here's a simple example of how you can configure a custom location for the view folder other than the `/WEB-INF/views`, simply by overwriting the `getProperties` method of the subclass `Application`:
+
+[source,java,numbered]
+----
+@ApplicationPath("resources")
+public class MyApplication extends Application {
+
+    @Override
+    public Map<String, Object> getProperties() {
+        final Map<String, Object> map = new HashMap<>();
+        map.put(ViewEngine.VIEW_FOLDER, "/jsp/");
+        return map;
+    }
+}
+----
