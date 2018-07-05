@@ -15,22 +15,27 @@
  */
 package javax.mvc.binding;
 
-import javax.validation.ConstraintViolation;
-
 /**
- * <p>Represents a single validation error detected for a parameter. A validation error always
- * corresponds to exactly one {@link ConstraintViolation}.</p>
+ * Base interface for errors related to parameter data binding
  *
  * @author Christian Kaltepoth
  * @since 1.0
  */
-public interface ValidationError extends ParamError {
+public interface ParamError {
 
     /**
-     * The underlying {@link ConstraintViolation} detected for the parameter.
+     * Returns a human-readable error message for this error.
      *
-     * @return The violation detected for the parameter
+     * @return The human-readable error message
      */
-    ConstraintViolation<?> getViolation();
+    String getMessage();
+
+    /**
+     * The parameter name of the value that caused the error. This is usually
+     * the name specified in the binding annotation (i.e. {@link javax.ws.rs.FormParam}).
+     *
+     * @return The name of the parameter which caused the error
+     */
+    String getParamName();
 
 }

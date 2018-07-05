@@ -24,22 +24,7 @@ package javax.mvc.binding;
  * @author Christian Kaltepoth
  * @since 1.0
  */
-public interface BindingError {
-
-    /**
-     * Returns the interpolated error message for this binding error.
-     *
-     * @return The human-readable error message
-     */
-    String getMessage();
-
-    /**
-     * The parameter name of the value that caused the binding error. This is usually
-     * the name specified with the binding annotation (i.e. {@link javax.ws.rs.FormParam}).
-     *
-     * @return The name of the parameter which caused the error
-     */
-    String getParamName();
+public interface BindingError extends ParamError {
 
     /**
      * Provides access to the raw submitted value of the parameter which caused the
