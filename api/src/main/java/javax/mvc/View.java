@@ -49,6 +49,13 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Documented
 @Inherited
 public @interface View {
+
+    /**
+     * The name of the view
+     *
+     * @return view name
+     */
     String value();
+
 }
 
