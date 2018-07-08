@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 /**
- * Types related to Web security.
+ * Types related to MVC security features.
  *
  * @version 1.0
  */
