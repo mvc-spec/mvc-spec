@@ -17,9 +17,8 @@ package javax.mvc.binding;
 
 /**
  * <p>Represents a single error that occurred while binding a parameter to a controller
- * method argument or controller field using a binding annotation like {@link
- * javax.ws.rs.FormParam}. Binding error message templates are read from a
- * {@link java.util.ResourceBundle} named <code>BindingMessages</code>.</p>
+ * method argument or controller field using a binding annotation like 
+ * {@link javax.ws.rs.FormParam}.</p>
  *
  * @author Christian Kaltepoth
  * @since 1.0
