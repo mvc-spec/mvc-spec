@@ -22,6 +22,7 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.UriInfo;
 import java.io.OutputStream;
+import java.util.Locale;
 
 /**
  * <p>Contextual data used by a {@link javax.mvc.engine.ViewEngine} to process a view.
@@ -48,6 +49,13 @@ public interface ViewEngineContext {
      * @return the models instance.
      */
     Models getModels();
+
+    /**
+     * Returns the request locale resolved for the current request.
+     *
+     * @return the request locale
+     */
+    Locale getLocale();
 
     /**
      * Returns the HTTP request object from the container. The type of the request object
