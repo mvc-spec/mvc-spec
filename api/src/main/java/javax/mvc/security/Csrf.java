@@ -29,10 +29,8 @@ public interface Csrf {
     /**
      * Property that can be used to globally enable CSRF protection for an application.
      * Values of this property must be of type {@link Csrf.CsrfOptions}.
-     *
-     * @see javax.ws.rs.core.Application#getProperties
      */
-    static final String CSRF_PROTECTION = "javax.mvc.security.CsrfProtection";
+    String CSRF_PROTECTION = "javax.mvc.security.CsrfProtection";
 
     /**
      * Options for property {@link Csrf#CSRF_PROTECTION}.
@@ -47,13 +45,13 @@ public interface Csrf {
          */
         EXPLICIT,
         /**
-         * CSRF enabled automatically.
+         * CSRF enabled automatically for all controllers.
          */
         IMPLICIT
     };
 
     /**
-     * Returns the name of the CSRF header. This header is typically a constant.
+     * Returns the name of the CSRF form field or HTTP request header. This name is typically a constant.
      *
      * @return name of CSRF header.
      */

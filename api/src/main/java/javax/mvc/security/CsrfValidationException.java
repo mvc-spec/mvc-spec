@@ -17,7 +17,7 @@ package javax.mvc.security;
 
 /**
  * This exception is thrown by the MVC implementation if the CSRF token validation fails.
- * By default this will result in a 403 status code sent to the client. The application
+ * By default, this will result in a 403 status code sent to the client. The application
  * can provide a custom exception mapper for this exception type to customize this
  * default behavior.
  *
