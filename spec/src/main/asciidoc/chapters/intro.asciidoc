@@ -151,6 +151,8 @@ The following are the contributors of the specification:
 |===
 |Daniel Dias dos Santos
 |Phillip Krüger
+|Andreas Badelt
+|
 |===
 
 [[acks]]
