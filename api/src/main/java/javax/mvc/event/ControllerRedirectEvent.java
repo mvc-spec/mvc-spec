@@ -20,13 +20,13 @@ import javax.ws.rs.core.UriInfo;
 import java.net.URI;
 
 /**
- * <p>Event fired when a controller returns a redirect status code. Only the
+ * <p>Event fired when a controller triggers a redirect. Only the
  * status codes 301 (moved permanently), 302 (found), 303 (see other) and
  * 307 (temporary redirect) are REQUIRED to be reported. Note that the
  * JAX-RS methods
  * {@link javax.ws.rs.core.Response#seeOther(java.net.URI)}} and
  * {@link javax.ws.rs.core.Response#temporaryRedirect(java.net.URI)}}
- * set to the status codes to 303 and 307, respectively. Must be
+ * use the status codes to 303 and 307, respectively. Must be
  * fired after {@link javax.mvc.event.AfterControllerEvent}.</p>
  *
  * <p>For example:
