@@ -29,7 +29,7 @@ include::chapters/intro.asciidoc[]
 
 include::chapters/controllers.asciidoc[]
 
-include::chapters/validation.asciidoc[]
+include::chapters/data-binding.asciidoc[]
 
 include::chapters/security.asciidoc[]
 
