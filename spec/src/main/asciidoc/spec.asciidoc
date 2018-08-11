@@ -1,6 +1,6 @@
 = MVC 1.0: Model-View-Controller Specification
 Ivar Grimstad, Christian Kaltepoth
-Version 1.0 Public Review, December 2017
+Version 1.0 Proposed Final Draft, August 2018
 
 // Settings:
 :experimental:
