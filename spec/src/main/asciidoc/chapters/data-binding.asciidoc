@@ -3,7 +3,7 @@
 
 This chapter discusses data binding in the MVC API. 
 Data binding is based on the underlying mechanism provided by JAX-RS, 
-but with additional support for I18N requirements and for handling data binding errors within the controller.
+but with additional support for i18n requirements and for handling data binding errors within the controller.
 
 [[data_binding_intro]]
 === Introduction
