@@ -79,8 +79,8 @@ public class FormController {
 }
 ----
 
-Please note that usually `@MvcBinding` will be used with `@FormParam` bindings, as they are very common in web application.
-However, depending on the specific use case, it may also be useful to use it with `@QueryParam` and other binding annotations.
+Please note that usually `@MvcBinding` will be used with `@FormParam` and `@QueryParam` bindings, as they are very common in web application.
+However, depending on the specific use case, it may also be useful to use it with other parameter binding types.
 [tck-testable tck-id-all-binding-annotations]#Therefore, MVC implementations MUST support `@MvcBinding` with all JAX-RS binding annotations#.
 
 The following sections will describe the differences from traditional JAX-RS data binding in detail.
