@@ -23,11 +23,4 @@ package javax.mvc.event;
  */
 public interface MvcEvent {
 
-    /**
-     * A unique identifier for this event. It does not need to be universally
-     * unique nor different across application restarts.
-     *
-     * @return an event identifier.
-     */
-    String getId();
 }
