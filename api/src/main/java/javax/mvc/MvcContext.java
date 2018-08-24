@@ -15,11 +15,10 @@
  */
 package javax.mvc;
 
-import javax.mvc.uri.MvcUriBuilder;
-import javax.mvc.uri.UriRef;
 import javax.mvc.security.Csrf;
 import javax.mvc.security.Encoders;
 import javax.ws.rs.core.Configuration;
+import javax.ws.rs.core.UriBuilder;
 import java.net.URI;
 import java.util.Locale;
 import java.util.Map;
@@ -129,7 +128,7 @@ public interface MvcContext {
     URI uri(String identifier, Map<String, Object> params);
 
     /**
-     * <p>Returns a {@link MvcUriBuilder} for building URIs to be matched
+     * <p>Returns a {@link UriBuilder} for building URIs to be matched
      * by a controller method. This is aimed primarily for use in Java classes.</p>
      *
      * <p>The controller method can either be identified by the simple name of the controller class
@@ -137,8 +136,8 @@ public interface MvcContext {
      * of the {@link UriRef} annotation.</p>
      *
      * @param identifier for the controller method.
-     * @return a reference to a {@link MvcUriBuilder}.
+     * @return a reference to a {@link UriBuilder}.
      */
-    MvcUriBuilder uriBuilder(String identifier);
+    UriBuilder uriBuilder(String identifier);
 
 }
