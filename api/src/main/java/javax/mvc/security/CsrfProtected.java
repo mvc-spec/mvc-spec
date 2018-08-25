@@ -49,5 +49,5 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
 @Retention(RUNTIME)
 @Documented
 @Inherited
-public @interface CsrfValid {
+public @interface CsrfProtected {
 }

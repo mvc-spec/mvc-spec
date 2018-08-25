@@ -33,7 +33,7 @@ In practice, most sites require the use of form posts to submit requests such as
 embedding additional, difficult-to-guess data fields in requests that contain sensible commands. This additional data, known as a token, is
 obtained from the trusted site but unlike cookies it is never stored in the browser.
 
-MVC implementations provide CSRF protection using the `Csrf` object and the `@CsrfValid` annotation.
+MVC implementations provide CSRF protection using the `Csrf` object and the `@CsrfProtected` annotation.
 [tck-testable tck-id-csrf-obj]#The `Csrf` object is available to applications via the injectable `MvcContext` type or in EL as `mvc.csrf`#.
 For more information about `MvcContext`, please refer to the <<mvc_context>> section.
 
@@ -68,7 +68,7 @@ The application-level property `javax.mvc.security.CsrfProtection` enables CSRF 
 The actual name of this header is implementation dependent.
 
 [tck-testable tck-id-csrf-implicit]#Automatic validation is enabled by setting this property to `CsrfOptions.IMPLICIT`, in which case all post requests must include either an HTTP header or a hidden field with the correct token#.
-[tck-testable tck-id-csrf-explict]#Finally, if the property is set to `CsrfOptions.EXPLICIT` then application developers must annotate controllers using `@CsrfValid` to manually enable validation as shown in the following example#.
+[tck-testable tck-id-csrf-explict]#Finally, if the property is set to `CsrfOptions.EXPLICIT` then application developers must annotate controllers using `@CsrfProtected` to manually enable validation as shown in the following example#.
 
 [source,java,numbered]
 ----
@@ -82,7 +82,7 @@ public class CsrfController {
     }
 
     @POST
-    @CsrfValid // Required for CsrfOptions.EXPLICIT
+    @CsrfProtected // Required for CsrfOptions.EXPLICIT
     public void postForm(@FormParam("greeting") String greeting) {
         // Process greeting
     }
