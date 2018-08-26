@@ -19,9 +19,9 @@ import javax.ws.rs.container.ResourceInfo;
 import javax.ws.rs.core.UriInfo;
 
 /**
- * <p>Event fired after a controller returns successfully. If the controller throws
- * an exception, this event may not be fired. Must be fired after {@link
- * javax.mvc.event.BeforeControllerEvent}.</p>
+ * <p>Event fired after a controller method returns. This event is always fired,
+ * even if the controller methods fails with an exception. Must be fired after 
+ * {@link javax.mvc.event.BeforeControllerEvent}.</p>
  *
  * <p>For example:
  * <pre><code>    public class EventObserver {
@@ -31,6 +31,7 @@ import javax.ws.rs.core.UriInfo;
  *    }</code></pre>
  *
  * @author Santiago Pericas-Geertsen
+ * @author Christian Kaltepoth
  * @see javax.enterprise.event.Observes
  * @since 1.0
  */
