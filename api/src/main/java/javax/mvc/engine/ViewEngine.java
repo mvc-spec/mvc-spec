@@ -24,7 +24,7 @@ package javax.mvc.engine;
  *     and discarding engines that return <code>false</code>.</li>
  *     <li>Sort the resulting set of candidates using priorities. View engines
  *     can be decorated with {@link javax.annotation.Priority} to indicate
- *     their priority; otherwise the priority is assumed to be {@link ViewEngine#PRIORITY_DEFAULT}.</li>
+ *     their priority; otherwise the priority is assumed to be {@link ViewEngine#PRIORITY_APPLICATION}.</li>
  *     <li>If more than one candidate is available, choose one in an
  *     implementation-defined manner.</li>
  *     <li>Fire a {@link javax.mvc.event.BeforeProcessViewEvent} event.</li>
@@ -57,7 +57,7 @@ public interface ViewEngine {
     String DEFAULT_VIEW_FOLDER = "/WEB-INF/views/";
 
     /**
-     * Default priority for all built-in view engines.
+     * Priority for all built-in view engines.
      */
     int PRIORITY_DEFAULT = 1000;
 
@@ -68,7 +68,7 @@ public interface ViewEngine {
     int PRIORITY_FRAMEWORK = 2000;
 
     /**
-     * Recommended priority for all application-provided view engines.
+     * Recommended priority for all application-provided view engines (default).
      */
     int PRIORITY_APPLICATION = 3000;
 
