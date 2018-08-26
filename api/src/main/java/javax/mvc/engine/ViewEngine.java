@@ -59,7 +59,7 @@ public interface ViewEngine {
     /**
      * Priority for all built-in view engines.
      */
-    int PRIORITY_DEFAULT = 1000;
+    int PRIORITY_BUILTIN = 1000;
 
     /**
      * Recommended priority for all view engines provided by frameworks built
