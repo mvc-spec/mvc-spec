@@ -15,7 +15,6 @@
  */
 package javax.mvc.binding;
 
-import javax.validation.ConstraintViolation;
 import java.util.List;
 import java.util.Set;
 
@@ -39,67 +38,37 @@ import java.util.Set;
 public interface BindingResult {
 
     /**
-     * Returns <code>true</code> if there is at least one binding error or
-     * constraint violation.
+     * Returns <code>true</code> if there is at least one parameter error.
      *
-     * @return <code>true</code> if there is at least one binding error
-     * constraint violation.
+     * @return <code>true</code> if there is at least one parameter error
      */
     boolean isFailed();
 
     /**
-     * Returns an immutable list of all messages representing both binding errors and
-     * constraint violations. The implementation will use {@link BindingError#getMessage()}
-     * and {@link ConstraintViolation#getMessage()} to create the individual messages.
+     * Returns an immutable list of all messages representing both binding and
+     * validation errors. This method is a shortcut for:
+     *
+     * <pre>
+     * getAllErrors().stream().map(ParamError::getMessage).collect(Collectors.toList())
+     * </pre>
      *
      * @return A list of human-readable messages
      */
     List<String> getAllMessages();
 
     /**
-     * Returns an immutable set of all binding errors detected while processing
-     * parameter bindings.
+     * Returns an immutable set of all binding and validation errors.
      *
-     * @return All binding errors detected
+     * @return All binding and validation errors.
      */
-    Set<BindingError> getAllBindingErrors();
+    Set<ParamError> getAllErrors();
 
     /**
-     * Returns the binding error for the binding specified by the given
-     * parameter name. Will return <code>null</code> if no binding error
-     * was detected.
+     * Returns an immutable set of all binding and validation errors for
+     * a specific parameter.
      *
-     * @param param The parameter name
-     * @return The binding error or <code>null</code>
+     * @return All binding and validation errors for the parameter.
      */
-    BindingError getBindingError(String param);
-
-    /**
-     * Returns an immutable set of all validation errors detected.
-     *
-     * @return All validation errors detected
-     */
-    Set<ValidationError> getAllValidationErrors();
-
-    /**
-     * Returns an immutable set of all validation errors detected
-     * for a parameter binding specified by the given parameter name.
-     *
-     * @param param The parameter name
-     * @return All validation errors for this parameter
-     * @see #getValidationError(String)
-     */
-    Set<ValidationError> getValidationErrors(String param);
-
-    /**
-     * Returns a single validation error detected for a parameter binding
-     * specified by the given parameter name. Will return the first if there
-     * is more than one and <code>null</code> if no error was detected.
-     *
-     * @param param The parameter name
-     * @return The first validation error for the parameter or <code>null</code>
-     * @see #getValidationErrors(String)
-     */
-    ValidationError getValidationError(String param);
+    Set<ParamError> getErrors(String param);
 
 }
