@@ -20,9 +20,8 @@ import javax.mvc.engine.ViewEngine;
 /**
  * <p>Event fired after the view engine method
  * {@link javax.mvc.engine.ViewEngine#processView(javax.mvc.engine.ViewEngineContext)}
- * returns successfully. If the an exception is thrown while processing a view,
- * this event may not be fired. Must be fired after {@link
- * javax.mvc.event.BeforeProcessViewEvent}.</p>
+ * returns. This event is always fired, even if the view engine fails with an exception. 
+ * Must be fired after {@link javax.mvc.event.BeforeProcessViewEvent}.</p>
  *
  * <p>For example:
  * <pre><code>    public class EventObserver {
@@ -32,6 +31,7 @@ import javax.mvc.engine.ViewEngine;
  *    }</code></pre>
  *
  * @author Santiago Pericas-Geertsen
+ * @author Christian Kaltepoth
  * @see javax.enterprise.event.Observes
  * @since 1.0
  */

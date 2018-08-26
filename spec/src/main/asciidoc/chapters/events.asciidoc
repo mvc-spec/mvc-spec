@@ -15,6 +15,7 @@ The reader is referred to the implementation’s documentation for more informat
 
 Observing events can be useful for applications to learn about the lifecycle of a request, perform logging, monitor performance, etc.
 [tck-testable tck-id-before-after-controller]#The events `BeforeControllerEvent` and `AfterControllerEvent` are fired around the invocation of a controller#.
+[tck-testable tck-id-after-controller-exception]#Please note that `AfterControllerEvent` is always fired, even if the controller fails with an exception#.
 
 [source,java,numbered]
 ----
@@ -53,6 +54,7 @@ for example, the events shown in the example above allow applications to get inf
 
 The <<view_engines>> section describes the algorithm used by implementations to select a specific view engine for processing; after a view engine is selected, the method `processView` is called.
 [tck-testable tck-id-before-after-view]#The events `BeforeProcessViewEvent` and `AfterProcessViewEvent` are fired around this call#.
+[tck-testable tck-id-after-view-exception]#Please note that `AfterProcessViewEvent` is always fired, even if the view engine fails with an exception#.
 
 [source,java,numbered]
 ----
