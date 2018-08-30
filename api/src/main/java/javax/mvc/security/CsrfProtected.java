@@ -35,10 +35,8 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * for POST controllers that consume payloads of type
  * {@link javax.ws.rs.core.MediaType#APPLICATION_FORM_URLENCODED_TYPE}, but
  * other HTTP methods and payloads may be optionally supported by the
- * underlying implementation.
- *
- * <p>Even though this annotation is also targeted to {@code TYPE}, it can only be used
- * to decorate individual controller methods.</p>
+ * underlying implementation. If declared at the type level, it applies 
+ * to all methods in the type.</p>
  *
  * @author Santiago Pericas-Geertsen
  * @see javax.mvc.security.Csrf
