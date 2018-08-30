@@ -15,7 +15,6 @@
  */
 package javax.mvc.security;
 
-import javax.ws.rs.NameBinding;
 import java.lang.annotation.Documented;
 import java.lang.annotation.Inherited;
 import java.lang.annotation.Retention;
@@ -42,7 +41,6 @@ import static java.lang.annotation.RetentionPolicy.RUNTIME;
  * @see javax.mvc.security.Csrf
  * @since 1.0
  */
-@NameBinding
 @Target({METHOD, TYPE})
 @Retention(RUNTIME)
 @Documented
