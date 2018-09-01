@@ -67,6 +67,7 @@ public interface BindingResult {
      * Returns an immutable set of all binding and validation errors for
      * a specific parameter.
      *
+     * @param param parameter name
      * @return All binding and validation errors for the parameter.
      */
     Set<ParamError> getErrors(String param);
