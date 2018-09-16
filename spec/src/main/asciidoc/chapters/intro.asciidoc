@@ -52,7 +52,7 @@ https://github.com/mvc-spec/mvc-spec/issues
 
 The corresponding Javadocs can be found online at:
 
-https://www.mvc-spec.org/
+https://www.mvc-spec.org/spec/
 
 The reference implementation can be obtained from:
 
