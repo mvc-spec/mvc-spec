@@ -76,9 +76,6 @@ Conventions
 The keywords `MUST', `MUST NOT', `REQUIRED', `SHALL', `SHALL NOT', `SHOULD', `SHOULD NOT', `RECOMMENDED', `MAY', and `OPTIONAL' 
 in this document are to be interpreted as described in RFC 2119 [<<rfc2119,4>>].
 
-Assertions defined by this specification are formatted as *\[[an-assertion]]* using a descriptive name as the label and are all listed in the 
-<<annotation_table>> section.
-
 Java code and sample data fragments are formatted as shown below:
 
 [source,java,numbered]
