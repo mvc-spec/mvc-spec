@@ -48,8 +48,7 @@ public class EventObserver {
 Observer methods in CDI are defined using the `@Observes` annotation on a parameter position.
 The class `EventObserver` is a CDI bean in application scope whose methods `onBeforeController` and `onAfterController` are called before and after a controller is called.
 
-[tck-testable tck-id-event-id]#Every event generated must include a unique ID whose getter is defined in `MvcEvent`#, the base type for all events.
-Moreover, each event includes additional information that is specific to the event;
+Each event includes additional information that is specific to the event;
 for example, the events shown in the example above allow applications to get information about the request URI and the resource (controller) selected.
 
 The <<view_engines>> section describes the algorithm used by implementations to select a specific view engine for processing; after a view engine is selected, the method `processView` is called.
