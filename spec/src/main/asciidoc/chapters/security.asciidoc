@@ -65,7 +65,8 @@ Another way to convey this information to and from the client is via an HTTP hea
 The application-level property `javax.mvc.security.CsrfProtection` enables CSRF protection when set to one of the possible values defined in `javax.mvc.security.Csrf.CsrfOptions`.
 [tck-testable tck-id-csrf-opt-default]#The default value of this property is `CsrfOptions.EXPLICIT`#.
 [tck-testable tck-id-csrf-inject-header]#Any other value than `CsrfOptions.OFF` will automatically inject a CSRF token as an HTTP header#.
-The actual name of this header is implementation dependent.
+[tck-testable tck-id-csrf-custom-header-name]#The actual name of the header can be configured via the `Csrf.CSRF_HEADER_NAME` configuration property#.
+[tck-testable tck-id-csrf-default-header-name]#The default name of the header is `Csrf.DEFAULT_CSRF_HEADER_NAME`#.
 
 [tck-testable tck-id-csrf-implicit]#Automatic validation is enabled by setting this property to `CsrfOptions.IMPLICIT`, in which case all post requests must include either an HTTP header or a hidden field with the correct token#.
 [tck-testable tck-id-csrf-explict]#Finally, if the property is set to `CsrfOptions.EXPLICIT` then application developers must annotate controllers using `@CsrfProtected` to manually enable validation as shown in the following example#.

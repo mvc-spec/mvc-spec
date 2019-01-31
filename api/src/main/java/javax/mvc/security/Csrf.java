@@ -21,6 +21,7 @@ package javax.mvc.security;
  * and accessible from EL via the {@link javax.mvc.MvcContext} class as {@code mvc.csrf}.
  *
  * @author Santiago Pericas-Geertsen
+ * @author Christian Kaltepoth
  * @see CsrfProtected
  * @since 1.0
  */
@@ -32,6 +33,17 @@ public interface Csrf {
      */
     String CSRF_PROTECTION = "javax.mvc.security.CsrfProtection";
 
+    /**
+     * Property that can be used to configure the name of the HTTP header used for
+     * the CSRF token.
+     */
+    String CSRF_HEADER_NAME = "javax.mvc.security.CsrfHeaderName";
+
+    /**
+     * The default value for {@link #CSRF_HEADER_NAME}.
+     */
+    String DEFAULT_CSRF_HEADER_NAME = "X-CSRF-TOKEN";
+    
     /**
      * Options for property {@link Csrf#CSRF_PROTECTION}.
      */
