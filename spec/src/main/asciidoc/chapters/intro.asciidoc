@@ -120,7 +120,6 @@ This specification is being developed as part of https://jcp.org/en/jsr/detail?i
 
 [cols="1,1"] 
 |===
-|Mathieu Ancelin (Individual Member)
 |Ivar Grimstad (Individual Member)
 |Neil Griffin (Liferay, Inc)
 |Joshua Wilson (RedHat)
