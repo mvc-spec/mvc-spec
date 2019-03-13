@@ -35,10 +35,9 @@ Selection Algorithm
 . Otherwise, sort the resulting set in descending order of priority using the integer value from the `@Priority` annotation decorating the view engine class or the default value `ViewEngine.PRIORITY_APPLICATION` if the annotation is not present.
 . Return the first element in the resulting sorted set, that is, the view engine with the highest priority that supports the given view.
 
-[tck-testable tck-id-no-engine-found]#If a view engine that can process a view is not found, implementations are REQUIRED to throw a `ViewEngineException`#.
+If a view engine that can process a view is not found, implementations SHOULD throw a corresponding exception and stop to process the request.
 
 The `processView` method has all the information necessary for processing in the `ViewEngineContext`, including the view, a reference to `Models`, as well as the underlying `OutputStream` that can be used to send the result to the client. 
-[tck-testable tck-id-engine-exception]#Implementations MUST catch exceptions thrown during the execution of `processView` and re-throw them as `ViewEngineException`’s#.
 
 Prior to the view render phase, all entries available in `Models` MUST be bound in such a way that they become available to the view being processed. 
 The exact mechanism for this depends on the actual view engine implementation. 
