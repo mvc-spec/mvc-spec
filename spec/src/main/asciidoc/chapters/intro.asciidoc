@@ -125,16 +125,22 @@ This specification is being developed as part of https://jcp.org/en/jsr/detail?i
 |Joshua Wilson (RedHat)
 |Rodrigo Turini (Caelum)
 |Stefan Tilkov (innoQ Deutschland GmbH)
-|Guilherme de Azevedo Silveira (Individual Member)
 |Frank Caputo (Individual Member)
 |Christian Kaltepoth (ingenit GmbH & Co. KG)
 |Woong-ki Lee (TmaxSoft, Inc.)
 |Paul Nicolucci (IBM)
-|Kito D. Mann (Individual Member)
 |Rahman Usta (Individual Member)
 |Florian Hirsch (adorsys GmbH & Co KG)
 |Santiago Pericas-Geertsen (Oracle)
 |Manfred Riem (Oracle)
+|===
+
+The following are former members of the expert group:
+
+[cols="1,1"] 
+|===
+|Guilherme de Azevedo Silveira (Individual Member)
+|Kito D. Mann (Individual Member)
 |===
 
 [[contributors]]
