@@ -35,7 +35,7 @@ Applications can monitor these events using an observer as shown next.
 public class EventObserver {
 
     public void onBeforeController(@Observes BeforeControllerEvent e) {
-        System.out.println("URI: " + e.getUriInfo().getRequestURI());
+        System.out.println("URI: " + e.getUriInfo().getRequestUri());
     }
 
     public void onAfterController(@Observes AfterControllerEvent e) {
