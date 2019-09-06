@@ -27,7 +27,7 @@ The PDF and HTML will be generated in `spec/target/generated-docs/`
 
 == Tagging phrases for the TCK
 
-The [MVC TCK](https://https://github.com/mvc-spec/mvc-tck) is a suite of unit
+The [MVC TCK](https://github.com/mvc-spec/mvc-tck) is a suite of unit
 tests for validating the compliance of MVC implementations with the specification.
 
 The tests of the TCK are based on assertions representing sentences and phrases in this
