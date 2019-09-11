@@ -31,7 +31,8 @@ public interface Encoders {
      * <p>Encoding for JavaScript code in attributes or script blocks. It MUST support
      * encoding of (at least) the following characters:</p>
      *
-     * <table summary="Encoding Table">
+     * <table>
+     * <caption>Encoding Table</caption>
      * <thead>
      * <tr><th>Input Character</th><th>Encoding</th></tr>
      * </thead>
@@ -59,7 +60,8 @@ public interface Encoders {
      * <p>Encoding for HTML code in attributes or content. It MUST support encoding of
      * (at least) the following characters:</p>
      *
-     * <table summary="Encoding Table">
+     * <table>
+     * <caption>Encoding Table</caption>
      * <thead>
      * <tr><th>Input Character</th><th>Encoding</th></tr>
      * </thead>
