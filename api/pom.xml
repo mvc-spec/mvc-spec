@@ -137,6 +137,7 @@
                 <configuration>
                     <doctitle>MVC ${project.version} API</doctitle>
                     <windowtitle>MVC ${project.version} API</windowtitle>
+                    <source>8</source>
                 </configuration>
             </plugin>
             <plugin>
