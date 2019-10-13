@@ -27,6 +27,7 @@ deploy:
     keep_history: true
     local_dir: spec/target/generated-docs
     on:
+      repo: mvc-spec/mvc-spec
       branch: master
       jdk: openjdk8
 
