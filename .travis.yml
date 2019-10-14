@@ -14,7 +14,7 @@ deploy:
   on:
     repo: mvc-spec/mvc-spec
     branch: master
-    jdk: oraclejdk8
+    jdk: openjdk8
 env:
   global:
     - secure: "iJFl971N9L3Bi1+2Z8DGexI+5VObaenykZB9+xohWEKSwzRjusa6/pmzk9+1Cm7RicwDubmx5kmcJvkZki5EF5wVP7lnuHodM2d281052qq/2TcaCN3/DmyGg1QuunCDvZpVWfu1e1F5KMwmp+brt6yaUQVPVN/ehKyT++niO7ZOlhjaB2Gn02bPwW8BZ8aEUt2mNPNwSOJ7R1g4yV+Ji7lleWTIMbJCa1bmg9YncHLyCU8un5vm/fok5fcmwZwrtnckbSU2fgIo8GDXKbblsHOSC2FeYfQFhFzMjh3+bhPhKHmQN7IG4puseNhsuJHGWAzK9hXdaacl+yZ+3WvPr7jf8E4ZL2RinCLaZwxkgHiImrm9Ay9FGMckyyobaPL3Uos1T2MBkhAIle9bh7GAw8GUYbZbCz+IUESTyloQn8Tg4Nspw7xna3W5uBzYySEBgJWKDnQBuWF9HOhJTzJunNWFfLrQEOXaQkyYks5+1VzMm2kKL10hJ55TwG/9zKA7AWspdeaK53ZdtzEfuVLfLymkpKZbtp872sdHbfveV8eeRwFoD4b8TF9K5oxMDQYzeP3N3zlpFsvXtjzQoAOxRE96n/1FiYTQQvbbiTf43lW/HI4QqyA6sV897zjdX5qhnTJT6iFZWxkCgt63Acnrz+CzMdFtL8CCEXnfJi/oIbY="
