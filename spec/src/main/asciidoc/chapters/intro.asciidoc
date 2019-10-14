@@ -56,7 +56,7 @@ https://www.mvc-spec.org/spec/
 
 The reference implementation can be obtained from:
 
-https://www.mvc-spec.org/ozark/
+https://www.mvc-spec.org/krazo/
 
 The expert group seeks feedback from the community on any aspect of this specification, please send comments to:
 
