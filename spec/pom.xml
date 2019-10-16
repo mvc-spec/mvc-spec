@@ -79,6 +79,7 @@
                                 <linkcss>false</linkcss>
                                 <project-version>${project.version}</project-version>
                             </attributes>
+                            <outputFile>${project.build.directory}/generated-docs/index.html</outputFile>
                         </configuration>
                     </execution>
                     <execution>
