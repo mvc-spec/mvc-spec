@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright © 2017 Ivar Grimstad (ivar.grimstad@gmail.com)
+    Copyright (c) 2018 JSR 371 expert group and contributors
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -135,7 +135,7 @@
         <xsl:text>&#10;</xsl:text>
         <xsl:comment>
 
-    Copyright © 2017 Ivar Grimstad (ivar.grimstad@gmail.com)
+    Copyright (c) 2016-2019 JSR 371 expert group and contributors
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
