@@ -20,7 +20,7 @@ This is the interface that must be implemented by all MVC view engines:
 
 [source,java,numbered]
 ----
-include::{mvc-api-source-dir}javax/mvc/engine/ViewEngine.java[lines=18..-1]
+include::{mvc-api-source-dir}javax/mvc/engine/ViewEngine.java[lines=19..-1]
 ----
 
 [[selection_algorithm]]

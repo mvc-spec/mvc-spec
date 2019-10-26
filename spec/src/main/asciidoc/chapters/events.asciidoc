@@ -19,12 +19,12 @@ Observing events can be useful for applications to learn about the lifecycle of 
 
 [source,java,numbered]
 ----
-include::{mvc-api-source-dir}javax/mvc/event/BeforeControllerEvent.java[lines=21..-1]
+include::{mvc-api-source-dir}javax/mvc/event/BeforeControllerEvent.java[lines=22..-1]
 ----
 
 [source,java,numbered]
 ----
-include::{mvc-api-source-dir}javax/mvc/event/AfterControllerEvent.java[lines=21..-1]
+include::{mvc-api-source-dir}javax/mvc/event/AfterControllerEvent.java[lines=22..-1]
 ----
 
 Applications can monitor these events using an observer as shown next.
@@ -57,12 +57,12 @@ The <<view_engines>> section describes the algorithm used by implementations to 
 
 [source,java,numbered]
 ----
-include::{mvc-api-source-dir}javax/mvc/event/BeforeProcessViewEvent.java[lines=20..-1]
+include::{mvc-api-source-dir}javax/mvc/event/BeforeProcessViewEvent.java[lines=21..-1]
 ----
 
 [source,java,numbered]
 ----
-include::{mvc-api-source-dir}javax/mvc/event/AfterProcessViewEvent.java[lines=20..-1]
+include::{mvc-api-source-dir}javax/mvc/event/AfterProcessViewEvent.java[lines=21..-1]
 ----
 
 These events can be observed in a similar manner:
@@ -109,7 +109,7 @@ For more information about the interaction between views and models, the reader 
 
 [source,java,numbered]
 ----
-include::{mvc-api-source-dir}javax/mvc/event/ControllerRedirectEvent.java[lines=20..-1]
+include::{mvc-api-source-dir}javax/mvc/event/ControllerRedirectEvent.java[lines=23..-1]
 ----
 
 CDI events fired by implementations are _synchronous_, so it is recommended that applications carry out only simple tasks in their observer methods,
