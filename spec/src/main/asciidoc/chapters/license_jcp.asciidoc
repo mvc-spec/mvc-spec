@@ -12,7 +12,7 @@ Status:  Final Release +
 Specification Lead:  Ivar Grimstad ("Specification Lead") +
 Release:  Final Release
 
-Copyright 2019 Ivar Grimstad (ivar.grimstad@gmail.com) +
+Copyright 2019 JSR 371 expert group and contributors +
 All rights reserved.
 
 LIMITED LICENSE GRANTS

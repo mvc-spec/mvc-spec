@@ -1,7 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!--
 
-    Copyright © 2017 Ivar Grimstad (ivar.grimstad@gmail.com)
+    Copyright (c) 2015 Oracle and/or its affiliates. All rights reserved.
+    Copyright (c) 2016-2019 JSR 371 expert group and contributors
 
     Licensed under the Apache License, Version 2.0 (the "License");
     you may not use this file except in compliance with the License.
@@ -231,36 +232,6 @@
                         <Export-Package>${packages.export}</Export-Package>
                     </instructions>
                 </configuration>
-            </plugin>
-            <plugin>
-                <groupId>com.mycila</groupId>
-                <artifactId>license-maven-plugin</artifactId>
-                <version>3.0</version>
-                <configuration>
-                    <header>com/mycila/maven/plugin/license/templates/APACHE-2.txt</header>
-                    <properties>
-                        <owner>Ivar Grimstad</owner>
-                        <email>ivar.grimstad@gmail.com</email>
-                        <project.inceptionYear>2017</project.inceptionYear>
-                    </properties>
-                    <includes>
-                        <include>src/**/*.java</include>
-                        <include>findbugs-exclude.xml</include>
-                        <include>pom.xml</include>
-                    </includes>
-                    <mapping>
-                        <java>SLASHSTAR_STYLE</java>
-                    </mapping>
-                </configuration>
-                <executions>
-                    <execution>
-                        <id>license-check</id>
-                        <phase>verify</phase>
-                        <goals>
-                            <goal>check</goal>
-                        </goals>
-                    </execution>
-                </executions>
             </plugin>
         </plugins>
     </build>

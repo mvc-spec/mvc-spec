@@ -8,7 +8,7 @@ Status: Pre-FCS Public Release
 
 Release: Public Review Release
 
-Copyright 2017 Ivar Grimstad (ivar.grimstad@gmail.com)
+Copyright 2017 JSR 371 expert group and contributors
 All rights reserved.
 
 NOTICE

@@ -1,5 +1,5 @@
 /*
- * Copyright © 2017 Ivar Grimstad (ivar.grimstad@gmail.com)
+ * Copyright (c) 2016-2017 JSR 371 expert group and contributors
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
