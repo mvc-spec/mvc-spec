@@ -21,7 +21,7 @@
     <modelVersion>4.0.0</modelVersion>
     <groupId>javax.mvc</groupId>
     <artifactId>javax.mvc-api</artifactId>
-    <version>1.0.0-SNAPSHOT</version>
+    <version>1.0.0</version>
     <packaging>bundle</packaging>
     <name>MVC ${project.version} API</name>
     <description>MVC ${project.version} API</description>
@@ -92,9 +92,9 @@
                 <version>1.2</version>
                 <configuration>
                     <spec>
-                        <nonFinal>true</nonFinal>
+                        <nonFinal>false</nonFinal>
                         <jarType>api</jarType>
-                        <specVersion>0.0</specVersion>
+                        <specVersion>1.0</specVersion>
                         <newSpecVersion>${spec_version}</newSpecVersion>
                         <specBuild>01</specBuild>
                         <specImplVersion>${spec_impl_version}</specImplVersion>
