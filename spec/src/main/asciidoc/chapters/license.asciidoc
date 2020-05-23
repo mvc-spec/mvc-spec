@@ -1,8 +1,4 @@
 [colophon]
 == License
 
-This specification is dual licensed under the JCP License and the Apache 2.0 License.
-
-include::license_jcp.asciidoc[]
-
-include::license_apache.asciidoc[]
+Eclipse Public License 2.0 and GNU General Public License, version 2 with the GNU Classpath Exception.
