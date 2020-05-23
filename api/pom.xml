@@ -32,8 +32,14 @@
     </organization>
     <licenses>
         <license>
-            <name>Apache License 2.0</name>
-            <url>https://www.apache.org/licenses/LICENSE-2.0</url>
+            <name>EPL-2.0</name>
+            <url>http://www.eclipse.org/legal/epl-2.0</url>
+            <distribution>repo</distribution>
+        </license>
+        <license>
+            <name>GPL-2.0-with-classpath-exception</name>
+            <url>https://www.gnu.org/software/classpath/license.html</url>
+            <distribution>repo</distribution>
         </license>
     </licenses>
     <developers>
